@@ -9,7 +9,13 @@ import {
   TelegramIcon,
 } from "react-share";
 
-export default function News({ title, file_id, channel, publishedAt, link }) {
+export default function AdminYoutube({
+  title,
+  file_id,
+  channel,
+  publishedAt,
+  link,
+}) {
   return (
     <div className="w-[300px] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-60">
       <iframe

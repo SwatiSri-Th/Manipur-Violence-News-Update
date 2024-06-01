@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import axios from "axios";
-import instance from "./Api/api_instance";
-import News from "./Component/News";
-import Google from "./Component/Google";
-import Navbar from "./Component/Navbar";
-import Ndtv from "./Component/Ndtv";
-import TimesOfIndia from "./Component/TimesOfIndia";
-import Sidebar from "./Component/Sidebar";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import Footer from "./Component/Footer";
-
-export default function App() {
+import instance from "@/Api/api_instance";
+import News from "@/Component/News";
+import Ndtv from "@/Component/Ndtv";
+import TimesOfIndia from "@/Component/TimesOfIndia";
+import Google from "@/Component/Google";
+import AdminSidebar from "./AdminSidebar";
+import AdminNavbar from "./AdminNavbar";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+export default function AdminPage() {
   const [youtubeData, setYoutubeData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
@@ -98,9 +96,9 @@ export default function App() {
   };
   return (
     <div className="flex">
-      <Sidebar />
+      <AdminSidebar />
       <div className=" w-full flex flex-col items-start justify-start">
-        <Navbar />
+        <AdminNavbar />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
           <div>
             <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">

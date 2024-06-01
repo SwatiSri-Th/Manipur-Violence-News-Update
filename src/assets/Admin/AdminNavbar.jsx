@@ -1,7 +1,7 @@
 import { IoMdSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import DarkMode from "./DarkMode";
-export default function Navbar() {
+import AdminDarkMode from "./AdminDarkmode";
+export default function AdminNavbar() {
   const navigate = useNavigate();
 
   return (
@@ -29,16 +29,8 @@ export default function Navbar() {
           {/* order button */}
           {/* Darkmode Switch */}
           <div>
-            <DarkMode />
+            <AdminDarkMode />
           </div>
-          <button
-            onClick={() => {
-              navigate("/admin");
-            }}
-            className="w-[60px] h-[25px] rounded-lg cursor-pointer text-sm hover:bg-blue-900 text-center bg-blue-600 text-wrap text-white"
-          >
-            Admin
-          </button>
         </div>
       </div>
       {/* Lower Navbar */}

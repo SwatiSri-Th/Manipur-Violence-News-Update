@@ -10,7 +10,14 @@ import {
   TelegramShareButton,
   TelegramIcon,
 } from "react-share";
-export default function Ndtv({ title, description, link, author, date, img }) {
+export default function AdminNdtv({
+  title,
+  description,
+  link,
+  author,
+  date,
+  img,
+}) {
   return (
     <a
       href={link}
