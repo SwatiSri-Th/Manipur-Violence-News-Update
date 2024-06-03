@@ -109,6 +109,7 @@ export default function App() {
             <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
               {youtubeData?.map((data) => (
                 <News
+                  video_id={data._id}
                   key={data._id}
                   title={data.title}
                   channel={data.channelTitle}
@@ -123,7 +124,7 @@ export default function App() {
             </div>
           </div>
 
-          <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
+          <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
             NDTV
           </h1>
           <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
@@ -140,7 +141,7 @@ export default function App() {
             ))}
           </div>
 
-          <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
+          <h1 className="text-3xl font-extrabold text-[#6e276f] text-center mb-8 mt-8">
             Times Of India
           </h1>
           <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">
@@ -164,7 +165,7 @@ export default function App() {
               <Google key={index} title={data.title} link={data.link} />
             ))}
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </ScrollArea>
       </div>
     </div>

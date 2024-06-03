@@ -8,10 +8,23 @@ import {
   TelegramShareButton,
   TelegramIcon,
 } from "react-share";
+import { useNavigate } from "react-router-dom";
+import YoutubeDisplay from "./YoutubeDisplay";
 
-export default function News({ title, file_id, channel, publishedAt, link }) {
+export default function News({
+  video_id,
+  title,
+  file_id,
+  channel,
+  publishedAt,
+  link,
+}) {
+  const navigate = useNavigate();
   return (
-    <div className="w-[300px] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-60">
+    <div
+      onClick={() => navigate(`/youtube/${video_id}`)}
+      className="w-[300px] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-60"
+    >
       <iframe
         className="aspect-video w-full object-cover"
         src={`https://drive.google.com/file/d/${file_id}/preview`}

@@ -16,13 +16,13 @@ export default function Sidebar() {
     { name: "Google", link: "/google", icon: FaGoogle, margin: true },
   ];
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <section
       className={` flex gap-6 z-20  ${open ? "w-60" : "w-16"} duration-500`}
     >
       <div
-        className={`bg-[#f5c1f3] min-h-screen ${
+        className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] min-h-screen ${
           open ? "w-72" : "w-16"
         } duration-500 text-black px-4`}
       >

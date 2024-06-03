@@ -23,7 +23,7 @@ const AdminNdtvPage = () => {
   }, []);
 
   return (
-    <div className=" flex">
+    <div className=" flex justify-center">
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>

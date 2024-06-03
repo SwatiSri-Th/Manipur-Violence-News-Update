@@ -8,7 +8,9 @@ import TimesOfIndia from "@/Component/TimesOfIndia";
 import Google from "@/Component/Google";
 import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import Footer from "@/Component/Footer";
+// import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 export default function AdminPage() {
   const [youtubeData, setYoutubeData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
@@ -25,63 +27,24 @@ export default function AdminPage() {
 
   const fetchYoutube = async () => {
     try {
-      const res = await instance({
-        url: "/",
-      });
+      // const res = await instance({
+      //   url: "/latest",
+      // });
+      const res = await instance.get("/latest");
       console.log(res.data);
-      setYoutubeData(res.data.data.slice(0, 6));
+      setYoutubeData(res.data.youtube.slice(0, 6));
+      setGoogleData(res.data.google.slice(0, 6));
+      setNdtv(res.data.ndtv.slice(0, 6));
+      setTofIndia(res.data.timesOfIndia.slice(0, 6));
     } catch (error) {
       console.error(error);
     }
   };
-
-  // const fetchSangai = () => {
-  //   fetch(`https://flaskappmanipur.onrender.com/state`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setSangaiData(data.slice(0, 4));
-  //     });
-  // };/
-
-  const fetchNdtv = async () => {
-    try {
-      const res = await instance({
-        url: "ndtv/data",
-      });
-      setNdtv(res.data.data.slice(0, 6));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchTimesOfIndia = async () => {
-    try {
-      const res = await instance({
-        url: "/timeOfIndia/data",
-      });
-      setTofIndia(res.data.slice(0, 6));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchGoogle = async () => {
-    try {
-      const res = await instance({
-        url: "/google",
-      });
-      console.log(res.data);
-      setGoogleData(res.data.slice(0, 6));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
     fetchYoutube();
-    fetchNdtv();
-    fetchGoogle();
-    fetchTimesOfIndia();
+    // fetchNdtv();
+    // fetchGoogle();
+    // fetchTimesOfIndia();
     // fetch(`https://flaskappmanipur.onrender.com/google`)
     //   .then((response) => response.json())
     //   .then((data) => {
@@ -162,7 +125,7 @@ export default function AdminPage() {
               <Google key={index} title={data.title} link={data.link} />
             ))}
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </ScrollArea>
       </div>
     </div>

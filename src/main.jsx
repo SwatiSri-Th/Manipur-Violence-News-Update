@@ -14,20 +14,24 @@ import GooglePage from "./Component/GooglePage.jsx";
 import TimesOfIndiaPage from "./Component/TimesOfIndiaPage.jsx";
 import AdminPage from "./assets/Admin/AdminPage.jsx";
 import AdminYoutubePage from "./assets/Admin/AdminYoutubePage.jsx";
+import Login from "./assets/Admin/Login.jsx";
+import YoutubeDisplay from "./Component/YoutubeDisplay.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route index element={<App />} />
       <Route path="/youtube" element={<YoutubePage />} />
+      <Route path="/youtube/:id" element={<YoutubeDisplay />} />
       <Route path="/ndtv" element={<NdtvPage />} />
       <Route path="/tofIndia" element={<TimesOfIndiaPage />} />
       <Route path="/google" element={<GooglePage />} />
       {/* <Route path="/admin" element={<AdminPage />} /> */}
 
       <Route path="/admin">
-        <Route index element={<AdminPage />} />
-        <Route path="/adminyoutube" element={<AdminYoutubePage />} />
+        <Route index element={<Login />} />
+        <Route path="dashboard" element={<AdminPage />} />
+        <Route path="youtube" element={<AdminYoutubePage />} />
       </Route>
     </Route>
   )
