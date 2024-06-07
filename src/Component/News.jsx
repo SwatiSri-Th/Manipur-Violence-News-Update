@@ -9,7 +9,6 @@ import {
   TelegramIcon,
 } from "react-share";
 import { useNavigate } from "react-router-dom";
-import YoutubeDisplay from "./YoutubeDisplay";
 
 export default function News({
   video_id,

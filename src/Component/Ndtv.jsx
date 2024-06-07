@@ -5,10 +5,10 @@ import {
   FacebookIcon,
   TwitterShareButton,
   XIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-  TelegramShareButton,
-  TelegramIcon,
+  // LinkedinShareButton,
+  // LinkedinIcon,
+  // TelegramShareButton,
+  // TelegramIcon,
 } from "react-share";
 export default function Ndtv({ title, description, link, author, date, img }) {
   return (
@@ -37,7 +37,7 @@ export default function Ndtv({ title, description, link, author, date, img }) {
       </div>
       <p className="text-black mt-5 text-left">{description}</p>
 
-      <div className="w-[120px] flex justify-around">
+      <div className="w-[120px] flex justify-center gap-2">
         <WhatsappShareButton url={link}>
           <WhatsappIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
@@ -59,7 +59,7 @@ export default function Ndtv({ title, description, link, author, date, img }) {
           ></XIcon>
         </TwitterShareButton>
 
-        <TelegramShareButton url="link">
+        {/* <TelegramShareButton url="link">
           <TelegramIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
             size={20}
@@ -71,7 +71,7 @@ export default function Ndtv({ title, description, link, author, date, img }) {
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
             size={20}
           ></LinkedinIcon>
-        </LinkedinShareButton>
+        </LinkedinShareButton> */}
       </div>
     </a>
   );

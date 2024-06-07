@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   WhatsappShareButton,
   WhatsappIcon,
@@ -10,14 +11,19 @@ import {
 } from "react-share";
 
 export default function AdminYoutube({
+  video_id,
   title,
   file_id,
   channel,
   publishedAt,
   link,
 }) {
+  const navigate = useNavigate();
   return (
-    <div className="w-[300px] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-60">
+    <div
+      onClick={() => navigate(`/admin/youtube/${video_id}`)}
+      className="w-[300px] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-60"
+    >
       <iframe
         className="aspect-video w-full object-cover"
         src={`https://drive.google.com/file/d/${file_id}/preview`}

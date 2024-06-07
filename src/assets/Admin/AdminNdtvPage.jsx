@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import instance from "@/Api/api_instance";
 import AdminNdtv from "./AdminNdtv";
-import Sidebar from "@/Component/Sidebar";
+import AdminSidebar from "./AdminSidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Footer from "@/Component/Footer";
 
 const AdminNdtvPage = () => {
   const [ndtv, setNdtv] = useState([]);
@@ -24,15 +25,15 @@ const AdminNdtvPage = () => {
 
   return (
     <div className=" flex justify-center">
-      <Sidebar />
+      <AdminSidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>
-          <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
+          <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
             NDTV
           </h1>
           <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
             {ndtv?.map((data) => (
-              <Ndtv
+              <AdminNdtv
                 key={data._id}
                 title={data.title}
                 description={data.desc}
@@ -44,6 +45,7 @@ const AdminNdtvPage = () => {
             ))}
           </div>
         </div>
+        <Footer />
       </ScrollArea>
     </div>
   );

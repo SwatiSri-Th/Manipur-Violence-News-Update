@@ -5,28 +5,24 @@ import {
   FacebookIcon,
   TwitterShareButton,
   XIcon,
-  // LinkedinShareButton,
-  // LinkedinIcon,
-  // TelegramShareButton,
-  // TelegramIcon,
 } from "react-share";
+
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 
-export default function AdminNdtv({
+export default function AdminTimesOfIndia({
   title,
   description,
   link,
-  author,
   date,
-  img,
+  image,
 }) {
   return (
     <a
       href={link}
-      className="w-[300px] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+      className="w-[90%] max-h-30 p-4 text-wrap text-black  rounded-xl flex flex-row  items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all"
     >
-      {img == null ? (
+      {image == null ? (
         <img
           className="aspect-video w-full object-cover"
           src="https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
@@ -34,21 +30,24 @@ export default function AdminNdtv({
         />
       ) : (
         <img
-          className="aspect-video w-full object-cover"
-          src={`https://drive.google.com/thumbnail?id=${img}`}
+          className="aspect-video w-[300px] object-cover"
+          src={`https://drive.google.com/thumbnail?id=${image}`}
         />
       )}
 
-      {/* <img className="aspect-video w-full object-cover" src={img} alt="" /> */}
-      <h1 className="font-bold">{title}</h1>
-      <div className="w-full flex justify-start text-slate-500 flex-col ">
-        <p>{author}</p>
-        <p>{date}</p>
+      {/* <img className="aspect-video w-full object-cover" src={image} alt="" /> */}
+      <div className="m-6">
+        <div className="flex flex-col ">
+          <h1 className="font-bold ">{title}</h1>
+          <div className="w-full flex justify-start text-slate-500 flex-col ">
+            <p>{date}</p>
+          </div>
+        </div>
+        <p className="text-black mt-5 text-left">{description}</p>
       </div>
-      <p className="text-black mt-5 text-left">{description}</p>
 
-      <div className="flex gap-16">
-        <div className="w-[120px] flex gap-2">
+      <div className="flex gap-4 mt-[190px]">
+        <div className="w-[120px] flex  gap-2">
           <WhatsappShareButton url={link}>
             <WhatsappIcon
               className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
@@ -81,20 +80,6 @@ export default function AdminNdtv({
           </button>
         </div>
       </div>
-
-      {/* <TelegramShareButton url="link">
-          <TelegramIcon
-            className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
-          ></TelegramIcon>
-        </TelegramShareButton>
-
-        <LinkedinShareButton url="link">
-          <LinkedinIcon
-            className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
-          ></LinkedinIcon>
-        </LinkedinShareButton> */}
     </a>
   );
 }

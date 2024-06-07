@@ -3,6 +3,7 @@ import instance from "@/Api/api_instance";
 import Ndtv from "@/Component/Ndtv";
 import Sidebar from "@/Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Footer from "./Footer";
 
 const NdtvPage = () => {
   const [ndtv, setNdtv] = useState([]);
@@ -27,7 +28,7 @@ const NdtvPage = () => {
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>
-          <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
+          <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
             NDTV
           </h1>
           <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
@@ -44,6 +45,7 @@ const NdtvPage = () => {
             ))}
           </div>
         </div>
+        <Footer />
       </ScrollArea>
     </div>
   );

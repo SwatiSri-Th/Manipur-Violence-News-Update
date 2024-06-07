@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import instance from "@/Api/api_instance";
-import Google from "@/Component/Google";
-import Sidebar from "@/Component/Sidebar";
+import AdminGoogle from "./AdminGoogle";
+import AdminSidebar from "./AdminSidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Footer from "./Footer";
+import Footer from "@/Component/Footer";
 
-const GooglePage = () => {
+const AdminGooglePage = () => {
   const [googleData, setGoogleData] = useState([]);
 
   const fetchGoogle = async () => {
@@ -25,7 +25,7 @@ const GooglePage = () => {
 
   return (
     <div className=" flex">
-      <Sidebar />
+      <AdminSidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>
           <h1 className="text-3xl font-extrabold text-[hsl(220,90%,67%)] text-center mt-8 mb-8">
@@ -33,7 +33,7 @@ const GooglePage = () => {
           </h1>
           <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
             {googleData?.map((data, index) => (
-              <Google
+              <AdminGoogle
                 key={index}
                 title={data.title}
                 link={data.link}
@@ -49,4 +49,4 @@ const GooglePage = () => {
   );
 };
 
-export default GooglePage;
+export default AdminGooglePage;

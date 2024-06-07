@@ -16,6 +16,10 @@ import AdminPage from "./assets/Admin/AdminPage.jsx";
 import AdminYoutubePage from "./assets/Admin/AdminYoutubePage.jsx";
 import Login from "./assets/Admin/Login.jsx";
 import YoutubeDisplay from "./Component/YoutubeDisplay.jsx";
+import AdminYoutubeDisplay from "./assets/Admin/AdminYoutubeDisplay.jsx";
+import AdminNdtvPage from "./assets/Admin/AdminNdtvPage.jsx";
+import AdminTimesOfIndiaPage from "./assets/Admin/AdminTimesOfIndiaPage.jsx";
+import AdminGooglePage from "./assets/Admin/AdminGooglePage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +36,10 @@ const router = createBrowserRouter(
         <Route index element={<Login />} />
         <Route path="dashboard" element={<AdminPage />} />
         <Route path="youtube" element={<AdminYoutubePage />} />
+        <Route path="youtube/:id" element={<AdminYoutubeDisplay />} />
+        <Route path="ndtv" element={<AdminNdtvPage />} />
+        <Route path="tofIndia" element={<AdminTimesOfIndiaPage />} />
+        <Route path="google" element={<AdminGooglePage />} />
       </Route>
     </Route>
   )

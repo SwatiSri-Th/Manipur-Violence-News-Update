@@ -1,3 +1,12 @@
+import {
+  WhatsappShareButton,
+  WhatsappIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  XIcon,
+} from "react-share";
+
 export default function TimesOfIndia({
   title,
   description,
@@ -32,6 +41,29 @@ export default function TimesOfIndia({
           </div>
         </div>
         <p className="text-black mt-5 text-left">{description}</p>
+      </div>
+
+      <div className="w-[120px] flex  gap-2 mt-[190px]">
+        <WhatsappShareButton url={link}>
+          <WhatsappIcon
+            className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
+            size={20}
+          ></WhatsappIcon>
+        </WhatsappShareButton>
+
+        <FacebookShareButton url={link}>
+          <FacebookIcon
+            className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
+            size={20}
+          ></FacebookIcon>
+        </FacebookShareButton>
+
+        <TwitterShareButton url="link">
+          <XIcon
+            className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
+            size={20}
+          ></XIcon>
+        </TwitterShareButton>
       </div>
     </a>
   );

@@ -1,6 +1,9 @@
 import { IoMdSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import DarkMode from "./DarkMode";
+import { MdArrowDropDown } from "react-icons/md";
+// import { data } from "autoprefixer";
+// import { link } from "fs";
 // import { link } from "fs";
 export default function Navbar() {
   const navigate = useNavigate();
@@ -32,7 +35,125 @@ export default function Navbar() {
 
     {
       id: 5,
-      name: "Threaten",
+      name: "Gun Fire",
+      link: "/#",
+    },
+  ];
+
+  const DropdownLinks = [
+    {
+      id: 1,
+      name: "Trending Videos",
+      link: "/#",
+    },
+
+    {
+      id: 2,
+      name: "Latest News",
+      link: "/#",
+    },
+
+    {
+      id: 3,
+      name: "Top Rated",
+      link: "/#",
+    },
+  ];
+
+  const DistrictDropdownLinks = [
+    {
+      id: 1,
+      name: "Imphal East",
+      link: "/#",
+    },
+
+    {
+      id: 2,
+      name: "Imphal West",
+      link: "/#",
+    },
+
+    {
+      id: 3,
+      name: "Thoubal",
+      link: "/#",
+    },
+
+    {
+      id: 4,
+      name: "Bishnupur",
+      link: "/#",
+    },
+
+    {
+      id: 5,
+      name: "Kakching",
+      link: "/#",
+    },
+
+    {
+      id: 6,
+      name: "Jiribam",
+      link: "/#",
+    },
+
+    {
+      id: 7,
+      name: "Ukhrul",
+      link: "/#",
+    },
+
+    {
+      id: 8,
+      name: "Senapati",
+      link: "/#",
+    },
+
+    {
+      id: 9,
+      name: "Tamenglong",
+      link: "/#",
+    },
+
+    {
+      id: 10,
+      name: "Chandel",
+      link: "/#",
+    },
+
+    {
+      id: 11,
+      name: "Noney",
+      link: "/#",
+    },
+
+    {
+      id: 12,
+      name: "Kamjong",
+      link: "/#",
+    },
+
+    {
+      id: 13,
+      name: "Tengnoupal",
+      link: "/#",
+    },
+
+    {
+      id: 14,
+      name: "Kangpokpi",
+      link: "/#",
+    },
+
+    {
+      id: 15,
+      name: "Pherzawl",
+      link: "/#",
+    },
+
+    {
+      id: 16,
+      name: "Churachanpur",
       link: "/#",
     },
   ];
@@ -55,7 +176,14 @@ export default function Navbar() {
                   className="w-[90px] aspect-square object-cover "
                 />
               </div>
-              <span>Manipur Violence News</span>
+
+              <div className=" h-[60px] flex items-center">
+                <img
+                  src="/images/name.png"
+                  alt=""
+                  className="h-[130px] w-[250px]  aspect-video object-cover "
+                />
+              </div>
             </a>
           </div>
           {/* search bar */}
@@ -74,14 +202,14 @@ export default function Navbar() {
           <div>
             <DarkMode />
           </div>
-          <button
+          {/* <button
             onClick={() => {
               navigate("/admin");
             }}
             className="w-[60px] h-[25px] rounded-lg cursor-pointer text-sm hover:bg-blue-900 text-center bg-blue-600 text-wrap text-white"
           >
             Admin
-          </button>
+          </button> */}
         </div>
       </div>
       {/* Lower Navbar */}
@@ -97,6 +225,57 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+
+          {/* Dropdown and links */}
+          <li className="group relative cursor-pointer">
+            <a href="#" className="flex items-center gap-[2px] py-2">
+              Trending
+              <span>
+                <MdArrowDropDown className="transition-all duration-200 group-hover:rotate-180" />
+              </span>
+            </a>
+
+            <div className="absolute z-[9999] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black">
+              <ul>
+                {DropdownLinks.map((data) => (
+                  <li key={data.id}>
+                    <a
+                      href={data.link}
+                      className="inline-block w-full rounded-md p-2 hover:bg-gray-300"
+                    >
+                      {data.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+
+          {/* District Dropdown */}
+
+          <li className="group relative cursor-pointer">
+            <a href="#" className="flex items-center gap-[2px] py-2">
+              Districts
+              <span>
+                <MdArrowDropDown className="transition-all duration-200 group-hover:rotate-180" />
+              </span>
+            </a>
+
+            <div className="absolute z-[99] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black">
+              <ul className="overflow-y-scroll bg-orange-300">
+                {DistrictDropdownLinks.map((data) => (
+                  <li key={data.id}>
+                    <a
+                      href={data.link}
+                      className="inline-block w-full rounded-md p-[1px] hover:bg-gray-200"
+                    >
+                      {data.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
     </div>

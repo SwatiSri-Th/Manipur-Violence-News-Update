@@ -4,6 +4,7 @@ import News from "./News";
 import { format } from "date-fns";
 import Sidebar from "@/Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Footer from "./Footer";
 
 const YoutubePage = () => {
   const [youtubeData, setYoutubeData] = useState([]);
@@ -32,7 +33,7 @@ const YoutubePage = () => {
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>
           <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
-            YouTubes
+            YouTube
           </h1>
           <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
             {youtubeData?.map((data) => (
@@ -50,6 +51,7 @@ const YoutubePage = () => {
             ))}
           </div>
         </div>
+        <Footer />
       </ScrollArea>
     </div>
   );

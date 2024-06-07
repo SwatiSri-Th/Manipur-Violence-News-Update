@@ -5,6 +5,7 @@ import AdminYoutube from "./AdminYoutube";
 import { format } from "date-fns";
 import AdminSidebar from "./AdminSidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Footer from "@/Component/Footer";
 
 const AdminYoutubePage = () => {
   const [youtubeData, setYoutubeData] = useState([]);
@@ -47,7 +48,7 @@ const AdminYoutubePage = () => {
             </h1>
             <button
               onClick={fetchNewData}
-              className="w-[200px] h-[60px] bg-blue-900 text-wrap text-white"
+              className="w-[170px] h-[40px] bg-blue-900 text-wrap rounded-xl hover:bg-blue-700 text-white"
             >
               {" "}
               Fetch New Data
@@ -69,6 +70,7 @@ const AdminYoutubePage = () => {
             ))}
           </div>
         </div>
+        <Footer />
       </ScrollArea>
     </div>
   );

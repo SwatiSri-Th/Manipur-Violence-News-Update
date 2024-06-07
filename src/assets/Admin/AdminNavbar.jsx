@@ -32,7 +32,7 @@ export default function Navbar() {
 
     {
       id: 5,
-      name: "Threaten",
+      name: "Gun Fire",
       link: "/#",
     },
   ];
@@ -55,7 +55,14 @@ export default function Navbar() {
                   className="w-[90px] aspect-square object-cover "
                 />
               </div>
-              <span>Manipur Violence News</span>
+
+              <div className=" h-[60px] flex items-center">
+                <img
+                  src="/images/name.png"
+                  alt=""
+                  className="h-[130px] w-[250px]  aspect-video object-cover "
+                />
+              </div>
             </a>
           </div>
           {/* search bar */}

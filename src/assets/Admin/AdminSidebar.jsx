@@ -9,11 +9,16 @@ import { FaGoogle } from "react-icons/fa6";
 
 export default function Sidebar() {
   const menus = [
-    { name: "Home", link: "/", icon: IoMdHome },
+    { name: "Home", link: "/admin/dashboard", icon: IoMdHome },
     { name: "YouTube", link: "/admin/youtube", icon: IoLogoYoutube },
-    { name: "NDTV", link: "/ndtv", icon: PiTelevisionSimpleFill, margin: true },
-    { name: "Times Of India", link: "/tofIndia", icon: GiNewspaper },
-    { name: "Google", link: "/google", icon: FaGoogle, margin: true },
+    {
+      name: "NDTV",
+      link: "/admin/ndtv",
+      icon: PiTelevisionSimpleFill,
+      margin: true,
+    },
+    { name: "Times Of India", link: "/admin/tofIndia", icon: GiNewspaper },
+    { name: "Google", link: "/admin/google", icon: FaGoogle, margin: true },
   ];
 
   const [open, setOpen] = useState(false);

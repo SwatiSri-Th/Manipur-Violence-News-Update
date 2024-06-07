@@ -10,12 +10,14 @@ import TimesOfIndia from "./Component/TimesOfIndia";
 import Sidebar from "./Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Component/Footer";
+import Twitter from "./Component/Twitter";
 
 export default function App() {
   const [youtubeData, setYoutubeData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
   const [tofIndia, setTofIndia] = useState([]);
+  const [twitter, setTwitter] = useState([]);
 
   // const fetchYoutube = () => {
   //   fetch(`https://flaskappmanipur.onrender.com/`)
@@ -27,11 +29,17 @@ export default function App() {
 
   const fetchYoutube = async () => {
     try {
-      const res = await instance({
-        url: "/",
-      });
+      const res = await instance.get("/latest");
       console.log(res.data);
-      setYoutubeData(res.data.data.slice(0, 6));
+      const sortedData = res?.data?.youtube?.sort(
+        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+      );
+      // setYoutubeData(res.data.youtube?.slice(0, 6));
+      setYoutubeData(sortedData?.slice(0, 6));
+      setGoogleData(res.data.google?.slice(0, 6));
+      setNdtv(res.data.ndtv?.slice(0, 6));
+      setTofIndia(res.data.timesOfIndia?.slice(0, 6));
+      setTwitter(res?.data?.twitter);
     } catch (error) {
       console.error(error);
     }
@@ -50,7 +58,7 @@ export default function App() {
       const res = await instance({
         url: "ndtv/data",
       });
-      setNdtv(res.data.data.slice(0, 6));
+      setNdtv(res?.data?.data?.slice(0, 6));
     } catch (error) {
       console.error(error);
     }
@@ -81,9 +89,7 @@ export default function App() {
 
   useEffect(() => {
     fetchYoutube();
-    fetchNdtv();
-    fetchGoogle();
-    fetchTimesOfIndia();
+
     // fetch(`https://flaskappmanipur.onrender.com/google`)
     //   .then((response) => response.json())
     //   .then((data) => {
@@ -157,14 +163,39 @@ export default function App() {
             ))}
           </div>
 
-          <h1 className="text-3xl font-extrabold text-blue-900 text-center mt-8 mb-8">
+          <h1 className="text-3xl font-extrabold text-[hsl(220,90%,67%)] text-center mt-8 mb-8">
             Google
           </h1>
           <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
             {googleData?.map((data, index) => (
-              <Google key={index} title={data.title} link={data.link} />
+              <Google
+                key={index}
+                title={data.title}
+                link={data.link}
+                source={data.source}
+                desc={data.desc}
+              />
             ))}
           </div>
+
+          <h1 className="text-3xl font-extrabold text-[#000] text-center mb-8 mt-8">
+            Twitter
+          </h1>
+          <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+            {twitter?.map((data) => (
+              <Twitter
+                key={data._id}
+                text={data.text}
+                link={data.url}
+                author={data.user_name}
+                date={data.created_at}
+                type={data.type}
+                media={data.media}
+                // img={data.img}
+              />
+            ))}
+          </div>
+
           <Footer />
         </ScrollArea>
       </div>

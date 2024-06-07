@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import instance from "@/Api/api_instance";
-import TimesOfIndia from "@/Component/TimesOfIndia";
-import Sidebar from "@/Component/Sidebar";
+import AdminTimesOfIndia from "./AdminTimesOfIndia";
+import AdminSidebar from "./AdminSidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Footer from "./Footer";
+import Footer from "@/Component/Footer";
 
-const TimesOfIndiaPage = () => {
+const AdminTimesOfIndiaPage = () => {
   const [tofIndia, setTofIndia] = useState([]);
 
   const fetchTimesOfIndia = async () => {
@@ -25,7 +25,7 @@ const TimesOfIndiaPage = () => {
 
   return (
     <div className=" flex">
-      <Sidebar />
+      <AdminSidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>
           <h1 className="text-3xl font-extrabold text-[#6e276f]  text-center mb-8 mt-8">
@@ -33,7 +33,7 @@ const TimesOfIndiaPage = () => {
           </h1>
           <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">
             {tofIndia?.map((data) => (
-              <TimesOfIndia
+              <AdminTimesOfIndia
                 key={data._id}
                 title={data.title}
                 description={data.description}
@@ -50,4 +50,4 @@ const TimesOfIndiaPage = () => {
   );
 };
 
-export default TimesOfIndiaPage;
+export default AdminTimesOfIndiaPage;
