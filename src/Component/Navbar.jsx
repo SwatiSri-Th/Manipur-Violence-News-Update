@@ -2,11 +2,29 @@ import { IoMdSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import DarkMode from "./DarkMode";
 import { MdArrowDropDown } from "react-icons/md";
+import { Select } from "@mantine/core";
+import { useEffect,useState } from "react";
+import instance from "@/Api/api_instance";
+
 // import { data } from "autoprefixer";
 // import { link } from "fs";
 // import { link } from "fs";
 export default function Navbar() {
   const navigate = useNavigate();
+  const [districts,setDistricts]=useState()
+  const fetchDistrict = async () => {
+    try {
+      const res = await instance.get("/district");
+      console.log(res.data);
+      setDistricts(res.data?.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(()=>{
+    fetchDistrict()
+  },[])
 
   const Category = [
     {
@@ -253,28 +271,20 @@ export default function Navbar() {
 
           {/* District Dropdown */}
 
-          <li className="group relative cursor-pointer">
-            <a href="#" className="flex items-center gap-[2px] py-2">
-              Districts
-              <span>
-                <MdArrowDropDown className="transition-all duration-200 group-hover:rotate-180" />
-              </span>
-            </a>
-
-            <div className="absolute z-[99] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black">
-              <ul className="overflow-y-scroll bg-orange-300">
-                {DistrictDropdownLinks.map((data) => (
-                  <li key={data.id}>
-                    <a
-                      href={data.link}
-                      className="inline-block w-full rounded-md p-[1px] hover:bg-gray-200"
-                    >
-                      {data.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <li className="group flex items-center gap-4 relative text-black cursor-pointer">
+            <p>District</p>
+            <Select
+            className="w-36 placeholder:text-black"
+              variant="unstyled"
+              placeholder="All District"
+               data={districts?.map((branch) => ({
+                value: branch._id,
+                label: branch.name,
+              }))}
+              defaultValue="React"
+              clearable
+              allowDeselect
+            />
           </li>
         </ul>
       </div>

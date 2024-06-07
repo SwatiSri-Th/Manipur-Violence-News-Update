@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import instance from "@/Api/api_instance";
+import Sidebar from "./Sidebar";
 import {
   WhatsappShareButton,
   WhatsappIcon,
@@ -31,9 +32,10 @@ const YoutubeDisplay = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex">
+    <Sidebar />
       {displayData ? (
-        <div className="flex p-6 items-center gap-4 ">
+        <div className="flex p-6 items-start gap-4 ">
           <div
             onClick={() => navigate(`/youtube/${video_id}`)}
             className="w-[800px] p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 "
@@ -77,14 +79,14 @@ const YoutubeDisplay = () => {
               </TelegramShareButton>
             </div>
           </div>
-          <div className="w-[500px] h-[400px] p-4 rounded-lg overflow-y-scroll border shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
+          <div className="w-[320px] h-[600px] p-4 rounded-lg overflow-y-scroll border shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
             <p>{displayData.description}</p>
           </div>
         </div>
       ) : (
         ""
       )}
-    </>
+    </div>
   );
 };
 

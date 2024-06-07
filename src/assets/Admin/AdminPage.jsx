@@ -5,6 +5,7 @@ import instance from "@/Api/api_instance";
 import AdminGoogle from "./AdminGoogle";
 import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
+import {OrbitProgress} from 'react-loading-indicators'
 import Footer from "@/Component/Footer";
 import AdminYoutube from "./AdminYoutube";
 // import { ScrollArea } from "@radix-ui/react-scroll-area";
@@ -17,6 +18,8 @@ export default function AdminPage() {
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
   const [tofIndia, setTofIndia] = useState([]);
+  const [twitterData, setTwitterData] = useState([]);
+  
 
   // const fetchYoutube = () => {
   //   fetch(`https://flaskappmanipur.onrender.com/`)

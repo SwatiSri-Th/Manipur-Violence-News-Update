@@ -28,7 +28,7 @@ export default function TimesOfIndia({
       ) : (
         <img
           className="aspect-video w-[300px] object-cover"
-          src={`https://drive.google.com/thumbnail?id=${image}`}
+          src={`https://drive.google.com/thumbnail?id=${image}&sz=w1000-h1000`}
         />
       )}
 
@@ -47,21 +47,21 @@ export default function TimesOfIndia({
         <WhatsappShareButton url={link}>
           <WhatsappIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
-            size={20}
+            size={24}
           ></WhatsappIcon>
         </WhatsappShareButton>
 
         <FacebookShareButton url={link}>
           <FacebookIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
+            size={24}
           ></FacebookIcon>
         </FacebookShareButton>
 
         <TwitterShareButton url="link">
           <XIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
+            size={24}
           ></XIcon>
         </TwitterShareButton>
       </div>

@@ -1,17 +1,30 @@
 // src/components/Login.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify";
+import instance from "@/Api/api_instance";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle login logic here
     console.log("Email:", email);
     console.log("Password:", password);
+    const id = toast.loading("Please wait...")
+    const res=await instance.post('/login',{email: email, password: password})
+    if(res.data.success){
+      window.localStorage.setItem('token',res.data.token)
+      navigate('dashboard')
+      toast.update(id, { render: "verified", type: "success", isLoading: false, autoClose:3000 });
+      return
+    }
+    else{
+      console.log(res.data.error);
+    }
   };
 
   return (
@@ -54,7 +67,7 @@ const Login = () => {
           <button
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
-            onClick={() => navigate("dashboard")}
+            onClick={handleSubmit}
           >
             Login
           </button>

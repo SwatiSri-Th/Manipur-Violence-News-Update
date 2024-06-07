@@ -54,10 +54,11 @@ const AdminYoutubePage = () => {
               Fetch New Data
             </button>
           </div>
-          <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+          <div className="flex  flex-wrap place-self-center w-full justify-center items-center  gap-4">
             {youtubeData?.map((data) => (
               <AdminYoutube
                 key={data._id}
+                video_id={data._id}
                 title={data.title}
                 channel={data.channelTitle}
                 file_id={data.file_id}

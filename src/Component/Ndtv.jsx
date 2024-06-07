@@ -5,10 +5,6 @@ import {
   FacebookIcon,
   TwitterShareButton,
   XIcon,
-  // LinkedinShareButton,
-  // LinkedinIcon,
-  // TelegramShareButton,
-  // TelegramIcon,
 } from "react-share";
 export default function Ndtv({ title, description, link, author, date, img }) {
   return (
@@ -25,7 +21,7 @@ export default function Ndtv({ title, description, link, author, date, img }) {
       ) : (
         <img
           className="aspect-video w-full object-cover"
-          src={`https://drive.google.com/thumbnail?id=${img}`}
+          src={`https://drive.google.com/thumbnail?id=${img}&sz=w1000-h1000`}
         />
       )}
 
@@ -41,21 +37,21 @@ export default function Ndtv({ title, description, link, author, date, img }) {
         <WhatsappShareButton url={link}>
           <WhatsappIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
-            size={20}
+            size={24}
           ></WhatsappIcon>
         </WhatsappShareButton>
 
         <FacebookShareButton url={link}>
           <FacebookIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
+            size={24}
           ></FacebookIcon>
         </FacebookShareButton>
 
         <TwitterShareButton url="link">
           <XIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
+            size={24}
           ></XIcon>
         </TwitterShareButton>
 

@@ -31,32 +31,32 @@ export default function News({
       <h1 className="font-bold">{title}</h1>
       <p>{channel}</p>
       <p>{publishedAt}</p>
-      <div className="w-[100px] flex justify-around">
+      <div className="w-[100px] gap-2 flex justify-around">
         <WhatsappShareButton url={link}>
           <WhatsappIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
-            size={20}
+            size={24}
           ></WhatsappIcon>
         </WhatsappShareButton>
 
         <FacebookShareButton url={link}>
           <FacebookIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
+            size={24}
           ></FacebookIcon>
         </FacebookShareButton>
 
         <TwitterShareButton url="link">
           <XIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
+            size={24}
           ></XIcon>
         </TwitterShareButton>
 
         <TelegramShareButton url="link">
           <TelegramIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-            size={20}
+            size={24}
           ></TelegramIcon>
         </TelegramShareButton>
       </div>

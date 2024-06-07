@@ -17,9 +17,7 @@ const YoutubePage = () => {
       const sortedData = res.data.data.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
-      // console.log(sortedData[0]._id);
       setYoutubeData(sortedData);
-      // setYoutubeData(res.data.data);
     } catch (error) {
       console.error(error);
     }

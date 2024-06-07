@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^7.10.1",
+    "@mantine/hooks": "^7.10.1",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
@@ -19,8 +21,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.0",
+    "react-loading-indicators": "^0.2.3",
     "react-router-dom": "^6.23.1",
     "react-share": "^5.1.0",
+    "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -35,6 +39,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "postcss": "^8.4.38",
+    "postcss-preset-mantine": "^1.15.0",
+    "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.0"
   }

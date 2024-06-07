@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 import "./index.css";
 import YoutubePage from "./Component/YoutubePage.jsx";
 import {
@@ -20,6 +23,10 @@ import AdminYoutubeDisplay from "./assets/Admin/AdminYoutubeDisplay.jsx";
 import AdminNdtvPage from "./assets/Admin/AdminNdtvPage.jsx";
 import AdminTimesOfIndiaPage from "./assets/Admin/AdminTimesOfIndiaPage.jsx";
 import AdminGooglePage from "./assets/Admin/AdminGooglePage.jsx";
+
+import '@mantine/core/styles.css';
+
+import { MantineProvider } from '@mantine/core';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +53,9 @@ const router = createBrowserRouter(
 );
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <MantineProvider>
+    <ToastContainer/>
     <RouterProvider router={router} />
+    </MantineProvider>
   </React.StrictMode>
 );

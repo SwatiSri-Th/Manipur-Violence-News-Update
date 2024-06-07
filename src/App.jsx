@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
-import axios from "axios";
 import instance from "./Api/api_instance";
 import News from "./Component/News";
 import Google from "./Component/Google";
@@ -9,10 +8,12 @@ import Ndtv from "./Component/Ndtv";
 import TimesOfIndia from "./Component/TimesOfIndia";
 import Sidebar from "./Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { OrbitProgress } from "react-loading-indicators";
 import Footer from "./Component/Footer";
 import Twitter from "./Component/Twitter";
 
 export default function App() {
+  const [loading,setLoading]=useState(false)
   const [youtubeData, setYoutubeData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
@@ -40,48 +41,7 @@ export default function App() {
       setNdtv(res.data.ndtv?.slice(0, 6));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));
       setTwitter(res?.data?.twitter);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // const fetchSangai = () => {
-  //   fetch(`https://flaskappmanipur.onrender.com/state`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setSangaiData(data.slice(0, 4));
-  //     });
-  // };/
-
-  const fetchNdtv = async () => {
-    try {
-      const res = await instance({
-        url: "ndtv/data",
-      });
-      setNdtv(res?.data?.data?.slice(0, 6));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchTimesOfIndia = async () => {
-    try {
-      const res = await instance({
-        url: "/timeOfIndia/data",
-      });
-      setTofIndia(res.data.slice(0, 6));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchGoogle = async () => {
-    try {
-      const res = await instance({
-        url: "/google",
-      });
-      console.log(res.data);
-      setGoogleData(res.data.slice(0, 6));
+      setLoading(true)
     } catch (error) {
       console.error(error);
     }
@@ -89,19 +49,8 @@ export default function App() {
 
   useEffect(() => {
     fetchYoutube();
-
-    // fetch(`https://flaskappmanipur.onrender.com/google`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setGoogleData(data.slice(0, 4));
-    //   });
   }, []);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return format(new Date(dateString), "dd-MMMM-yyyy h:mm:a");
-  };
   return (
     <div className="flex">
       <Sidebar />
@@ -109,10 +58,14 @@ export default function App() {
         <Navbar />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
           <div>
+      
             <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
               YouTube
-            </h1>
+              </h1>
             <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+              {
+                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
+              }
               {youtubeData?.map((data) => (
                 <News
                   video_id={data._id}
@@ -134,6 +87,9 @@ export default function App() {
             NDTV
           </h1>
           <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+          {
+                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
+          }
             {ndtv?.map((data) => (
               <Ndtv
                 key={data._id}
@@ -150,7 +106,9 @@ export default function App() {
           <h1 className="text-3xl font-extrabold text-[#6e276f] text-center mb-8 mt-8">
             Times Of India
           </h1>
-          <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">
+          <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">{
+                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
+          }
             {tofIndia?.map((data) => (
               <TimesOfIndia
                 key={data._id}
@@ -166,7 +124,9 @@ export default function App() {
           <h1 className="text-3xl font-extrabold text-[hsl(220,90%,67%)] text-center mt-8 mb-8">
             Google
           </h1>
-          <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
+          <div className="flex flex-wrap place-self-center w-full justify-center gap-4">{
+                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
+          }
             {googleData?.map((data, index) => (
               <Google
                 key={index}
@@ -181,7 +141,9 @@ export default function App() {
           <h1 className="text-3xl font-extrabold text-[#000] text-center mb-8 mt-8">
             Twitter
           </h1>
-          <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+          <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">{
+                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
+          }
             {twitter?.map((data) => (
               <Twitter
                 key={data._id}

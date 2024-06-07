@@ -33,7 +33,7 @@ const Footer = () => {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d452.8393520981812!2d93.92767551447436!3d24.77096529396387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3749266d41e20f53%3A0xdcc2f85fd6c40821!2sKorou%20Technologies!5e0!3m2!1sen!2sin!4v1717571617711!5m2!1sen!2sin"
             width="100%"
             height="100%"
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
