@@ -1,6 +1,5 @@
-// src/components/Login.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import instance from "@/Api/api_instance";
 
@@ -14,15 +13,23 @@ const Login = () => {
     // Handle login logic here
     console.log("Email:", email);
     console.log("Password:", password);
-    const id = toast.loading("Please wait...")
-    const res=await instance.post('/login',{email: email, password: password})
-    if(res.data.success){
-      window.localStorage.setItem('token',res.data.token)
-      navigate('dashboard')
-      toast.update(id, { render: "verified", type: "success", isLoading: false, autoClose:3000 });
-      return
-    }
-    else{
+    const id = toast.loading("Please wait...");
+    const res = await instance.post("/login", {
+      email: email,
+      password: password,
+    });
+    if (res.data.success) {
+      window.localStorage.setItem("token", res.data.token);
+      toast.update(id, {
+        render: "verified",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+
+      navigate("/admin/dashboard");
+      window.location.reload();
+    } else {
       console.log(res.data.error);
     }
   };

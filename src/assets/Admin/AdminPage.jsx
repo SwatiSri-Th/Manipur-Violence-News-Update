@@ -5,67 +5,44 @@ import instance from "@/Api/api_instance";
 import AdminGoogle from "./AdminGoogle";
 import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
-import {OrbitProgress} from 'react-loading-indicators'
+import { OrbitProgress } from "react-loading-indicators";
 import Footer from "@/Component/Footer";
 import AdminYoutube from "./AdminYoutube";
 // import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AdminNdtv from "./AdminNdtv";
 import AdminTimesOfIndia from "./AdminTimesOfIndia";
+import AdminTwitterComponent from "./AdminTwitterComponent";
 
 export default function AdminPage() {
+  const [loading, setLoading] = useState(false);
   const [youtubeData, setYoutubeData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
   const [tofIndia, setTofIndia] = useState([]);
   const [twitterData, setTwitterData] = useState([]);
-  
-
-  // const fetchYoutube = () => {
-  //   fetch(`https://flaskappmanipur.onrender.com/`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setYoutubeData(data.slice(0, 8));
-  //     });
-  // };
 
   const fetchYoutube = async () => {
     try {
-      // const res = await instance({
-      //   url: "/latest",
-      // });
-
       const res = await instance.get("/latest");
       console.log(res.data);
-      const sortedData = res?.data?.youtube?.sort(
-        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
-      );
-      // setYoutubeData(res.data.youtube?.slice(0, 6));
-      setYoutubeData(sortedData?.slice(0, 6));
+
+      // setYoutubeData(res.data.youtube?.slice(0, 6
+      console.log(res.data.youtube);
+      setYoutubeData(res.data.youtube?.slice(0, 6));
       setGoogleData(res.data.google?.slice(0, 6));
       setNdtv(res.data.ndtv?.slice(0, 6));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));
+      setTwitterData(res.data.twitter);
+      setLoading(true);
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
     fetchYoutube();
-    // fetchNdtv();
-    // fetchGoogle();
-    // fetchTimesOfIndia();
-    // fetch(`https://flaskappmanipur.onrender.com/google`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setGoogleData(data.slice(0, 4));
-    //   });
   }, []);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return format(new Date(dateString), "dd-MMMM-yyyy h:mm:a");
-  };
   return (
     <div className="flex">
       <AdminSidebar />
@@ -73,10 +50,19 @@ export default function AdminPage() {
         <AdminNavbar />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
           <div>
-            <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
+            <h1 className="text-3xl font-extrabold text-blue-600 text-center  mb-8 mt-8">
               YouTube
             </h1>
-            <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+            <div className="flex   flex-wrap  w-full justify-around  gap-4">
+              {!loading && (
+                <OrbitProgress
+                  variant="disc"
+                  color="#32cd32"
+                  size="medium"
+                  text=""
+                  textColor=""
+                />
+              )}
               {youtubeData?.map((data) => (
                 <AdminYoutube
                   key={data._id}
@@ -89,6 +75,8 @@ export default function AdminPage() {
                     "dd-MMMM-yyyy h:mm:a"
                   )}
                   link={data.video_link}
+                  district={data.district}
+                  category={data.category}
                 />
               ))}
             </div>
@@ -97,7 +85,16 @@ export default function AdminPage() {
           <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
             NDTV
           </h1>
-          <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+          <div className="flex  flex-wrap place-self-center w-full justify-around  gap-4">
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
             {ndtv?.map((data) => (
               <AdminNdtv
                 key={data._id}
@@ -115,6 +112,15 @@ export default function AdminPage() {
             Times Of India
           </h1>
           <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
             {tofIndia?.map((data) => (
               <AdminTimesOfIndia
                 key={data._id}
@@ -131,6 +137,15 @@ export default function AdminPage() {
             Google
           </h1>
           <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
             {googleData?.map((data, index) => (
               <AdminGoogle
                 key={index}
@@ -138,6 +153,32 @@ export default function AdminPage() {
                 link={data.link}
                 source={data.source}
                 desc={data.desc}
+              />
+            ))}
+          </div>
+          <h1 className="text-3xl font-extrabold text-[#000] text-center mb-8 mt-8">
+            Twitter
+          </h1>
+          <div className="flex flex-wrap h-fit   w-full gap-4 justify-center  ">
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
+            {twitterData?.map((data) => (
+              <AdminTwitterComponent
+                key={data._id}
+                text={data.text}
+                link={data.url}
+                author={data.user_name}
+                date={data.created_at}
+                type={data.type}
+                media={data.media}
+                // img={data.img}
               />
             ))}
           </div>

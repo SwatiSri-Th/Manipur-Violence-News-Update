@@ -6,8 +6,9 @@ import { IoLogoYoutube } from "react-icons/io5";
 import { PiTelevisionSimpleFill } from "react-icons/pi";
 import { GiNewspaper } from "react-icons/gi";
 import { FaGoogle } from "react-icons/fa6";
+import { BiCategoryAlt } from "react-icons/bi";
 
-export default function Sidebar() {
+export default function AdminSidebar() {
   const menus = [
     { name: "Home", link: "/admin/dashboard", icon: IoMdHome },
     { name: "YouTube", link: "/admin/youtube", icon: IoLogoYoutube },
@@ -19,6 +20,12 @@ export default function Sidebar() {
     },
     { name: "Times Of India", link: "/admin/tofIndia", icon: GiNewspaper },
     { name: "Google", link: "/admin/google", icon: FaGoogle, margin: true },
+    {
+      name: "Category",
+      link: "/admin/category",
+      icon: BiCategoryAlt,
+      margin: true,
+    },
   ];
 
   const [open, setOpen] = useState(false);
@@ -28,7 +35,7 @@ export default function Sidebar() {
     >
       <div
         className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] min-h-screen ${
-          open ? "w-72" : "w-16"
+          open ? "w-72" : "w-[70px]"
         } duration-500 text-black px-4`}
       >
         <div className="py-3  flex justify-end">
@@ -45,7 +52,7 @@ export default function Sidebar() {
               key={i}
               className={` ${
                 menu?.margin && "mt-5"
-              } group flex  items-center text-sm gap-3.5 font-medium p-2 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]
+              } group flex items-center p-2 text-sm gap-3.5 font-medium  hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]
               rounded-md`}
             >
               <div>{React.createElement(menu?.icon, { size: "20" })}</div>

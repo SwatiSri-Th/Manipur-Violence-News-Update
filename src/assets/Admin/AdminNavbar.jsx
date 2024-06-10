@@ -1,8 +1,10 @@
 import { IoMdSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import DarkMode from "@/Component/DarkMode";
+import { useState } from "react";
 // import { link } from "fs";
-export default function Navbar() {
+export default function AdminNavbar({ hide = false }) {
+  const [hidden, setHidden] = useState(hide);
   const navigate = useNavigate();
 
   const Category = [
@@ -84,13 +86,13 @@ export default function Navbar() {
         </div>
       </div>
       {/* Lower Navbar */}
-      <div className="flex justify-center">
-        <ul className="sm:flex hidden items-center gap-4">
+      <div className={` justify-center ${hidden ? "hidden" : "flex"}`}>
+        <ul className="sm:flex hidden items-center h-7 gap-4">
           {Category.map((data) => (
             <li key={data.id}>
               <a
                 href={data.link}
-                className="inline-block px-4 hover:text-purple-600 duration-200"
+                className="inline-block px-4  hover:text-purple-600 duration-200"
               >
                 {data.name}
               </a>

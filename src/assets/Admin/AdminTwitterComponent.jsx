@@ -1,5 +1,12 @@
-import {format,parse} from 'date-fns'
-export default function Twitter({ text, link, author, date, type, media }) {
+import { format, parse } from "date-fns";
+export default function AdminTwitterComponent({
+  text,
+  link,
+  author,
+  date,
+  type,
+  media,
+}) {
   return (
     <a
       href={link}
@@ -22,8 +29,9 @@ export default function Twitter({ text, link, author, date, type, media }) {
         <></>
       )}
 
-      <p>{format(parse(date, 'EEE MMM dd HH:mm:ss xxxx yyyy', new Date()), 'Pp')
-      }</p>
+      <p>
+        {format(parse(date, "EEE MMM dd HH:mm:ss xxxx yyyy", new Date()), "Pp")}
+      </p>
     </a>
   );
 }
