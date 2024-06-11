@@ -6,14 +6,27 @@ import { format } from "date-fns";
 import AdminSidebar from "./AdminSidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "@/Component/Footer";
+import { toast } from "react-toastify";
 
 const AdminYoutubePage = () => {
   const [youtubeData, setYoutubeData] = useState([]);
 
   const fetchNewData = async () => {
     try {
+      const id = toast.loading("Please wait...");
       const response = await instance.get("/youtube");
-      setYoutubeData(response.data.data);
+      if (response.status === 201) {
+        toast.update(id, {
+          render: "Data is fetch",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      }
+      const sortedData = res?.data?.data?.sort(
+        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+      );
+      setYoutubeData((prev) => [...prev, sortedData]);
     } catch (e) {
       console.log(e.message);
     }
@@ -24,16 +37,15 @@ const AdminYoutubePage = () => {
       const res = await instance({
         url: "/",
       });
-      console.log(res.data.data);
-      const sortedData = res.data.data.sort(
+      const sortedData = res?.data?.data?.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
       setYoutubeData(sortedData);
-      // setYoutubeData(res.data.data);
     } catch (error) {
-      console.error(error);
+      toast.error(error.message);
     }
   };
+
   useEffect(() => {
     fetchYoutube();
   }, []);
@@ -50,7 +62,6 @@ const AdminYoutubePage = () => {
               onClick={fetchNewData}
               className="w-[170px] h-[40px] bg-blue-900 text-wrap rounded-xl hover:bg-blue-700 text-white"
             >
-              {" "}
               Fetch New Data
             </button>
           </div>
