@@ -29,7 +29,7 @@ import AdminGooglePage from "./assets/Admin/AdminGooglePage.jsx";
 import CategoryPage from "./assets/Admin/CategoryPage.jsx";
 
 import "@mantine/core/styles.css";
-
+import "@mantine/carousel/styles.css";
 import { MantineProvider } from "@mantine/core";
 import AdminRegister from "./assets/Admin/AdminRegister.jsx";
 const login = window.localStorage.getItem("token");

@@ -11,6 +11,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { OrbitProgress } from "react-loading-indicators";
 import Footer from "./Component/Footer";
 import Twitter from "./Component/Twitter";
+import Carousel from "./Component/Carousel";
+// import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 export default function App() {
   const [loading, setLoading] = useState(false);
@@ -57,6 +59,9 @@ export default function App() {
       <div className=" w-full flex flex-col items-start justify-start">
         <Navbar />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+          <main className="w-full">
+            <Carousel />
+          </main>
           <div>
             <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
               YouTube
