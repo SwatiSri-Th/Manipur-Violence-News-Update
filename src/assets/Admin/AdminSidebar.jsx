@@ -7,6 +7,7 @@ import { PiTelevisionSimpleFill } from "react-icons/pi";
 import { GiNewspaper } from "react-icons/gi";
 import { FaGoogle } from "react-icons/fa6";
 import { BiCategoryAlt } from "react-icons/bi";
+import { IoPersonAddSharp } from "react-icons/io5";
 
 export default function AdminSidebar() {
   const menus = [
@@ -24,6 +25,12 @@ export default function AdminSidebar() {
       name: "Category",
       link: "/admin/category",
       icon: BiCategoryAlt,
+      margin: true,
+    },
+    {
+      name: "Category",
+      link: "/admin/register",
+      icon: IoPersonAddSharp,
       margin: true,
     },
   ];

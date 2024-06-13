@@ -25,6 +25,7 @@ import AdminNdtvPage from "./assets/Admin/AdminNdtvPage.jsx";
 import AdminTimesOfIndiaPage from "./assets/Admin/AdminTimesOfIndiaPage.jsx";
 import AdminGooglePage from "./assets/Admin/AdminGooglePage.jsx";
 import CategoryPage from "./assets/Admin/CategoryPage.jsx";
+import AdminRegister from "./assets/Admin/AdminRegister.jsx";
 
 import "@mantine/core/styles.css";
 
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
           <Route path="tofIndia" element={<AdminTimesOfIndiaPage />} />
           <Route path="google" element={<AdminGooglePage />} />
           <Route path="category" element={<CategoryPage />} />
+          <Route path="register" element={<AdminRegister />} />
         </Route>
       ) : (
         <Route path="*" element={<Navigate to="/admin" />} />

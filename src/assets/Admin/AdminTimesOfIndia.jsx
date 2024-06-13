@@ -31,7 +31,7 @@ export default function AdminTimesOfIndia({
       ) : (
         <img
           className="aspect-video w-[300px] object-cover"
-          src={`https://drive.google.com/thumbnail?id=${image}`}
+          src={`https://drive.google.com/thumbnail?id=${image}&sz=w1000-h1000`}
         />
       )}
 
