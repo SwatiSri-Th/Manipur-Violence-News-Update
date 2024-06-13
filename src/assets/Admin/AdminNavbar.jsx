@@ -1,11 +1,27 @@
 import { IoMdSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import DarkMode from "@/Component/DarkMode";
-import { useState } from "react";
+import { MdArrowDropDown } from "react-icons/md";
+import { useState, useEffect } from "react";
+import { Select } from "@mantine/core";
+import instance from "@/Api/api_instance";
 // import { link } from "fs";
-export default function AdminNavbar({ hide = false }) {
-  const [hidden, setHidden] = useState(hide);
+export default function AdminNavbar() {
   const navigate = useNavigate();
+  const [districts, setDistricts] = useState();
+  const fetchDistrict = async () => {
+    try {
+      const res = await instance.get("/district");
+      console.log(res.data);
+      setDistricts(res.data?.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDistrict();
+  }, []);
 
   const Category = [
     {
@@ -22,19 +38,39 @@ export default function AdminNavbar({ hide = false }) {
 
     {
       id: 3,
-      name: "Violence",
+      name: "Elections",
       link: "/#",
     },
 
     {
       id: 4,
-      name: "Death",
+      name: "Accident",
       link: "/#",
     },
 
     {
       id: 5,
       name: "Gun Fire",
+      link: "/#",
+    },
+  ];
+
+  const DropdownLinks = [
+    {
+      id: 1,
+      name: "Trending Videos",
+      link: "/#",
+    },
+
+    {
+      id: 2,
+      name: "Latest News",
+      link: "/#",
+    },
+
+    {
+      id: 3,
+      name: "Top Rated",
       link: "/#",
     },
   ];
@@ -86,7 +122,7 @@ export default function AdminNavbar({ hide = false }) {
         </div>
       </div>
       {/* Lower Navbar */}
-      <div className={` justify-center ${hidden ? "hidden" : "flex"}`}>
+      <div className="flex justify-center">
         <ul className="sm:flex hidden items-center h-7 gap-4">
           {Category.map((data) => (
             <li key={data.id}>
@@ -98,6 +134,49 @@ export default function AdminNavbar({ hide = false }) {
               </a>
             </li>
           ))}
+
+          {/* Dropdown and links */}
+          <li className="group relative cursor-pointer">
+            <a href="#" className="flex items-center gap-[2px] py-2">
+              Trending
+              <span>
+                <MdArrowDropDown className="transition-all duration-200 group-hover:rotate-180" />
+              </span>
+            </a>
+
+            <div className="absolute z-[9999] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black">
+              <ul>
+                {DropdownLinks.map((data) => (
+                  <li key={data.id}>
+                    <a
+                      href={data.link}
+                      className="inline-block w-full rounded-md p-2 hover:bg-gray-300"
+                    >
+                      {data.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+
+          {/* District Dropdown */}
+
+          <li className="group flex items-center gap-4 relative text-black cursor-pointer">
+            <p>District</p>
+            <Select
+              className="w-36 placeholder:text-black"
+              variant="unstyled"
+              placeholder="All District"
+              data={districts?.map((branch) => ({
+                value: branch._id,
+                label: branch.name,
+              }))}
+              defaultValue="React"
+              clearable
+              allowDeselect
+            />
+          </li>
         </ul>
       </div>
     </div>

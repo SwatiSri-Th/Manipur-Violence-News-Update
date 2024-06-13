@@ -7,6 +7,8 @@ import { PiTelevisionSimpleFill } from "react-icons/pi";
 import { GiNewspaper } from "react-icons/gi";
 import { FaGoogle } from "react-icons/fa6";
 import { BiCategoryAlt } from "react-icons/bi";
+import { RiTwitterXFill } from "react-icons/ri";
+import { IoPersonAddSharp } from "react-icons/io5";
 
 export default function AdminSidebar() {
   const menus = [
@@ -20,11 +22,18 @@ export default function AdminSidebar() {
     },
     { name: "Times Of India", link: "/admin/tofIndia", icon: GiNewspaper },
     { name: "Google", link: "/admin/google", icon: FaGoogle, margin: true },
+    { name: "Twitter", link: "/admin/twitter", icon: RiTwitterXFill },
     {
       name: "Category",
       link: "/admin/category",
       icon: BiCategoryAlt,
       margin: true,
+    },
+
+    {
+      name: "Register",
+      link: "/admin/register",
+      icon: IoPersonAddSharp,
     },
   ];
 

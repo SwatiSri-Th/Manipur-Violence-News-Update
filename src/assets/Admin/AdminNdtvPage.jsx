@@ -62,10 +62,6 @@ const AdminNdtvPage = () => {
           autoClose: 3000,
         });
       }
-      const sortedData = response?.data?.data?.sort(
-        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
-      );
-
       setNdtv(response.data.data);
     } catch (e) {
       console.log(e.message);
@@ -167,10 +163,11 @@ const AdminNdtvPage = () => {
           </div>
         </div>
       </Modal>
+
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>
           <div className="flex w-full items-center justify-center gap-8 ">
-            <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
+            <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
               Ndtv
             </h1>
             <button

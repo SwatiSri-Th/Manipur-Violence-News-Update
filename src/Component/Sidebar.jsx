@@ -6,6 +6,7 @@ import { IoLogoYoutube } from "react-icons/io5";
 import { PiTelevisionSimpleFill } from "react-icons/pi";
 import { GiNewspaper } from "react-icons/gi";
 import { FaGoogle } from "react-icons/fa6";
+import { RiTwitterXFill } from "react-icons/ri";
 
 export default function Sidebar() {
   const menus = [
@@ -14,6 +15,7 @@ export default function Sidebar() {
     { name: "NDTV", link: "/ndtv", icon: PiTelevisionSimpleFill, margin: true },
     { name: "Times Of India", link: "/tofIndia", icon: GiNewspaper },
     { name: "Google", link: "/google", icon: FaGoogle, margin: true },
+    { name: "Twitter", link: "/twitter", icon: RiTwitterXFill },
   ];
 
   const [open, setOpen] = useState(false);

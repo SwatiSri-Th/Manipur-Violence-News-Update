@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DarkMode from "./DarkMode";
 import { MdArrowDropDown } from "react-icons/md";
 import { Select } from "@mantine/core";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import instance from "@/Api/api_instance";
 
 // import { data } from "autoprefixer";
@@ -11,7 +11,7 @@ import instance from "@/Api/api_instance";
 // import { link } from "fs";
 export default function Navbar() {
   const navigate = useNavigate();
-  const [districts,setDistricts]=useState()
+  const [districts, setDistricts] = useState();
   const fetchDistrict = async () => {
     try {
       const res = await instance.get("/district");
@@ -20,11 +20,11 @@ export default function Navbar() {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
-  useEffect(()=>{
-    fetchDistrict()
-  },[])
+  useEffect(() => {
+    fetchDistrict();
+  }, []);
 
   const Category = [
     {
@@ -41,13 +41,13 @@ export default function Navbar() {
 
     {
       id: 3,
-      name: "Violence",
+      name: "Elections",
       link: "/#",
     },
 
     {
       id: 4,
-      name: "Death",
+      name: "Accident",
       link: "/#",
     },
 
@@ -74,104 +74,6 @@ export default function Navbar() {
     {
       id: 3,
       name: "Top Rated",
-      link: "/#",
-    },
-  ];
-
-  const DistrictDropdownLinks = [
-    {
-      id: 1,
-      name: "Imphal East",
-      link: "/#",
-    },
-
-    {
-      id: 2,
-      name: "Imphal West",
-      link: "/#",
-    },
-
-    {
-      id: 3,
-      name: "Thoubal",
-      link: "/#",
-    },
-
-    {
-      id: 4,
-      name: "Bishnupur",
-      link: "/#",
-    },
-
-    {
-      id: 5,
-      name: "Kakching",
-      link: "/#",
-    },
-
-    {
-      id: 6,
-      name: "Jiribam",
-      link: "/#",
-    },
-
-    {
-      id: 7,
-      name: "Ukhrul",
-      link: "/#",
-    },
-
-    {
-      id: 8,
-      name: "Senapati",
-      link: "/#",
-    },
-
-    {
-      id: 9,
-      name: "Tamenglong",
-      link: "/#",
-    },
-
-    {
-      id: 10,
-      name: "Chandel",
-      link: "/#",
-    },
-
-    {
-      id: 11,
-      name: "Noney",
-      link: "/#",
-    },
-
-    {
-      id: 12,
-      name: "Kamjong",
-      link: "/#",
-    },
-
-    {
-      id: 13,
-      name: "Tengnoupal",
-      link: "/#",
-    },
-
-    {
-      id: 14,
-      name: "Kangpokpi",
-      link: "/#",
-    },
-
-    {
-      id: 15,
-      name: "Pherzawl",
-      link: "/#",
-    },
-
-    {
-      id: 16,
-      name: "Churachanpur",
       link: "/#",
     },
   ];
@@ -274,10 +176,10 @@ export default function Navbar() {
           <li className="group flex items-center gap-4 relative text-black cursor-pointer">
             <p>District</p>
             <Select
-            className="w-36 placeholder:text-black"
+              className="w-36 placeholder:text-black"
               variant="unstyled"
               placeholder="All District"
-               data={districts?.map((branch) => ({
+              data={districts?.map((branch) => ({
                 value: branch._id,
                 label: branch.name,
               }))}

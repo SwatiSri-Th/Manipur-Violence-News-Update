@@ -133,7 +133,7 @@ const AdminYoutubeDisplay = () => {
             clearable
             allowDeselect
           />
-          <div className="flex gap-4">
+          <div className="flex gap-4 ">
             <p
               className="px-4 bg-blue-400 text-white rounded-lg"
               onClick={districtAndCategoryHandler}
@@ -145,12 +145,12 @@ const AdminYoutubeDisplay = () => {
         </div>
       </Modal>
       {displayData ? (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <AdminNavbar hide={true} />
-          <div className="flex p-6 items-start gap-4 ">
+          <div className="flex p-8 items-start gap-4 ">
             <div
               onClick={() => navigate(`/youtube/${video_id}`)}
-              className="w-[650px] p-4 text-wrap text-black  rounded-xl flex flex-col items-start justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 "
+              className="w-[70%]  p-4 text-wrap  text-black  rounded-xl flex flex-col items-start justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 "
             >
               <iframe
                 className="aspect-video w-full object-cover"
@@ -199,8 +199,8 @@ const AdminYoutubeDisplay = () => {
                 </TelegramShareButton>
               </div>
             </div>
-            <div>
-              <div className=" flex justify-end gap-5">
+            <div className="w-[40%]">
+              <div className=" flex w-full justify-end gap-5">
                 <button
                   className="w-[100px] rounded-lg cursor-pointer border  border-solid-[6px] transition-[3s] hover:bg-transparent hover:text-black  bg-black text-wrap text-white"
                   onClick={open}
@@ -215,7 +215,7 @@ const AdminYoutubeDisplay = () => {
                   Delete
                 </button>
               </div>
-              <div className="w-[500px] h-[calc(100vh-10rem)] p-4 rounded-lg mt-4 overflow-y-scroll border shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
+              <div className="w-full h-[calc(100vh-10rem)] p-4 rounded-lg mt-4 overflow-y-scroll border shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
                 <p>{displayData.description}</p>
               </div>
             </div>

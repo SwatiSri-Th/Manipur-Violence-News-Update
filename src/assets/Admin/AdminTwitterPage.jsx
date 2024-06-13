@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import instance from "@/Api/api_instance";
-import AdminTimesOfIndia from "./AdminTimesOfIndia";
 import AdminSidebar from "./AdminSidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "@/Component/Footer";
+import AdminTwitter from "./AdminTwittert";
 import { toast } from "react-toastify";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Select } from "@mantine/core";
 
-const AdminTimesOfIndiaPage = () => {
-  const [tofIndia, setTofIndia] = useState([]);
+const AdminTwitterPage = () => {
+  const [twitterData, setTwitterData] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [id, setId] = useState();
   const [category, setCategory] = useState([]);
@@ -46,7 +46,7 @@ const AdminTimesOfIndiaPage = () => {
   const fetchNewData = async () => {
     try {
       const id = toast.loading("Please wait...");
-      const response = await instance.get("/time");
+      const response = await instance.get("/twitter");
       console.log(response.data);
       if (response.data.data.length === 0) {
         toast.update(id, {
@@ -65,7 +65,7 @@ const AdminTimesOfIndiaPage = () => {
           autoClose: 3000,
         });
       }
-      setTofIndia(response.data.data);
+      setTwitterData(response.data.data);
     } catch (e) {
       console.log(e.message);
     }
@@ -101,12 +101,12 @@ const AdminTimesOfIndiaPage = () => {
     }
   };
 
-  const fetchTimesOfIndia = async () => {
+  const fetchTwitter = async () => {
     try {
       const res = await instance({
-        url: "/timeOfIndia/data",
+        url: "twitter/search",
       });
-      setTofIndia(res.data);
+      setTwitterData(res.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -118,7 +118,7 @@ const AdminTimesOfIndiaPage = () => {
   };
 
   useEffect(() => {
-    fetchTimesOfIndia();
+    fetchTwitter();
     getCategory();
     getDistrict();
   }, []);
@@ -171,8 +171,8 @@ const AdminTimesOfIndiaPage = () => {
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>
           <div className="flex w-full items-center justify-center gap-8">
-            <h1 className="text-3xl font-extrabold text-[#6e276f]  text-center mb-8 mt-8">
-              Times Of India
+            <h1 className="text-3xl font-extrabold text-[#000] text-center mt-8 mb-8">
+              Twitter
             </h1>
             <button
               onClick={fetchNewData}
@@ -181,17 +181,17 @@ const AdminTimesOfIndiaPage = () => {
               Fetch New Data
             </button>
           </div>
-
-          <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">
-            {tofIndia?.map((data) => (
-              <AdminTimesOfIndia
+          <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
+            {twitterData?.map((data) => (
+              <AdminTwitter
                 key={data._id}
                 id={data._id}
-                title={data.title}
-                description={data.description}
+                text={data.text}
                 link={data.link}
-                date={data.date}
-                image={data.image}
+                author={data.user_name}
+                date={data.created_at}
+                type={data.type}
+                media={data.media}
                 district={data.district}
                 category={data.category}
                 open={modalOpened}
@@ -206,4 +206,4 @@ const AdminTimesOfIndiaPage = () => {
   );
 };
 
-export default AdminTimesOfIndiaPage;
+export default AdminTwitterPage;
