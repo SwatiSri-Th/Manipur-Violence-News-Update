@@ -13,7 +13,7 @@ const Footer = () => {
             <li>Ndtv</li>
             <li>Times Of India</li>
             <li>Google</li>
-            <li>Clients</li>
+            <li>Twitter</li>
             <li>Subscription</li>
           </ul>
         </div>

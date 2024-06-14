@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import instance from "@/Api/api_instance";
+import { PiWindLight } from "react-icons/pi";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,28 +10,44 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
     const id = toast.loading("Please wait...");
-    const res = await instance.post("/login", {
-      email: email,
-      password: password,
-    });
-    if (res.data.success) {
-      window.localStorage.setItem("token", res.data.token);
+    try {
+      e.preventDefault();
+      // Handle login logic here
+      console.log("Email:", email);
+      console.log("Password:", password);
+      const res = await instance.post("/login", {
+        email: email,
+        password: password,
+      });
+      if (res.data.success) {
+        window.localStorage.setItem("token", res.data.token);
+        window.localStorage.setItem("role", res.data.role);
+        toast.update(id, {
+          render: "verified",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+
+        navigate("/admin/dashboard");
+        window.location.reload();
+      } else {
+        console.log(res.data.error);
+        toast.update(id, {
+          render: "error",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      }
+    } catch (e) {
       toast.update(id, {
-        render: "verified",
-        type: "success",
+        render: "error",
+        type: e.message,
         isLoading: false,
         autoClose: 3000,
       });
-
-      navigate("/admin/dashboard");
-      window.location.reload();
-    } else {
-      console.log(res.data.error);
     }
   };
 

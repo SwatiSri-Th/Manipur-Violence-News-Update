@@ -7,9 +7,16 @@ const AdminRegister = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(name);
+    const res = await instance.post("/admin", { name, email, password });
+    if (res.status === 200) {
+      toast.success("Success");
+    }
+    setName("");
+    setEmail("");
+    setPassword("");
   };
   return (
     <div className=" flex">

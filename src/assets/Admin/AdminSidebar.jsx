@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { IoMdHome } from "react-icons/io";
 import { IoLogoYoutube } from "react-icons/io5";
@@ -7,9 +8,14 @@ import { PiTelevisionSimpleFill } from "react-icons/pi";
 import { GiNewspaper } from "react-icons/gi";
 import { FaGoogle } from "react-icons/fa6";
 import { BiCategoryAlt } from "react-icons/bi";
+import { RiTwitterXFill } from "react-icons/ri";
 import { IoPersonAddSharp } from "react-icons/io5";
+import { IoLogOutSharp } from "react-icons/io5";
+import { MdPeople } from "react-icons/md";
 
 export default function AdminSidebar() {
+  const history = useNavigate();
+  const role = window.localStorage.getItem("role");
   const menus = [
     { name: "Home", link: "/admin/dashboard", icon: IoMdHome },
     { name: "YouTube", link: "/admin/youtube", icon: IoLogoYoutube },
@@ -21,19 +27,35 @@ export default function AdminSidebar() {
     },
     { name: "Times Of India", link: "/admin/tofIndia", icon: GiNewspaper },
     { name: "Google", link: "/admin/google", icon: FaGoogle, margin: true },
+    { name: "Twitter", link: "/admin/twitter", icon: RiTwitterXFill },
     {
       name: "Category",
       link: "/admin/category",
       icon: BiCategoryAlt,
       margin: true,
     },
+
+    ...(role === "admin"
+      ? [
+          {
+            name: "Moderator",
+            link: "/admin/moderator",
+            icon: MdPeople,
+          },
+          { name: "Register", link: "/admin/register", icon: IoPersonAddSharp },
+        ]
+      : []),
     {
-      name: "Category",
-      link: "/admin/register",
-      icon: IoPersonAddSharp,
-      margin: true,
+      name: "Logout",
+      icon: IoLogOutSharp,
+      onClick: () => handleLogout(),
     },
   ];
+
+  const handleLogout = () => {
+    window.localStorage.clear();
+    history("/admin");
+  };
 
   const [open, setOpen] = useState(false);
   return (
@@ -57,6 +79,7 @@ export default function AdminSidebar() {
             <NavLink
               to={menu?.link}
               key={i}
+              onClick={menu?.onClick}
               className={` ${
                 menu?.margin && "mt-5"
               } group flex items-center p-2 text-sm gap-3.5 font-medium  hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]

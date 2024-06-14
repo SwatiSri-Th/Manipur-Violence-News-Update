@@ -1,61 +1,72 @@
+import { format, parse } from "date-fns";
 import {
   WhatsappShareButton,
   WhatsappIcon,
   FacebookShareButton,
   FacebookIcon,
-  TwitterShareButton,
-  XIcon,
 } from "react-share";
 
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
-
-export default function AdminGoogle({
+export default function AdminTwitter({
   id,
-  title,
+  text,
   link,
-  source,
-  desc,
-  open,
+  author,
+  date,
+  type,
+  media,
   district,
-  deleteHandler,
   category,
+  open,
+  deleteHandler,
 }) {
   return (
-    <div className="w-[300px] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-      <h1 className="font-bold  ">{title}</h1>
+    <a
+      href={link}
+      className="h-fit w-[50%] bg-white p-4 text-wrap  text-black  rounded-xl flex flex-col items-start gap-4 justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-70 "
+    >
+      <h1 className="font-bold  ">{author}</h1>
+      <p className="">{text}</p>
+      {type === "photo" ? (
+        <img
+          className="aspect-video w-full object-cover"
+          src={`https://drive.google.com/thumbnail?id=${media}&sz=w1000-h1000`}
+        />
+      ) : type === "video" ? (
+        <iframe
+          className="aspect-video w-full object-cover"
+          src={`https://drive.google.com/file/d/${media}/preview`}
+          allowFullScreen
+        ></iframe>
+      ) : (
+        <></>
+      )}
       <p className="text-black font-bold">{district ? district : ""}</p>
       <p className="text-black font-bold">{category ? category : ""}</p>
-      <p className="underline">{source}</p>
+
       <p>
-        {desc}
-        <a href={link} className="text-blue-300 hover:text-blue-700">
-          Read More..
-        </a>
+        {format(
+          parse(date, "EEE MMM dd HH:mm:ss xxxx yyyy", new Date()),
+          "PPP"
+        )}
       </p>
 
-      <div className="flex gap-16">
-        <div className="w-[120px] flex gap-2">
+      <div className="flex gap-52 ">
+        <div className="w-[120px] flex  gap-2">
           <WhatsappShareButton url={link}>
             <WhatsappIcon
               className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
-              size={24}
+              size={28}
             ></WhatsappIcon>
           </WhatsappShareButton>
 
           <FacebookShareButton url={link}>
             <FacebookIcon
               className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-              size={24}
+              size={28}
             ></FacebookIcon>
           </FacebookShareButton>
-
-          <TwitterShareButton url="link">
-            <XIcon
-              className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
-              size={24}
-            ></XIcon>
-          </TwitterShareButton>
         </div>
 
         <div className=" flex justify-end gap-3">
@@ -63,17 +74,17 @@ export default function AdminGoogle({
             className=" flex justify-center p-1 rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] cursor-pointer border  border-solid-[6px] transition-[3s] hover:bg-transparent hover:text-black  bg-black text-wrap text-white"
             onClick={() => open(id)}
           >
-            <AiOutlineEdit size={18} />
+            <AiOutlineEdit size={20} />
           </button>
 
           <button
             className=" flex justify-center p-1 rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] cursor-pointer border border-solid-[6px]  transition-[3s] hover:bg-transparent hover:text-black bg-black text-wrap text-white"
-            onClick={() => deleteHandler(id)}
+            onClick={deleteHandler}
           >
-            <MdDelete size={18} />
+            <MdDelete size={20} />
           </button>
         </div>
       </div>
-    </div>
+    </a>
   );
 }

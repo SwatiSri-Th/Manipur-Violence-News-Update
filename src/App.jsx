@@ -11,9 +11,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { OrbitProgress } from "react-loading-indicators";
 import Footer from "./Component/Footer";
 import Twitter from "./Component/Twitter";
+import Carousel from "./Component/Carousel";
+// import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 export default function App() {
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const [youtubeData, setYoutubeData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
@@ -36,12 +38,12 @@ export default function App() {
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
       // setYoutubeData(res.data.youtube?.slice(0, 6));
-      setYoutubeData(sortedData?.slice(0, 6));
+      setYoutubeData(sortedData?.slice(0, 8));
       setGoogleData(res.data.google?.slice(0, 6));
-      setNdtv(res.data.ndtv?.slice(0, 6));
+      setNdtv(res.data.ndtv?.slice(0, 8));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));
       setTwitter(res?.data?.twitter);
-      setLoading(true)
+      setLoading(true);
     } catch (error) {
       console.error(error);
     }
@@ -57,15 +59,23 @@ export default function App() {
       <div className=" w-full flex flex-col items-start justify-start">
         <Navbar />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+          <main className="w-full">
+            <Carousel />
+          </main>
           <div>
-      
             <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
               YouTube
-              </h1>
+            </h1>
             <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
-              {
-                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
-              }
+              {!loading && (
+                <OrbitProgress
+                  variant="disc"
+                  color="#32cd32"
+                  size="medium"
+                  text=""
+                  textColor=""
+                />
+              )}
               {youtubeData?.map((data) => (
                 <News
                   video_id={data._id}
@@ -87,9 +97,15 @@ export default function App() {
             NDTV
           </h1>
           <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
-          {
-                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
-          }
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
             {ndtv?.map((data) => (
               <Ndtv
                 key={data._id}
@@ -106,9 +122,16 @@ export default function App() {
           <h1 className="text-3xl font-extrabold text-[#6e276f] text-center mb-8 mt-8">
             Times Of India
           </h1>
-          <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">{
-                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
-          }
+          <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
             {tofIndia?.map((data) => (
               <TimesOfIndia
                 key={data._id}
@@ -124,9 +147,16 @@ export default function App() {
           <h1 className="text-3xl font-extrabold text-[hsl(220,90%,67%)] text-center mt-8 mb-8">
             Google
           </h1>
-          <div className="flex flex-wrap place-self-center w-full justify-center gap-4">{
-                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
-          }
+          <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
             {googleData?.map((data, index) => (
               <Google
                 key={index}
@@ -141,9 +171,16 @@ export default function App() {
           <h1 className="text-3xl font-extrabold text-[#000] text-center mb-8 mt-8">
             Twitter
           </h1>
-          <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">{
-                !loading && <OrbitProgress variant="disc" color="#32cd32" size="medium" text="" textColor="" /> 
-          }
+          <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
             {twitter?.map((data) => (
               <Twitter
                 key={data._id}

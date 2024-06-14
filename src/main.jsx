@@ -15,9 +15,11 @@ import {
 } from "react-router-dom";
 import NdtvPage from "./Component/NdtvPage.jsx";
 import GooglePage from "./Component/GooglePage.jsx";
+import TwitterPage from "./Component/TwitterPage.jsx";
 import TimesOfIndiaPage from "./Component/TimesOfIndiaPage.jsx";
 import AdminPage from "./assets/Admin/AdminPage.jsx";
 import AdminYoutubePage from "./assets/Admin/AdminYoutubePage.jsx";
+import AdminTwitterPage from "./assets/Admin/AdminTwitterPage.jsx";
 import Login from "./assets/Admin/Login.jsx";
 import YoutubeDisplay from "./Component/YoutubeDisplay.jsx";
 import AdminYoutubeDisplay from "./assets/Admin/AdminYoutubeDisplay.jsx";
@@ -25,11 +27,13 @@ import AdminNdtvPage from "./assets/Admin/AdminNdtvPage.jsx";
 import AdminTimesOfIndiaPage from "./assets/Admin/AdminTimesOfIndiaPage.jsx";
 import AdminGooglePage from "./assets/Admin/AdminGooglePage.jsx";
 import CategoryPage from "./assets/Admin/CategoryPage.jsx";
-import AdminRegister from "./assets/Admin/AdminRegister.jsx";
+import ModeratorList from "./assets/Admin/ModeratorList.jsx";
+// import AdminRegister from "./assets/Admin/AdminRegister.jsx";
 
 import "@mantine/core/styles.css";
-
+import "@mantine/carousel/styles.css";
 import { MantineProvider } from "@mantine/core";
+import AdminRegister from "./assets/Admin/AdminRegister.jsx";
 const login = window.localStorage.getItem("token");
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +44,7 @@ const router = createBrowserRouter(
       <Route path="/ndtv" element={<NdtvPage />} />
       <Route path="/tofIndia" element={<TimesOfIndiaPage />} />
       <Route path="/google" element={<GooglePage />} />
+      <Route path="/twitter" element={<TwitterPage />} />
       <Route path="/admin" element={<Login />} />
 
       {login ? (
@@ -51,8 +56,10 @@ const router = createBrowserRouter(
           <Route path="ndtv" element={<AdminNdtvPage />} />
           <Route path="tofIndia" element={<AdminTimesOfIndiaPage />} />
           <Route path="google" element={<AdminGooglePage />} />
+          <Route path="twitter" element={<AdminTwitterPage />} />
           <Route path="category" element={<CategoryPage />} />
           <Route path="register" element={<AdminRegister />} />
+          <Route path="moderator" element={<ModeratorList />} />
         </Route>
       ) : (
         <Route path="*" element={<Navigate to="/admin" />} />

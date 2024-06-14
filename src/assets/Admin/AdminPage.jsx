@@ -12,7 +12,7 @@ import AdminYoutube from "./AdminYoutube";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AdminNdtv from "./AdminNdtv";
 import AdminTimesOfIndia from "./AdminTimesOfIndia";
-import AdminTwitterComponent from "./AdminTwitterComponent";
+import AdminTwitterComponent from "./AdminTwittert";
 
 export default function AdminPage() {
   const [loading, setLoading] = useState(false);
@@ -29,9 +29,9 @@ export default function AdminPage() {
 
       // setYoutubeData(res.data.youtube?.slice(0, 6
       console.log(res.data.youtube);
-      setYoutubeData(res.data.youtube?.slice(0, 6));
+      setYoutubeData(res.data.youtube?.slice(0, 9));
       setGoogleData(res.data.google?.slice(0, 6));
-      setNdtv(res.data.ndtv?.slice(0, 6));
+      setNdtv(res.data.ndtv?.slice(0, 8));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));
       setTwitterData(res.data.twitter);
       setLoading(true);
@@ -50,7 +50,7 @@ export default function AdminPage() {
         <AdminNavbar />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
           <div>
-            <h1 className="text-3xl font-extrabold text-blue-600 text-center  mb-8 mt-8">
+            <h1 className="text-3xl font-extrabold text-red-600 text-center  mb-8 mt-8">
               YouTube
             </h1>
             <div className="flex   flex-wrap  w-full justify-around  gap-4">
