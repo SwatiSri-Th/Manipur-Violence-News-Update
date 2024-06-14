@@ -2,21 +2,32 @@ import React, { useState } from "react";
 import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Select } from "@mantine/core";
+import instance from "@/Api/api_instance";
+import { toast } from "react-toastify";
 import Footer from "@/Component/Footer";
 const AdminRegister = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const id = toast.loading("Loading...");
     console.log(name);
-    const res = await instance.post("/admin", { name, email, password });
+    const res = await instance.post("/admin", { name, email, password, role });
     if (res.status === 200) {
-      toast.success("Success");
+      toast.update(id, {
+        render: "added",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
     setName("");
     setEmail("");
     setPassword("");
+    setRole("");
   };
   return (
     <div className=" flex">
@@ -60,9 +71,22 @@ const AdminRegister = () => {
                   required
                 />
               </div>
+              <div className="mb-6">
+                <label className="block text-gray-700">Role</label>
+                <Select
+                  className="w-full  border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  value={role}
+                  onChange={setRole}
+                  data={["Admin", "Moderator"]}
+                  clearable
+                  allowDeselect
+                />
+              </div>
+
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+                onClick={handleSubmit}
               >
                 Save
               </button>

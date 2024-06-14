@@ -187,7 +187,7 @@ const AdminTwitterPage = () => {
                 key={data._id}
                 id={data._id}
                 text={data.text}
-                link={data.link}
+                link={data.url}
                 author={data.user_name}
                 date={data.created_at}
                 type={data.type}
