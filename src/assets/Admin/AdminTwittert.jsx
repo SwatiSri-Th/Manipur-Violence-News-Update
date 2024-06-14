@@ -19,19 +19,19 @@ export default function AdminTwitter({
   district,
   category,
   open,
+  setImage,
+  imageOpenHandler,
   deleteHandler,
 }) {
   return (
-    <a
-      href={link}
-      className="h-fit w-[50%] bg-white p-4 text-wrap  text-black  rounded-xl flex flex-col items-start gap-4 justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-70 "
-    >
+    <div className="h-fit w-[50%] bg-white p-4 text-wrap  text-black  rounded-xl flex flex-col items-start gap-4 justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-70 ">
       <h1 className="font-bold  ">{author}</h1>
       <p className="">{text}</p>
       {type === "photo" ? (
         <img
           className="aspect-video w-full object-cover"
           src={`https://drive.google.com/thumbnail?id=${media}&sz=w1000-h1000`}
+          onClick={() => imageOpenHandler(media)}
         />
       ) : type === "video" ? (
         <iframe
@@ -79,12 +79,12 @@ export default function AdminTwitter({
 
           <button
             className=" flex justify-center p-1 rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] cursor-pointer border border-solid-[6px]  transition-[3s] hover:bg-transparent hover:text-black bg-black text-wrap text-white"
-            onClick={deleteHandler}
+            onClick={() => deleteHandler(id)}
           >
             <MdDelete size={20} />
           </button>
         </div>
       </div>
-    </a>
+    </div>
   );
 }

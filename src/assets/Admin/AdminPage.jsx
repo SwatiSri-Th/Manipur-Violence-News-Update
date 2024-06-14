@@ -7,6 +7,7 @@ import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
 import { OrbitProgress } from "react-loading-indicators";
 import Footer from "@/Component/Footer";
+import CarouselElement from "@/Component/Carousel";
 import AdminYoutube from "./AdminYoutube";
 // import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -49,6 +50,9 @@ export default function AdminPage() {
       <div className=" w-full flex flex-col items-start justify-start">
         <AdminNavbar />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+          <main className="w-full">
+            <CarouselElement />
+          </main>
           <div>
             <h1 className="text-3xl font-extrabold text-red-600 text-center  mb-8 mt-8">
               YouTube

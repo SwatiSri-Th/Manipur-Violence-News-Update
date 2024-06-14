@@ -17,6 +17,8 @@ export default function News({
   channel,
   publishedAt,
   link,
+  district,
+  category,
 }) {
   const navigate = useNavigate();
   return (
@@ -31,6 +33,10 @@ export default function News({
       <h1 className="font-bold">{title}</h1>
       <p>{channel}</p>
       <p>{publishedAt}</p>
+
+      <p>{district ? district : ""}</p>
+      <p>{category ? category : ""}</p>
+
       <div className="w-[100px] gap-2 flex justify-around">
         <WhatsappShareButton url={link}>
           <WhatsappIcon

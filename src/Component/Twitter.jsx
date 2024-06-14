@@ -1,4 +1,10 @@
 import { format, parse } from "date-fns";
+import {
+  WhatsappShareButton,
+  WhatsappIcon,
+  FacebookShareButton,
+  FacebookIcon,
+} from "react-share";
 export default function Twitter({
   text,
   link,
@@ -7,7 +13,8 @@ export default function Twitter({
   type,
   media,
   open,
-  image,
+  district,
+  category,
   setImage,
 }) {
   const modalHandler = (media) => {
@@ -37,12 +44,31 @@ export default function Twitter({
         <></>
       )}
 
+      <p className="text-black font-bold">{district ? district : ""}</p>
+      <p className="text-black font-bold">{category ? category : ""}</p>
+
       <p>
         {format(
           parse(date, "EEE MMM dd HH:mm:ss xxxx yyyy", new Date()),
           "PPP"
         )}
       </p>
+
+      <div className="w-[120px] flex  gap-2">
+        <WhatsappShareButton url={link}>
+          <WhatsappIcon
+            className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
+            size={28}
+          ></WhatsappIcon>
+        </WhatsappShareButton>
+
+        <FacebookShareButton url={link}>
+          <FacebookIcon
+            className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)]"
+            size={28}
+          ></FacebookIcon>
+        </FacebookShareButton>
+      </div>
     </a>
   );
 }

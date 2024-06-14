@@ -40,6 +40,8 @@ const TimesOfIndiaPage = () => {
                 link={data.link}
                 date={data.date}
                 image={data.image}
+                district={data.district}
+                category={data.category}
               />
             ))}
           </div>

@@ -9,7 +9,9 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal, Select } from "@mantine/core";
 
 const AdminTwitterPage = () => {
+  const [image, setImage] = useState();
   const [twitterData, setTwitterData] = useState([]);
+  const [imageModel, setImageModel] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [id, setId] = useState();
   const [category, setCategory] = useState([]);
@@ -21,7 +23,7 @@ const AdminTwitterPage = () => {
     try {
       const toastid = toast.loading("...adding");
       console.log(id);
-      const res = await instance.put(`/timeOfIndia/${id}`, {
+      const res = await instance.put(`/twitter/${id}`, {
         category,
         district,
       });
@@ -73,7 +75,7 @@ const AdminTwitterPage = () => {
 
   const deleteHandler = async (id) => {
     try {
-      const res = await instance.delete(`/timeOfIndia/delete/${id}`);
+      const res = await instance.delete(`/twitter/delete/${id}`);
       if (res.status === 200) {
         toast.success("deleted");
         window.location.reload();
@@ -117,6 +119,10 @@ const AdminTwitterPage = () => {
     open();
   };
 
+  const imageOpenHandler = (media) => {
+    setImage(media);
+    setImageModel(true);
+  };
   useEffect(() => {
     fetchTwitter();
     getCategory();
@@ -168,6 +174,18 @@ const AdminTwitterPage = () => {
         </div>
       </Modal>
 
+      <Modal
+        opened={imageModel}
+        onClose={() => setImageModel(false)}
+        centered
+        size="100vw"
+      >
+        <img
+          className="aspect-auto w-full object-cover"
+          src={`https://drive.google.com/thumbnail?id=${image}&sz=w1000-h1000`}
+        />
+      </Modal>
+
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
         <div>
           <div className="flex w-full items-center justify-center gap-8">
@@ -187,7 +205,7 @@ const AdminTwitterPage = () => {
                 key={data._id}
                 id={data._id}
                 text={data.text}
-                link={data.link}
+                link={data.url}
                 author={data.user_name}
                 date={data.created_at}
                 type={data.type}
@@ -196,6 +214,7 @@ const AdminTwitterPage = () => {
                 category={data.category}
                 open={modalOpened}
                 deleteHandler={deleteHandler}
+                imageOpenHandler={imageOpenHandler}
               />
             ))}
           </div>

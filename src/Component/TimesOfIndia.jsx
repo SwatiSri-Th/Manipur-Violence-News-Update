@@ -13,6 +13,8 @@ export default function TimesOfIndia({
   link,
   date,
   image,
+  district,
+  category,
 }) {
   return (
     <a
@@ -41,6 +43,9 @@ export default function TimesOfIndia({
           </div>
         </div>
         <p className="text-black mt-5 text-left">{description}</p>
+
+        <p className="text-black font-bold">{district ? district : ""}</p>
+        <p className="text-black font-bold">{category ? category : ""}</p>
       </div>
 
       <div className="w-[120px] flex  gap-2 mt-[190px]">

@@ -21,7 +21,7 @@ const AdminGooglePage = () => {
     try {
       const toastid = toast.loading("...adding");
       console.log(id);
-      const res = await instance.put(`/ndtv/${id}`, { category, district });
+      const res = await instance.put(`/google/${id}`, { category, district });
       if (res.status === 200) {
         toast.update(toastid, {
           render: "added",
@@ -43,7 +43,7 @@ const AdminGooglePage = () => {
   const fetchNewData = async () => {
     try {
       const id = toast.loading("Please wait...");
-      const response = await instance.get("/ndtv");
+      const response = await instance.get("/google/search");
       console.log(response.data);
       if (response.data.data.length === 0) {
         toast.update(id, {
@@ -180,6 +180,7 @@ const AdminGooglePage = () => {
           <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
             {googleData?.map((data, index) => (
               <AdminGoogle
+                id={data._id}
                 key={index}
                 title={data.title}
                 link={data.link}

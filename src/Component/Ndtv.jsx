@@ -6,7 +6,16 @@ import {
   TwitterShareButton,
   XIcon,
 } from "react-share";
-export default function Ndtv({ title, description, link, author, date, img }) {
+export default function Ndtv({
+  title,
+  description,
+  link,
+  author,
+  date,
+  img,
+  district,
+  category,
+}) {
   return (
     <a
       href={link}
@@ -30,6 +39,9 @@ export default function Ndtv({ title, description, link, author, date, img }) {
       <div className="w-full flex justify-start text-slate-500 flex-col ">
         <p>{author}</p>
         <p>{date}</p>
+
+        <p className="text-black font-bold">{district ? district : ""}</p>
+        <p className="text-black font-bold">{category ? category : ""}</p>
       </div>
       <p className="text-black mt-5 text-left">{description}</p>
 

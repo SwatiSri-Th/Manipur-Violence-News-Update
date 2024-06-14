@@ -41,6 +41,8 @@ const NdtvPage = () => {
                 author={data.author}
                 date={data.date}
                 img={data.img}
+                district={data.district}
+                category={data.category}
               />
             ))}
           </div>

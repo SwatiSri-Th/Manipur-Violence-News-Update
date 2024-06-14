@@ -33,7 +33,7 @@ const YoutubeDisplay = () => {
 
   return (
     <div className="flex">
-    <Sidebar />
+      <Sidebar />
       {displayData ? (
         <div className="flex p-6 items-start gap-4 ">
           <div
@@ -49,6 +49,15 @@ const YoutubeDisplay = () => {
 
             <p>{displayData.channel}</p>
             <p>{displayData.publishedAt}</p>
+
+            <div>
+              District :
+              {displayData.district ? displayData.district : "Not set"}
+            </div>
+            <div>
+              Category :
+              {displayData.category ? displayData.category : "Not set"}
+            </div>
             <div className="w-[100px] flex justify-around">
               <WhatsappShareButton url={displayData.link}>
                 <WhatsappIcon

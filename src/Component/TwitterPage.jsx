@@ -45,12 +45,14 @@ const TwitterPage = () => {
               <Twitter
                 key={data._id}
                 text={data.text}
-                link={data.link}
+                link={data.url}
                 author={data.user_name}
                 date={data.created_at}
                 type={data.type}
                 media={data.media}
                 image={image}
+                district={data.district}
+                category={data.category}
                 setImage={setImage}
                 open={open}
               />

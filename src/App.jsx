@@ -115,6 +115,8 @@ export default function App() {
                 author={data.author}
                 date={data.date}
                 img={data.img}
+                district={data.district}
+                category={data.category}
               />
             ))}
           </div>
@@ -140,6 +142,8 @@ export default function App() {
                 link={data.link}
                 date={data.date}
                 image={data.image}
+                district={data.district}
+                category={data.category}
               />
             ))}
           </div>
@@ -190,6 +194,8 @@ export default function App() {
                 date={data.created_at}
                 type={data.type}
                 media={data.media}
+                district={data.district}
+                category={data.category}
                 // img={data.img}
               />
             ))}
