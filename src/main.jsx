@@ -27,6 +27,8 @@ import AdminNdtvPage from "./assets/Admin/AdminNdtvPage.jsx";
 import AdminTimesOfIndiaPage from "./assets/Admin/AdminTimesOfIndiaPage.jsx";
 import AdminGooglePage from "./assets/Admin/AdminGooglePage.jsx";
 import CategoryPage from "./assets/Admin/CategoryPage.jsx";
+import ModeratorList from "./assets/Admin/ModeratorList.jsx";
+// import AdminRegister from "./assets/Admin/AdminRegister.jsx";
 
 import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
@@ -57,6 +59,7 @@ const router = createBrowserRouter(
           <Route path="twitter" element={<AdminTwitterPage />} />
           <Route path="category" element={<CategoryPage />} />
           <Route path="register" element={<AdminRegister />} />
+          <Route path="moderator" element={<ModeratorList />} />
         </Route>
       ) : (
         <Route path="*" element={<Navigate to="/admin" />} />

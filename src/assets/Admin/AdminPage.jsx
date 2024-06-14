@@ -29,7 +29,7 @@ export default function AdminPage() {
 
       // setYoutubeData(res.data.youtube?.slice(0, 6
       console.log(res.data.youtube);
-      setYoutubeData(res.data.youtube?.slice(0, 8));
+      setYoutubeData(res.data.youtube?.slice(0, 9));
       setGoogleData(res.data.google?.slice(0, 6));
       setNdtv(res.data.ndtv?.slice(0, 8));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));

@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import instance from "@/Api/api_instance";
 import Footer from "@/Component/Footer";
-import { toast } from "react-toastify";
 const AdminRegister = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

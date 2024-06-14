@@ -181,7 +181,7 @@ const AdminTwitterPage = () => {
               Fetch New Data
             </button>
           </div>
-          <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
+          <div className="flex flex-col w-screen items-center bg-slate-300  justify-center  gap-4">
             {twitterData?.map((data) => (
               <AdminTwitter
                 key={data._id}
