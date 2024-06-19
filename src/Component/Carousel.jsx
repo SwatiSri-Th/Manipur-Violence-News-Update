@@ -82,7 +82,7 @@ const CarouselElement = () => {
       align="start"
       slidesToScroll={1}
       withIndicators
-      height={300}
+      // height={300}
     >
       {slides.map((slide) => (
         <Carousel.Slide>

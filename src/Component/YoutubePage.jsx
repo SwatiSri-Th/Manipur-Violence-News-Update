@@ -45,6 +45,8 @@ const YoutubePage = () => {
                   new Date(data.publishedAt),
                   "dd-MMMM-yyyy h:mm:a"
                 )}
+                category={data.category}
+                district={data.district}
               />
             ))}
           </div>

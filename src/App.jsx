@@ -15,8 +15,10 @@ import Carousel from "./Component/Carousel";
 // import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 export default function App() {
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [youtubeData, setYoutubeData] = useState([]);
+  const [filterYoutubeData, setFilterYoutubeData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
   const [tofIndia, setTofIndia] = useState([]);
@@ -33,12 +35,13 @@ export default function App() {
   const fetchYoutube = async () => {
     try {
       const res = await instance.get("/latest");
-      console.log(res.data);
       const sortedData = res?.data?.youtube?.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
+      console.log(sortedData);
       // setYoutubeData(res.data.youtube?.slice(0, 6));
       setYoutubeData(sortedData?.slice(0, 8));
+      setFilterYoutubeData(sortedData?.slice(0, 8));
       setGoogleData(res.data.google?.slice(0, 6));
       setNdtv(res.data.ndtv?.slice(0, 8));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));
@@ -49,15 +52,30 @@ export default function App() {
     }
   };
 
+  const filterByCategory = (data, category) => {
+    return data.filter(
+      (item) => item.category?.toLowerCase() === category?.toLowerCase()
+    );
+  };
+
   useEffect(() => {
     fetchYoutube();
   }, []);
 
+  useEffect(() => {
+    const result = filterByCategory(youtubeData, search);
+    if (!result) {
+      setDataResult(false);
+      setFilterYoutubeData(youtubeData);
+    }
+    setFilterYoutubeData(result);
+  }, [search]);
+
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar search={search} setSearch={setSearch} />
       <div className=" w-full flex flex-col items-start justify-start">
-        <Navbar />
+        <Navbar search={search} setSearch={setSearch} />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
           <main className="w-full">
             <Carousel />
@@ -76,20 +94,50 @@ export default function App() {
                   textColor=""
                 />
               )}
-              {youtubeData?.map((data) => (
-                <News
-                  video_id={data._id}
-                  key={data._id}
-                  title={data.title}
-                  channel={data.channelTitle}
-                  file_id={data.file_id}
-                  publishedAt={format(
-                    new Date(data.publishedAt),
-                    "dd-MMMM-yyyy h:mm:a"
+              {filterYoutubeData.length > 0 ? (
+                filterYoutubeData.map((data) => (
+                  <News
+                    video_id={data._id}
+                    key={data._id}
+                    title={data.title}
+                    channel={data.channelTitle}
+                    file_id={data.file_id}
+                    publishedAt={format(
+                      new Date(data.publishedAt),
+                      "dd-MMMM-yyyy h:mm:a"
+                    )}
+                    link={data.video_link}
+                    district={data.district}
+                    category={data.category}
+                  />
+                ))
+              ) : (
+                <div className="flex flex-col">
+                  {loading && (
+                    <p className="text-center text-xl px-4 py-2 border border-slate-200 mb-4">
+                      No data available for {search}
+                    </p>
                   )}
-                  link={data.video_link}
-                />
-              ))}
+                  <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+                    {youtubeData.map((data) => (
+                      <News
+                        video_id={data._id}
+                        key={data._id}
+                        title={data.title}
+                        channel={data.channelTitle}
+                        file_id={data.file_id}
+                        publishedAt={format(
+                          new Date(data.publishedAt),
+                          "dd-MMMM-yyyy h:mm:a"
+                        )}
+                        link={data.video_link}
+                        district={data.district}
+                        category={data.category}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

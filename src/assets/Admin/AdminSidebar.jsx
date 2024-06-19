@@ -64,7 +64,7 @@ export default function AdminSidebar() {
     >
       <div
         className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] min-h-screen ${
-          open ? "w-72" : "w-[70px]"
+          open ? "w-72" : "w-[68px]"
         } duration-500 text-black px-4`}
       >
         <div className="py-3  flex justify-end">

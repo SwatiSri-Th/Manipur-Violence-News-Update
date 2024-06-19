@@ -25,7 +25,7 @@ export default function Sidebar() {
     >
       <div
         className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] min-h-screen ${
-          open ? "w-72" : "w-16"
+          open ? "w-72" : "w-[68px]"
         } duration-500 text-black px-4`}
       >
         <div className="py-3  flex justify-end">
@@ -40,9 +40,10 @@ export default function Sidebar() {
             <NavLink
               to={menu?.link}
               key={i}
+              onClick={menu?.onClick}
               className={` ${
                 menu?.margin && "mt-5"
-              } group flex  items-center text-sm gap-3.5 font-medium p-2 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]
+              } group flex items-center p-2 text-sm gap-3.5 font-medium  hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]
               rounded-md`}
             >
               <div>{React.createElement(menu?.icon, { size: "20" })}</div>

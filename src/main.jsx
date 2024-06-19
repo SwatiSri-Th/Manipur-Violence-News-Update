@@ -35,6 +35,7 @@ import "@mantine/carousel/styles.css";
 import { MantineProvider } from "@mantine/core";
 import AdminRegister from "./assets/Admin/AdminRegister.jsx";
 const login = window.localStorage.getItem("token");
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">

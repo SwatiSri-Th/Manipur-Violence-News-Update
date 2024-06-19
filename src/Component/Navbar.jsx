@@ -9,7 +9,7 @@ import instance from "@/Api/api_instance";
 // import { data } from "autoprefixer";
 // import { link } from "fs";
 // import { link } from "fs";
-export default function Navbar() {
+export default function Navbar({ setSearch }) {
   const navigate = useNavigate();
   const [districts, setDistricts] = useState();
   const fetchDistrict = async () => {
@@ -30,31 +30,33 @@ export default function Navbar() {
     {
       id: 1,
       name: "Protest",
-      link: "/#",
+      // link: "/#",
+      onClick: () => setSearch("Protest"),
     },
 
     {
       id: 2,
       name: "Murder",
       link: "/#",
+      onClick: () => setSearch("Murder"),
     },
 
     {
       id: 3,
       name: "Elections",
-      link: "/#",
+      onClick: () => setSearch("Elections"),
     },
 
     {
       id: 4,
       name: "Accident",
-      link: "/#",
+      onClick: () => setSearch("Accident"),
     },
 
     {
       id: 5,
       name: "Gun Fire",
-      link: "/#",
+      onClick: () => setSearch("Gun Fire"),
     },
   ];
 
@@ -137,12 +139,12 @@ export default function Navbar() {
         <ul className="sm:flex hidden items-center gap-4">
           {Category.map((data) => (
             <li key={data.id}>
-              <a
-                href={data.link}
+              <div
+                onClick={data.onClick}
                 className="inline-block px-4 hover:text-purple-600 duration-200"
               >
                 {data.name}
-              </a>
+              </div>
             </li>
           ))}
 
