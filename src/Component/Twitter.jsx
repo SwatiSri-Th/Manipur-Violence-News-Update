@@ -22,10 +22,7 @@ export default function Twitter({
     open();
   };
   return (
-    <a
-      href={link}
-      className="h-fit w-[50%] bg-white p-4 text-wrap  text-black  rounded-xl flex flex-col items-start gap-4 justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-70 "
-    >
+    <div className="h-fit w-[50%] bg-white p-4 text-wrap  text-black  rounded-xl flex flex-col items-start gap-4 justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-70 ">
       <h1 className="font-bold  ">{author}</h1>
       <p className="">{text}</p>
       {type === "photo" ? (
@@ -53,6 +50,9 @@ export default function Twitter({
           "PPP"
         )}
       </p>
+      <a href={link} className="text-blue-400 hover:text-blue-600">
+        Read more about this tweets..
+      </a>
 
       <div className="w-[120px] flex  gap-2">
         <WhatsappShareButton url={link}>
@@ -69,6 +69,6 @@ export default function Twitter({
           ></FacebookIcon>
         </FacebookShareButton>
       </div>
-    </a>
+    </div>
   );
 }

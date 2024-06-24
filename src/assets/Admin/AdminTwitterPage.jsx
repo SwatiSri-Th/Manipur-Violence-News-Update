@@ -67,7 +67,7 @@ const AdminTwitterPage = () => {
           autoClose: 3000,
         });
       }
-      setTwitterData(response.data.data);
+      setTwitterData(response.data);
     } catch (e) {
       console.log(e.message);
     }

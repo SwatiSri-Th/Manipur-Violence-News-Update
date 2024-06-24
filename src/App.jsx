@@ -12,13 +12,19 @@ import { OrbitProgress } from "react-loading-indicators";
 import Footer from "./Component/Footer";
 import Twitter from "./Component/Twitter";
 import Carousel from "./Component/Carousel";
+import { toast } from "react-toastify";
 // import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 export default function App() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState();
+  const [searching, setSearching] = useState();
   const [loading, setLoading] = useState(false);
   const [youtubeData, setYoutubeData] = useState([]);
   const [filterYoutubeData, setFilterYoutubeData] = useState([]);
+  const [filterGoogleData, setFilterGoogleData] = useState([]);
+  const [filterNdtvData, setFilterNdtvData] = useState([]);
+  const [filterTofIndiaData, setFilterTofIndiaData] = useState([]);
+  const [filterTwitterData, setFilterTwitterData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
   const [tofIndia, setTofIndia] = useState([]);
@@ -39,16 +45,19 @@ export default function App() {
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
       console.log(sortedData);
-      // setYoutubeData(res.data.youtube?.slice(0, 6));
-      setYoutubeData(sortedData?.slice(0, 8));
-      setFilterYoutubeData(sortedData?.slice(0, 8));
+      setYoutubeData(sortedData?.slice(0, 9));
+      setFilterYoutubeData(sortedData?.slice(0, 9));
       setGoogleData(res.data.google?.slice(0, 6));
-      setNdtv(res.data.ndtv?.slice(0, 8));
+      setFilterGoogleData(res.data.google?.slice(0, 6));
+      setNdtv(res.data.ndtv?.slice(0, 9));
+      setFilterNdtvData(res.data.ndtv?.slice(0, 9));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));
+      setFilterTofIndiaData(res.data.timesOfIndia?.slice(0, 6));
       setTwitter(res?.data?.twitter);
+      setFilterTwitterData(res?.data?.twitter);
       setLoading(true);
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   };
 
@@ -63,125 +72,183 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const result = filterByCategory(youtubeData, search);
-    if (!result) {
-      setDataResult(false);
-      setFilterYoutubeData(youtubeData);
-    }
-    setFilterYoutubeData(result);
+    const handleDataFilter = (result, setData, originalData) => {
+      if (result.length === 0) {
+        setData(originalData);
+      } else {
+        setData(result);
+      }
+    };
+
+    const youtubeResult = filterByCategory(youtubeData, search);
+    const ndtvResult = filterByCategory(ndtv, search);
+    const tofIndiaResult = filterByCategory(tofIndia, search);
+    const googleResult = filterByCategory(googleData, search);
+    const twitterResult = filterByCategory(twitter, search);
+
+    console.log(youtubeResult);
+    console.log(ndtvResult);
+
+    handleDataFilter(youtubeResult, setFilterYoutubeData, youtubeData);
+    handleDataFilter(ndtvResult, setFilterNdtvData, ndtv);
+    handleDataFilter(tofIndiaResult, setFilterTofIndiaData, tofIndia);
+    handleDataFilter(googleResult, setFilterGoogleData, googleData);
+    handleDataFilter(twitterResult, setFilterTwitterData, twitter);
   }, [search]);
 
   return (
     <div className="flex">
       <Sidebar search={search} setSearch={setSearch} />
       <div className=" w-full flex flex-col items-start justify-start">
-        <Navbar search={search} setSearch={setSearch} />
+        <Navbar
+          search={search}
+          setSearch={setSearch}
+          setSearching={setSearching}
+        />
         <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
           <main className="w-full">
             <Carousel />
           </main>
-          <div>
-            <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
-              YouTube
-            </h1>
-            <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+          <div className="mt-8">
+            <div className="grid  lg:grid-cols-3 items-center justify-items-center  w-screen  sm:w-full justify-center  gap-4">
               {!loading && (
-                <OrbitProgress
-                  variant="disc"
-                  color="#32cd32"
-                  size="medium"
-                  text=""
-                  textColor=""
-                />
+                <div className="col-span-3">
+                  <OrbitProgress
+                    variant="disc"
+                    color="#32cd32"
+                    size="medium"
+                    text=""
+                    textColor=""
+                  />
+                </div>
               )}
-              {filterYoutubeData.length > 0 ? (
-                filterYoutubeData.map((data) => (
-                  <News
-                    video_id={data._id}
+              {filterYoutubeData.length > 0
+                ? filterYoutubeData.map((data) => (
+                    <News
+                      video_id={data._id}
+                      key={data._id}
+                      title={data.title}
+                      channel={data.channelTitle}
+                      file_id={data.file_id}
+                      publishedAt={format(
+                        new Date(data.publishedAt),
+                        "dd-MMMM-yyyy h:mm:a"
+                      )}
+                      link={data.video_link}
+                      district={data.district}
+                      category={data.category}
+                    />
+                  ))
+                : youtubeData.map((data) => (
+                    <News
+                      video_id={data._id}
+                      key={data._id}
+                      title={data.title}
+                      channel={data.channelTitle}
+                      file_id={data.file_id}
+                      publishedAt={format(
+                        new Date(data.publishedAt),
+                        "dd-MMMM-yyyy h:mm:a"
+                      )}
+                      link={data.video_link}
+                      district={data.district}
+                      category={data.category}
+                    />
+                  ))}
+              {filterNdtvData.length > 0
+                ? filterNdtvData.map((data) => (
+                    <Ndtv
+                      key={data._id}
+                      title={data.title}
+                      description={data.desc}
+                      link={data.link}
+                      author={data.author}
+                      date={data.date}
+                      img={data.img}
+                      district={data.district}
+                      category={data.category}
+                    />
+                  ))
+                : ndtv.map((data) => (
+                    <Ndtv
+                      key={data._id}
+                      title={data.title}
+                      description={data.desc}
+                      link={data.link}
+                      author={data.author}
+                      date={data.date}
+                      img={data.img}
+                      district={data.district}
+                      category={data.category}
+                    />
+                  ))}
+            </div>
+          </div>
+          {/* <div className="grid  lg:grid-cols-3 items-center justify-items-center  w-screen  sm:w-full justify-center  gap-4">
+            {!loading && (
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            )}
+            {filterNdtvData.length > 0
+              ? filterNdtvData.map((data) => (
+                  <Ndtv
                     key={data._id}
                     title={data.title}
-                    channel={data.channelTitle}
-                    file_id={data.file_id}
-                    publishedAt={format(
-                      new Date(data.publishedAt),
-                      "dd-MMMM-yyyy h:mm:a"
-                    )}
-                    link={data.video_link}
+                    description={data.desc}
+                    link={data.link}
+                    author={data.author}
+                    date={data.date}
+                    img={data.img}
                     district={data.district}
                     category={data.category}
                   />
                 ))
-              ) : (
-                <div className="flex flex-col">
-                  {loading && (
-                    <p className="text-center text-xl px-4 py-2 border border-slate-200 mb-4">
-                      No data available for {search}
-                    </p>
-                  )}
-                  <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
-                    {youtubeData.map((data) => (
-                      <News
-                        video_id={data._id}
-                        key={data._id}
-                        title={data.title}
-                        channel={data.channelTitle}
-                        file_id={data.file_id}
-                        publishedAt={format(
-                          new Date(data.publishedAt),
-                          "dd-MMMM-yyyy h:mm:a"
-                        )}
-                        link={data.video_link}
-                        district={data.district}
-                        category={data.category}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+              : ndtv.map((data) => (
+                  <Ndtv
+                    key={data._id}
+                    title={data.title}
+                    description={data.desc}
+                    link={data.link}
+                    author={data.author}
+                    date={data.date}
+                    img={data.img}
+                    district={data.district}
+                    category={data.category}
+                  />
+                ))}
+          </div> */}
 
-          <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
-            NDTV
-          </h1>
-          <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
-            {!loading && (
-              <OrbitProgress
-                variant="disc"
-                color="#32cd32"
-                size="medium"
-                text=""
-                textColor=""
-              />
-            )}
-            {ndtv?.map((data) => (
-              <Ndtv
-                key={data._id}
-                title={data.title}
-                description={data.desc}
-                link={data.link}
-                author={data.author}
-                date={data.date}
-                img={data.img}
-                district={data.district}
-                category={data.category}
-              />
-            ))}
-          </div>
-
-          <h1 className="text-3xl font-extrabold text-[#6e276f] text-center mb-8 mt-8">
-            Times Of India
-          </h1>
-          <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">
-            {!loading && (
-              <OrbitProgress
-                variant="disc"
-                color="#32cd32"
-                size="medium"
-                text=""
-                textColor=""
-              />
-            )}
+          <div className="flex mt-8 mb-8 flex-wrap place-self-start w-full justify-center  gap-5">
+            {filterTofIndiaData.length > 0
+              ? filterTofIndiaData.map((data) => (
+                  <TimesOfIndia
+                    key={data._id}
+                    title={data.title}
+                    description={data.description}
+                    link={data.link}
+                    date={data.date}
+                    image={data.image}
+                    district={data.district}
+                    category={data.category}
+                  />
+                ))
+              : tofIndia.map((data) => (
+                  <TimesOfIndia
+                    key={data._id}
+                    title={data.title}
+                    description={data.description}
+                    link={data.link}
+                    date={data.date}
+                    image={data.image}
+                    district={data.district}
+                    category={data.category}
+                  />
+                ))}
             {tofIndia?.map((data) => (
               <TimesOfIndia
                 key={data._id}
@@ -196,19 +263,7 @@ export default function App() {
             ))}
           </div>
 
-          <h1 className="text-3xl font-extrabold text-[hsl(220,90%,67%)] text-center mt-8 mb-8">
-            Google
-          </h1>
-          <div className="flex flex-wrap place-self-center w-full justify-center gap-4">
-            {!loading && (
-              <OrbitProgress
-                variant="disc"
-                color="#32cd32"
-                size="medium"
-                text=""
-                textColor=""
-              />
-            )}
+          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-full justify-center gap-4">
             {googleData?.map((data, index) => (
               <Google
                 key={index}
@@ -219,20 +274,7 @@ export default function App() {
               />
             ))}
           </div>
-
-          <h1 className="text-3xl font-extrabold text-[#000] text-center mb-8 mt-8">
-            Twitter
-          </h1>
           <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">
-            {!loading && (
-              <OrbitProgress
-                variant="disc"
-                color="#32cd32"
-                size="medium"
-                text=""
-                textColor=""
-              />
-            )}
             {twitter?.map((data) => (
               <Twitter
                 key={data._id}

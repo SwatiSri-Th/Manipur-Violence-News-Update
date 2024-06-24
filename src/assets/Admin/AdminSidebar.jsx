@@ -35,7 +35,7 @@ export default function AdminSidebar() {
       margin: true,
     },
 
-    ...(role === "admin"
+    ...(role === "Admin"
       ? [
           {
             name: "Moderator",

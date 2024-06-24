@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { format } from "date-fns";
 import instance from "@/Api/api_instance";
 import Sidebar from "./Sidebar";
 import {
@@ -48,7 +49,7 @@ const YoutubeDisplay = () => {
             <h1 className="font-bold">{displayData.title}</h1>
 
             <p>{displayData.channel}</p>
-            <p>{displayData.publishedAt}</p>
+            <p>{format(displayData.publishedAt, "PPPP")}</p>
 
             <div>
               District :

@@ -3,6 +3,7 @@ import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "@/Component/Footer";
+import { Select } from "@mantine/core";
 const AdminRegister = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -58,6 +59,18 @@ const AdminRegister = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block text-gray-700">Role</label>
+                <Select
+                  className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  variant="unstyled"
+                  placeholder="Choose ..."
+                  data={["Admin", "Register"]}
+                  defaultValue="React"
+                  clearable
+                  allowDeselect
                 />
               </div>
               <button
