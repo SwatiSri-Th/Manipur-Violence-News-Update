@@ -23,16 +23,14 @@ export default function AdminSidebar() {
       name: "NDTV",
       link: "/admin/ndtv",
       icon: PiTelevisionSimpleFill,
-      margin: true,
     },
     { name: "Times Of India", link: "/admin/tofIndia", icon: GiNewspaper },
-    { name: "Google", link: "/admin/google", icon: FaGoogle, margin: true },
+    { name: "Google", link: "/admin/google", icon: FaGoogle },
     { name: "Twitter", link: "/admin/twitter", icon: RiTwitterXFill },
     {
       name: "Category",
       link: "/admin/category",
       icon: BiCategoryAlt,
-      margin: true,
     },
 
     ...(role === "Admin"

@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import Sidebar from "@/Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 const YoutubePage = () => {
   const [youtubeData, setYoutubeData] = useState([]);
@@ -29,6 +30,7 @@ const YoutubePage = () => {
     <div className=" flex">
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+        <Navbar />
         <div>
           <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
             YouTube

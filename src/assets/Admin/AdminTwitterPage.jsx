@@ -50,7 +50,7 @@ const AdminTwitterPage = () => {
       const id = toast.loading("Please wait...");
       const response = await instance.get("/twitter");
       console.log(response.data);
-      if (response.data.data.length === 0) {
+      if (response.data.length === 0) {
         toast.update(id, {
           render: "No new data available",
           type: "success",

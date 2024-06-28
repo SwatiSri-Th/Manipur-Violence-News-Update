@@ -4,6 +4,7 @@ import Google from "@/Component/Google";
 import Sidebar from "@/Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 const GooglePage = () => {
   const [googleData, setGoogleData] = useState([]);
@@ -27,6 +28,7 @@ const GooglePage = () => {
     <div className=" flex">
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+        <Navbar />
         <div>
           <h1 className="text-3xl font-extrabold text-[hsl(220,90%,67%)] text-center mt-8 mb-8">
             Google

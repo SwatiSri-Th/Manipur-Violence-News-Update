@@ -30,7 +30,17 @@ const ModeratorList = () => {
   useEffect(() => {
     fetchModeratorsList();
   }, []);
-
+  const deleteHandler = async (id) => {
+    try {
+      const res = await instance.delete(`/mod/${id}`);
+      if (res.status === 200) {
+        toast.success("deleted successfully");
+        window.location.reload();
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <div className=" flex">
       <AdminSidebar />
@@ -68,7 +78,10 @@ const ModeratorList = () => {
                       {eachUser.role}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">
+                      <button
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
+                        onClick={() => deleteHandler(eachUser._id)}
+                      >
                         Delete
                       </button>
                     </td>

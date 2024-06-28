@@ -7,6 +7,7 @@ import { PiTelevisionSimpleFill } from "react-icons/pi";
 import { GiNewspaper } from "react-icons/gi";
 import { FaGoogle } from "react-icons/fa6";
 import { RiTwitterXFill } from "react-icons/ri";
+import { ImNewspaper } from "react-icons/im";
 
 export default function Sidebar() {
   const menus = [
@@ -16,6 +17,7 @@ export default function Sidebar() {
     { name: "Times Of India", link: "/tofIndia", icon: GiNewspaper },
     { name: "Google", link: "/google", icon: FaGoogle, margin: true },
     { name: "Twitter", link: "/twitter", icon: RiTwitterXFill },
+    { name: "Express", link: "/express", icon: ImNewspaper },
   ];
 
   const [open, setOpen] = useState(false);

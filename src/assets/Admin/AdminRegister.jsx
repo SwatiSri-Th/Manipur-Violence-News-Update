@@ -3,21 +3,31 @@ import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "@/Component/Footer";
+import { toast } from "react-toastify";
 import { Select } from "@mantine/core";
+import instance from "@/Api/api_instance";
 const AdminRegister = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const id = toast.loading("Loading...");
     console.log(name);
-    const res = await instance.post("/admin", { name, email, password });
+    const res = await instance.post("/admin", { name, email, password, role });
     if (res.status === 200) {
-      toast.success("Success");
+      toast.update(id, {
+        render: "verified",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
     setName("");
     setEmail("");
     setPassword("");
+    setRole("");
   };
   return (
     <div className=" flex">
@@ -67,7 +77,9 @@ const AdminRegister = () => {
                   className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   variant="unstyled"
                   placeholder="Choose ..."
-                  data={["Admin", "Register"]}
+                  value={role}
+                  onChange={setRole}
+                  data={["Admin", "Moderator"]}
                   defaultValue="React"
                   clearable
                   allowDeselect

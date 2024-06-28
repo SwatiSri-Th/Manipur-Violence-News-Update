@@ -7,6 +7,7 @@ import Navbar from "./Component/Navbar";
 import Ndtv from "./Component/Ndtv";
 import TimesOfIndia from "./Component/TimesOfIndia";
 import Sidebar from "./Component/Sidebar";
+import Express from "./Component/Express";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { OrbitProgress } from "react-loading-indicators";
 import Footer from "./Component/Footer";
@@ -17,7 +18,7 @@ import { toast } from "react-toastify";
 
 export default function App() {
   const [search, setSearch] = useState();
-  const [searching, setSearching] = useState();
+  const [searching, setSearching] = useState("");
   const [loading, setLoading] = useState(false);
   const [youtubeData, setYoutubeData] = useState([]);
   const [filterYoutubeData, setFilterYoutubeData] = useState([]);
@@ -25,6 +26,7 @@ export default function App() {
   const [filterNdtvData, setFilterNdtvData] = useState([]);
   const [filterTofIndiaData, setFilterTofIndiaData] = useState([]);
   const [filterTwitterData, setFilterTwitterData] = useState([]);
+  const [expressData, setExpressData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
   const [tofIndia, setTofIndia] = useState([]);
@@ -44,7 +46,7 @@ export default function App() {
       const sortedData = res?.data?.youtube?.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
-      console.log(sortedData);
+      setExpressData(res.data.indianExpress);
       setYoutubeData(sortedData?.slice(0, 9));
       setFilterYoutubeData(sortedData?.slice(0, 9));
       setGoogleData(res.data.google?.slice(0, 6));
@@ -67,20 +69,31 @@ export default function App() {
     );
   };
 
+  // const filterByTitle = (data, title) => {
+  //   return data.filter((item) =>
+  //     item.title?.toLowerCase().includes(title?.toLowerCase())
+  //   );
+  // };
+
   useEffect(() => {
     fetchYoutube();
   }, []);
 
   useEffect(() => {
+    if (youtubeData.length < 0) {
+      return;
+    }
     const handleDataFilter = (result, setData, originalData) => {
       if (result.length === 0) {
         setData(originalData);
       } else {
+        console.log(result);
         setData(result);
       }
     };
 
     const youtubeResult = filterByCategory(youtubeData, search);
+    // const youtubeSearchResult = filterByTitle(youtubeData, searching);
     const ndtvResult = filterByCategory(ndtv, search);
     const tofIndiaResult = filterByCategory(tofIndia, search);
     const googleResult = filterByCategory(googleData, search);
@@ -90,6 +103,7 @@ export default function App() {
     console.log(ndtvResult);
 
     handleDataFilter(youtubeResult, setFilterYoutubeData, youtubeData);
+    // handleDataFilter(youtubeSearchResult, setFilterYoutubeData, youtubeData);
     handleDataFilter(ndtvResult, setFilterNdtvData, ndtv);
     handleDataFilter(tofIndiaResult, setFilterTofIndiaData, tofIndia);
     handleDataFilter(googleResult, setFilterGoogleData, googleData);
@@ -262,7 +276,21 @@ export default function App() {
               />
             ))}
           </div>
-
+          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-full justify-center gap-4">
+            {expressData?.map((data, index) => (
+              <Express
+                //mg, link, paragraph, time, title, district, category
+                key={index}
+                img={data.img}
+                link={data.link}
+                time={data.time}
+                paragraph={data.paragraph}
+                district={data.district}
+                category={data.category}
+                title={data.title}
+              />
+            ))}
+          </div>
           <div className="flex flex-wrap mt-8 mb-8 place-self-center w-full justify-center gap-4">
             {googleData?.map((data, index) => (
               <Google

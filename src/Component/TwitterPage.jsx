@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
+import Navbar from "./Navbar";
 const TwitterPage = () => {
   const [image, setImage] = useState();
   const [twitter, setTwitter] = useState([]);
@@ -36,6 +37,7 @@ const TwitterPage = () => {
         />
       </Modal>
       <ScrollArea className="h-[calc(100vh-2rem)] bg-slate-300 w-full rounded-md  ">
+        <Navbar />
         <div>
           <h1 className="text-3xl bg-slate-300 font-extrabold text-[#000] text-center mb-8 mt-8">
             Twitter

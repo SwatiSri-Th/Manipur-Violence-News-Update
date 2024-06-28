@@ -23,7 +23,7 @@ const AdminYoutubePage = () => {
           autoClose: 3000,
         });
       }
-      const sortedData = res?.data?.data?.sort(
+      const sortedData = response?.data?.data?.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
       setYoutubeData((prev) => [...prev, sortedData]);
