@@ -12,6 +12,7 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { IoLogOutSharp } from "react-icons/io5";
 import { MdPeople } from "react-icons/md";
+import { ImNewspaper } from "react-icons/im";
 
 export default function AdminSidebar() {
   const history = useNavigate();
@@ -32,6 +33,7 @@ export default function AdminSidebar() {
       link: "/admin/category",
       icon: BiCategoryAlt,
     },
+    { name: "Express", link: "/admin/express", icon: ImNewspaper },
 
     ...(role === "Admin"
       ? [

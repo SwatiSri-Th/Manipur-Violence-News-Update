@@ -27,31 +27,26 @@ export default function AdminNavbar() {
     {
       id: 1,
       name: "Protest",
-      link: "/#",
     },
 
     {
       id: 2,
       name: "Murder",
-      link: "/#",
     },
 
     {
       id: 3,
       name: "Elections",
-      link: "/#",
     },
 
     {
       id: 4,
       name: "Accident",
-      link: "/#",
     },
 
     {
       id: 5,
       name: "Gun Fire",
-      link: "/#",
     },
   ];
 
@@ -59,19 +54,16 @@ export default function AdminNavbar() {
     {
       id: 1,
       name: "Trending Videos",
-      link: "/#",
     },
 
     {
       id: 2,
       name: "Latest News",
-      link: "/#",
     },
 
     {
       id: 3,
       name: "Top Rated",
-      link: "/#",
     },
   ];
 

@@ -1,27 +1,55 @@
 import React, { useState, useEffect } from "react";
 import instance from "@/Api/api_instance";
-import AdminTimesOfIndia from "./AdminTimesOfIndia";
+import AdminExpress from "./AdminExpress";
 import AdminSidebar from "./AdminSidebar";
+import AdminNavbar from "./AdminNavbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "@/Component/Footer";
-import { toast } from "react-toastify";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Select } from "@mantine/core";
+import { toast } from "react-toastify";
 
-const AdminTimesOfIndiaPage = () => {
-  const [tofIndia, setTofIndia] = useState([]);
+const AdminExpressPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
+  const [express, setExpress] = useState([]);
   const [id, setId] = useState();
   const [category, setCategory] = useState([]);
   const [district, setDistrict] = useState([]);
   const [categoryData, setCategoryData] = useState();
   const [districtData, setDistrictData] = useState();
 
+  const fetchNewData = async () => {
+    try {
+      const id = toast.loading("Please wait...");
+      const response = await instance.get("/express");
+      console.log(response.data);
+      if (response.data.data.length === 0) {
+        toast.update(id, {
+          render: "No new data available",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+        return;
+      }
+      if (response.status === 200) {
+        toast.update(id, {
+          render: "Data is fetch",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      }
+      setExpress(response.data.data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   const addCategoryAndDistrict = async (category, district) => {
     try {
       const toastid = toast.loading("...adding");
       console.log(id);
-      const res = await instance.put(`/timeOfIndia/${id}`, {
+      const res = await instance.put(`/timeExpress/${id}`, {
         category,
         district,
       });
@@ -42,47 +70,6 @@ const AdminTimesOfIndiaPage = () => {
   const districtAndCategoryHandler = () => {
     addCategoryAndDistrict(categoryData, districtData);
   };
-
-  const fetchNewData = async () => {
-    try {
-      const id = toast.loading("Please wait...");
-      const response = await instance.get("/time");
-      console.log(response.data);
-      if (response.data.data.length === 0) {
-        toast.update(id, {
-          render: "No new data available",
-          type: "success",
-          isLoading: false,
-          autoClose: 3000,
-        });
-        return;
-      }
-      if (response.status === 200) {
-        toast.update(id, {
-          render: "Data is fetch",
-          type: "success",
-          isLoading: false,
-          autoClose: 3000,
-        });
-      }
-      setTofIndia(response.data.data);
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
-  const deleteHandler = async (id) => {
-    try {
-      const res = await instance.delete(`/timeOfIndia/delete/${id}`);
-      if (res.status === 200) {
-        toast.success("deleted");
-        setTofIndia((prev) => prev.filter((item) => item._id !== id));
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
   const getCategory = async () => {
     try {
       const res = await instance.get("/category");
@@ -91,7 +78,6 @@ const AdminTimesOfIndiaPage = () => {
       toast.error(error);
     }
   };
-
   const getDistrict = async () => {
     try {
       const res = await instance.get("/district");
@@ -100,25 +86,42 @@ const AdminTimesOfIndiaPage = () => {
       toast.error(error);
     }
   };
-
-  const fetchTimesOfIndia = async () => {
-    try {
-      const res = await instance({
-        url: "/timeOfIndia/data",
-      });
-      setTofIndia(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const modalOpened = (id) => {
     setId(id);
     open();
   };
+  const deleteHandler = async (id) => {
+    try {
+      const toastid = toast.loading("Deleting...");
+      const res = await instance.delete(`/time/delete/${id}`);
+      if (res.status === 200) {
+        toast.update(toastid, {
+          render: "Deleted",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+        setExpress((prev) => {
+          return prev.filter((item) => item._id !== id);
+        });
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+  const fetchExpress = async () => {
+    try {
+      const res = await instance({
+        url: "express/data",
+      });
+      setExpress(res.data.data);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   useEffect(() => {
-    fetchTimesOfIndia();
+    fetchExpress();
     getCategory();
     getDistrict();
   }, []);
@@ -126,7 +129,6 @@ const AdminTimesOfIndiaPage = () => {
   return (
     <div className=" flex">
       <AdminSidebar />
-
       <Modal opened={opened} onClose={close}>
         {/* Modal content */}
         <div className="flex flex-col gap-y-4">
@@ -167,12 +169,12 @@ const AdminTimesOfIndiaPage = () => {
           </div>
         </div>
       </Modal>
-
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+        <AdminNavbar />
         <div>
-          <div className="flex w-full items-center justify-center gap-8">
-            <h1 className="text-3xl font-extrabold text-[#6e276f]  text-center mb-8 mt-8">
-              Times Of India
+          <div className="flex w-full items-center justify-center gap-8 ">
+            <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
+              Indian Express
             </h1>
             <button
               onClick={fetchNewData}
@@ -181,19 +183,18 @@ const AdminTimesOfIndiaPage = () => {
               Fetch New Data
             </button>
           </div>
-
-          <div className="flex  flex-wrap place-self-start w-full justify-center  gap-5">
-            {tofIndia?.map((data) => (
-              <AdminTimesOfIndia
-                key={data._id}
+          <div className="grid  lg:grid-cols-3 items-center justify-items-center  w-screen  sm:w-full justify-center  gap-4">
+            {express?.map((data) => (
+              <AdminExpress
                 id={data._id}
-                title={data.title}
-                description={data.description}
+                key={data._id}
+                img={data.img}
                 link={data.link}
-                date={data.date}
-                image={data.image}
+                time={data.time}
+                paragraph={data.paragraph}
                 district={data.district}
                 category={data.category}
+                title={data.title}
                 open={modalOpened}
                 deleteHandler={deleteHandler}
               />
@@ -206,4 +207,4 @@ const AdminTimesOfIndiaPage = () => {
   );
 };
 
-export default AdminTimesOfIndiaPage;
+export default AdminExpressPage;

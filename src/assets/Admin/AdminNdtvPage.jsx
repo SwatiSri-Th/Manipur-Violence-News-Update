@@ -73,7 +73,9 @@ const AdminNdtvPage = () => {
       const res = await instance.delete(`/ndtv/delete/${id}`);
       if (res.status === 200) {
         toast.success("deleted");
-        window.location.reload();
+        setNdtv((prev) => {
+          return prev.filter((item) => item._id !== id);
+        });
       }
     } catch (error) {
       toast.error(error.message);

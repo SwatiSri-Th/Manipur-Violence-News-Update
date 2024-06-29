@@ -75,10 +75,18 @@ const AdminTwitterPage = () => {
 
   const deleteHandler = async (id) => {
     try {
+      const toastid = toast.loading("...deleting ");
       const res = await instance.delete(`/twitter/delete/${id}`);
       if (res.status === 200) {
-        toast.success("deleted");
-        window.location.reload();
+        toast.update(toastid, {
+          render: "deleted",
+          icon: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+        setTwitterData((prev) => {
+          return prev.filter((item) => item._id !== id);
+        });
       }
     } catch (error) {
       toast.error(error.message);

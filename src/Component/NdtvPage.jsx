@@ -27,6 +27,8 @@ const NdtvPage = () => {
     <div className=" flex">
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+        <Sidebar />
+
         <div>
           <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
             NDTV

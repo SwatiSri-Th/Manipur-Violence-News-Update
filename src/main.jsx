@@ -29,6 +29,7 @@ import AdminGooglePage from "./assets/Admin/AdminGooglePage.jsx";
 import CategoryPage from "./assets/Admin/CategoryPage.jsx";
 import ModeratorList from "./assets/Admin/ModeratorList.jsx";
 import ExpressPage from "./Component/ExpressPage.jsx";
+import AdminExpressPage from "./assets/Admin/AdminExpressPage.jsx";
 // import AdminRegister from "./assets/Admin/AdminRegister.jsx";
 
 import "@mantine/core/styles.css";
@@ -58,6 +59,7 @@ const router = createBrowserRouter(
           <Route path="youtube" element={<AdminYoutubePage />} />
           <Route path="youtube/:id" element={<AdminYoutubeDisplay />} />
           <Route path="ndtv" element={<AdminNdtvPage />} />
+          <Route path="express" element={<AdminExpressPage />} />
           <Route path="tofIndia" element={<AdminTimesOfIndiaPage />} />
           <Route path="google" element={<AdminGooglePage />} />
           <Route path="twitter" element={<AdminTwitterPage />} />
