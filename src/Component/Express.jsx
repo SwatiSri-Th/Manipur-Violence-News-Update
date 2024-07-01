@@ -9,7 +9,7 @@ import {
 } from "react-share";
 const Express = ({ img, link, paragraph, time, title, district, category }) => {
   return (
-    <div className="w-[350px] h-[500px] p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+    <div className="w-[350px] h-max p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
       {img == null ? (
         <img
           className="aspect-video w-full object-cover"

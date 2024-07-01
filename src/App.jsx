@@ -14,10 +14,12 @@ import Footer from "./Component/Footer";
 import Twitter from "./Component/Twitter";
 import Carousel from "./Component/Carousel";
 import { toast } from "react-toastify";
+import { useDebouncedValue } from "@mantine/hooks";
+
 // import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 export default function App() {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const [searching, setSearching] = useState("");
   const [loading, setLoading] = useState(false);
   const [youtubeData, setYoutubeData] = useState([]);
@@ -26,11 +28,13 @@ export default function App() {
   const [filterNdtvData, setFilterNdtvData] = useState([]);
   const [filterTofIndiaData, setFilterTofIndiaData] = useState([]);
   const [filterTwitterData, setFilterTwitterData] = useState([]);
+  const [filterExpress, setFilterExpress] = useState([]);
   const [expressData, setExpressData] = useState([]);
   const [googleData, setGoogleData] = useState([]);
   const [ndtv, setNdtv] = useState([]);
   const [tofIndia, setTofIndia] = useState([]);
   const [twitter, setTwitter] = useState([]);
+  const [debounced] = useDebouncedValue(searching, 200);
 
   // const fetchYoutube = () => {
   //   fetch(`https://flaskappmanipur.onrender.com/`)
@@ -57,6 +61,7 @@ export default function App() {
       setFilterTofIndiaData(res.data.timesOfIndia?.slice(0, 6));
       setTwitter(res?.data?.twitter);
       setFilterTwitterData(res?.data?.twitter);
+      setFilterExpress(res.data?.indianExpress);
       setLoading(true);
     } catch (error) {
       toast.error(error);
@@ -69,25 +74,67 @@ export default function App() {
     );
   };
 
-  // const filterByTitle = (data, title) => {
-  //   return data.filter((item) =>
-  //     item.title?.toLowerCase().includes(title?.toLowerCase())
-  //   );
-  // };
+  const filterByTitle = (data, title) => {
+    return data.filter((item) =>
+      item.title?.toLowerCase().includes(title?.toLowerCase())
+    );
+  };
 
   useEffect(() => {
     fetchYoutube();
   }, []);
 
   useEffect(() => {
-    if (youtubeData.length < 0) {
+    if (debounced.length === 0) {
       return;
     }
     const handleDataFilter = (result, setData, originalData) => {
       if (result.length === 0) {
         setData(originalData);
       } else {
-        console.log(result);
+        setData(result);
+      }
+    };
+
+    const youtubeResult = filterByTitle(youtubeData, debounced);
+    // const youtubeSearchResult = filterByTitle(youtubeData, searching);
+    const ndtvResult = filterByTitle(ndtv, debounced);
+    const tofIndiaResult = filterByTitle(tofIndia, debounced);
+    const googleResult = filterByTitle(googleData, debounced);
+    const twitterResult = filterByTitle(twitter, debounced);
+    const expressResult = filterByTitle(filterExpress, debounced);
+
+    console.log(youtubeResult);
+    console.log(ndtvResult);
+
+    if (
+      youtubeResult.length === 0 &&
+      twitterResult.length === 0 &&
+      ndtvResult.length === 0 &&
+      tofIndiaResult.length === 0 &&
+      googleResult.length === 0 &&
+      expressData.length === 0
+    ) {
+      toast.error("No results found for the given search query");
+    }
+
+    handleDataFilter(youtubeResult, setFilterYoutubeData, youtubeData);
+    // handleDataFilter(youtubeSearchResult, setFilterYoutubeData, youtubeData);
+    handleDataFilter(ndtvResult, setFilterNdtvData, ndtv);
+    handleDataFilter(tofIndiaResult, setFilterTofIndiaData, tofIndia);
+    handleDataFilter(googleResult, setFilterGoogleData, googleData);
+    handleDataFilter(twitterResult, setFilterTwitterData, twitter);
+    handleDataFilter(expressResult, setFilterExpress, filterExpress);
+  }, [debounced]);
+
+  useEffect(() => {
+    if (search.length === 0) {
+      return;
+    }
+    const handleDataFilter = (result, setData, originalData) => {
+      if (result.length === 0) {
+        setData(originalData);
+      } else {
         setData(result);
       }
     };
@@ -98,9 +145,21 @@ export default function App() {
     const tofIndiaResult = filterByCategory(tofIndia, search);
     const googleResult = filterByCategory(googleData, search);
     const twitterResult = filterByCategory(twitter, search);
+    const expressResult = filterByCategory(filterExpress, search);
 
     console.log(youtubeResult);
     console.log(ndtvResult);
+
+    if (
+      youtubeResult.length === 0 &&
+      twitterResult.length === 0 &&
+      ndtvResult.length === 0 &&
+      tofIndiaResult.length === 0 &&
+      googleResult.length === 0 &&
+      expressResult.length === 0
+    ) {
+      toast.error("No results found for the given search query");
+    }
 
     handleDataFilter(youtubeResult, setFilterYoutubeData, youtubeData);
     // handleDataFilter(youtubeSearchResult, setFilterYoutubeData, youtubeData);
@@ -108,10 +167,11 @@ export default function App() {
     handleDataFilter(tofIndiaResult, setFilterTofIndiaData, tofIndia);
     handleDataFilter(googleResult, setFilterGoogleData, googleData);
     handleDataFilter(twitterResult, setFilterTwitterData, twitter);
+    handleDataFilter(expressResult, setFilterExpress, filterExpress);
   }, [search]);
 
   return (
-    <div className="flex">
+    <div className="flex w-screen">
       <Sidebar search={search} setSearch={setSearch} />
       <div className=" w-full flex flex-col items-start justify-start">
         <Navbar
@@ -119,12 +179,15 @@ export default function App() {
           setSearch={setSearch}
           setSearching={setSearching}
         />
-        <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+        <ScrollArea className="h-[calc(100vh)] w-full rounded-md  ">
           <main className="w-full">
             <Carousel />
           </main>
           <div className="mt-8">
-            <div className="grid  lg:grid-cols-3 items-center justify-items-center  w-screen  sm:w-full justify-center  gap-4">
+            <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+              News From Youtube
+            </h1>
+            <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center justify-items-center  w-screen  sm:w-full justify-center  gap-4">
               {!loading && (
                 <div className="col-span-3">
                   <OrbitProgress
@@ -169,6 +232,9 @@ export default function App() {
                       category={data.category}
                     />
                   ))}
+              <h1 className="text-3xl col-span-1 sm:col-span-3 justify-self-start  font-extrabold ml-8 text-blue-900 text-left ">
+                News From NDTV
+              </h1>
               {filterNdtvData.length > 0
                 ? filterNdtvData.map((data) => (
                     <Ndtv
@@ -236,8 +302,10 @@ export default function App() {
                   />
                 ))}
           </div> */}
-
-          <div className="flex mt-8 mb-8 flex-wrap place-self-start w-full justify-center  gap-5">
+          <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+            News From Times Of India
+          </h1>
+          <div className="flex mt-8 mb-8 flex-wrap place-self-start w-screen justify-center sm:w-full  gap-5">
             {filterTofIndiaData.length > 0
               ? filterTofIndiaData.map((data) => (
                   <TimesOfIndia
@@ -263,35 +331,43 @@ export default function App() {
                     category={data.category}
                   />
                 ))}
-            {tofIndia?.map((data) => (
-              <TimesOfIndia
-                key={data._id}
-                title={data.title}
-                description={data.description}
-                link={data.link}
-                date={data.date}
-                image={data.image}
-                district={data.district}
-                category={data.category}
-              />
-            ))}
           </div>
-          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-full justify-center gap-4">
-            {expressData?.map((data, index) => (
-              <Express
-                //mg, link, paragraph, time, title, district, category
-                key={index}
-                img={data.img}
-                link={data.link}
-                time={data.time}
-                paragraph={data.paragraph}
-                district={data.district}
-                category={data.category}
-                title={data.title}
-              />
-            ))}
-          </div>
-          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-full justify-center gap-4">
+          <h1 className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8">
+            News From Indian Express
+          </h1>
+          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
+            {filterExpress.length > 0
+              ? filterExpress.map((data) => (
+                  <Express
+                    //mg, link, paragraph, time, title, district, category
+                    key={data._id}
+                    img={data.img}
+                    link={data.link}
+                    time={data.time}
+                    paragraph={data.paragraph}
+                    district={data.district}
+                    category={data.category}
+                    title={data.title}
+                  />
+                ))
+              : expressData?.map((data, index) => (
+                  <Express
+                    //mg, link, paragraph, time, title, district, category
+                    key={data._id}
+                    img={data.img}
+                    link={data.link}
+                    time={data.time}
+                    paragraph={data.paragraph}
+                    district={data.district}
+                    category={data.category}
+                    title={data.title}
+                  />
+                ))}
+          </div>{" "}
+          <h1 className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8">
+            News From Google
+          </h1>
+          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
             {googleData?.map((data, index) => (
               <Google
                 key={index}
@@ -302,6 +378,9 @@ export default function App() {
               />
             ))}
           </div>
+          <h1 className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8">
+            News From Twitter
+          </h1>
           <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">
             {twitter?.map((data) => (
               <Twitter
@@ -318,7 +397,6 @@ export default function App() {
               />
             ))}
           </div>
-
           <Footer />
         </ScrollArea>
       </div>

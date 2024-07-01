@@ -19,7 +19,7 @@ export default function TimesOfIndia({
   return (
     <a
       href={link}
-      className="w-[90%] max-h-30 p-4 text-wrap text-black  rounded-xl flex flex-row items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all"
+      className="w-[80vw] sm:w-[90%] max-h-30 p-4 text-wrap text-black  rounded-xl flex flex-wrap sm:flex-nowrap flex-row items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all"
     >
       {image == null ? (
         <img
@@ -48,7 +48,7 @@ export default function TimesOfIndia({
         <p className="text-black font-bold">{category ? category : ""}</p>
       </div>
 
-      <div className="w-[120px] flex  gap-2 mt-[190px]">
+      <div className="w-[120px] flex  gap-2 sm:mt-[190px]">
         <WhatsappShareButton url={link}>
           <WhatsappIcon
             className="rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] "
