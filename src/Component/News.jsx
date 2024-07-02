@@ -19,6 +19,7 @@ export default function News({
   link,
   district,
   category,
+  embed,
 }) {
   const navigate = useNavigate();
   return (
@@ -26,10 +27,22 @@ export default function News({
       onClick={() => navigate(`/youtube/${video_id}`)}
       className="w-[80vw] sm:w-[350px] h-[400px] p-4 sm:p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-60"
     >
-      <iframe
-        className="aspect-video w-full object-cover"
-        src={`https://drive.google.com/file/d/${file_id}/preview`}
-      ></iframe>
+      {embed ? (
+        <iframe
+          className="aspect-video w-full object-cover"
+          src={embed}
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      ) : (
+        <iframe
+          className="aspect-video w-full object-cover"
+          src={`https://drive.google.com/file/d/${file_id}/preview`}
+        ></iframe>
+      )}
       <h1 className="font-bold">{title}</h1>
       <p>{channel}</p>
       <p>{publishedAt}</p>

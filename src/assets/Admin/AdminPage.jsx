@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import axios from "axios";
 import instance from "@/Api/api_instance";
 import AdminGoogle from "./AdminGoogle";
+// import Sidebar from "@/Component/Sidebar";
 import AdminSidebar from "./AdminSidebar";
 import AdminNavbar from "./AdminNavbar";
 import { OrbitProgress } from "react-loading-indicators";
@@ -71,6 +72,7 @@ export default function AdminPage() {
                 <AdminYoutube
                   key={data._id}
                   video_id={data._id}
+                  embed={data.embed}
                   title={data.title}
                   channel={data.channelTitle}
                   file_id={data.file_id}

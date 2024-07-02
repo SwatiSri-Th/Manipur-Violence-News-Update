@@ -24,7 +24,7 @@ const AdminYoutubePage = () => {
         });
       }
       const sortedData = response?.data?.data?.sort(
-        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+        (a, b) => new Date(b?.publishedAt) - new Date(a?.publishedAt)
       );
       setYoutubeData((prev) => [...prev, sortedData]);
     } catch (e) {
@@ -38,7 +38,7 @@ const AdminYoutubePage = () => {
         url: "/",
       });
       const sortedData = res?.data?.data?.sort(
-        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+        (a, b) => new Date(b?.publishedAt) - new Date(a?.publishedAt)
       );
       setYoutubeData(sortedData);
     } catch (error) {
@@ -73,8 +73,9 @@ const AdminYoutubePage = () => {
                 title={data.title}
                 channel={data.channelTitle}
                 file_id={data.file_id}
+                embed={data.embed}
                 publishedAt={format(
-                  new Date(data.publishedAt),
+                  new Date(data?.publishedAt),
                   "dd-MMMM-yyyy h:mm:a"
                 )}
                 link={data.video_link}

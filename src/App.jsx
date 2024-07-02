@@ -214,6 +214,7 @@ export default function App() {
                       link={data.video_link}
                       district={data.district}
                       category={data.category}
+                      embed={data.embed}
                     />
                   ))
                 : youtubeData.map((data) => (
@@ -230,11 +231,24 @@ export default function App() {
                       link={data.video_link}
                       district={data.district}
                       category={data.category}
+                      embed={data.embed}
                     />
                   ))}
+
               <h1 className="text-3xl col-span-1 sm:col-span-3 justify-self-start  font-extrabold ml-8 text-blue-900 text-left ">
                 News From NDTV
               </h1>
+              {!loading && (
+                <div className="col-span-3">
+                  <OrbitProgress
+                    variant="disc"
+                    color="#32cd32"
+                    size="medium"
+                    text=""
+                    textColor=""
+                  />
+                </div>
+              )}
               {filterNdtvData.length > 0
                 ? filterNdtvData.map((data) => (
                     <Ndtv
@@ -306,6 +320,17 @@ export default function App() {
             News From Times Of India
           </h1>
           <div className="flex mt-8 mb-8 flex-wrap place-self-start w-screen justify-center sm:w-full  gap-5">
+            {!loading && (
+              <div className="col-span-3">
+                <OrbitProgress
+                  variant="disc"
+                  color="#32cd32"
+                  size="medium"
+                  text=""
+                  textColor=""
+                />
+              </div>
+            )}
             {filterTofIndiaData.length > 0
               ? filterTofIndiaData.map((data) => (
                   <TimesOfIndia
@@ -336,6 +361,17 @@ export default function App() {
             News From Indian Express
           </h1>
           <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
+            {!loading && (
+              <div className="col-span-3">
+                <OrbitProgress
+                  variant="disc"
+                  color="#32cd32"
+                  size="medium"
+                  text=""
+                  textColor=""
+                />
+              </div>
+            )}
             {filterExpress.length > 0
               ? filterExpress.map((data) => (
                   <Express
@@ -368,6 +404,17 @@ export default function App() {
             News From Google
           </h1>
           <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
+            {!loading && (
+              <div className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8 ">
+                <OrbitProgress
+                  variant="disc"
+                  color="#32cd32"
+                  size="medium"
+                  text=""
+                  textColor=""
+                />
+              </div>
+            )}
             {googleData?.map((data, index) => (
               <Google
                 key={index}
@@ -381,6 +428,17 @@ export default function App() {
           <h1 className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8">
             News From Twitter
           </h1>
+          {!loading && (
+            <div className="col-span-3">
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            </div>
+          )}
           <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">
             {twitter?.map((data) => (
               <Twitter
