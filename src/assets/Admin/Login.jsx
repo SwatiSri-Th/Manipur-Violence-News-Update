@@ -3,11 +3,43 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import instance from "@/Api/api_instance";
 import { PiWindLight } from "react-icons/pi";
+import { Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 
 const Login = () => {
+  const [opened, { open, close }] = useDisclosure(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [token, setToken] = useState("");
+
+  const handleSave = async () => {
+    // Handle save logic here
+    console.log("Old Password:", oldPassword);
+    console.log("New Password:", newPassword);
+    const response = await instance.post(
+      "/reset",
+      {
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+    if (response.status === 200) {
+      toast.success("Password updated successfully");
+      navigate("/admin/dashboard");
+    } else {
+      toast.error("Invalid credentials");
+    }
+  };
 
   const handleSubmit = async (e) => {
     const id = toast.loading("Please wait...");
@@ -20,18 +52,32 @@ const Login = () => {
         email: email,
         password: password,
       });
+      console.log(res);
+      console.log(res.data.needs_password_change);
       if (res.data.success) {
+        setToken(res.data.token);
         window.localStorage.setItem("token", res.data.token);
         window.localStorage.setItem("role", res.data.role);
-        toast.update(id, {
-          render: "verified",
-          type: "success",
-          isLoading: false,
-          autoClose: 3000,
-        });
-
-        navigate("/admin/dashboard");
-        window.location.reload();
+        if (res.data.needs_password_change) {
+          toast.update(id, {
+            render: "Change Password",
+            type: "warning",
+            isLoading: false,
+            autoClose: true,
+          });
+          open();
+        } else {
+          window.localStorage.setItem("token", res.data.token);
+          window.localStorage.setItem("role", res.data.role);
+          toast.update(id, {
+            render: "verified",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          });
+          navigate("/admin/dashboard");
+          window.location.reload();
+        }
       } else {
         console.log(res.data.error);
         toast.update(id, {
@@ -53,6 +99,50 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <Modal opened={opened} onClose={close} title="Authentication">
+        <div className="p-4">
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="oldPassword"
+            >
+              Old Password
+            </label>
+            <input
+              type="text"
+              id="oldPassword"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Enter old password"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="newPassword"
+            >
+              New Password
+            </label>
+            <input
+              type="text"
+              id="newPassword"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Enter new password"
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              onClick={handleSave}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </Modal>
       <div className="bg-white p-8 rounded shadow-md w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={handleSubmit}>

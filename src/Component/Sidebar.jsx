@@ -17,20 +17,20 @@ export default function Sidebar() {
     { name: "Times Of India", link: "/tofIndia", icon: GiNewspaper },
     { name: "Google", link: "/google", icon: FaGoogle, margin: true },
     { name: "Twitter", link: "/twitter", icon: RiTwitterXFill },
-    { name: "Express", link: "/express", icon: ImNewspaper },
+    { name: "Express", link: "/express", icon: ImNewspaper, margin: true },
   ];
 
   const [open, setOpen] = useState(false);
   return (
     <section
-      className={` flex gap-6 z-20  ${open ? "w-60" : "w-16"} duration-500`}
+      className={` flex gap-6 z-20  ${open ? "w-60" : "w-16"} duration-500 `}
     >
       <div
         className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] min-h-screen ${
           open ? "w-72" : "w-[68px]"
         } duration-500 text-black px-4`}
       >
-        <div className="py-3  flex justify-end">
+        <div className="py-3 flex justify-end">
           <HiMenuAlt3
             size={26}
             className="cursor-pointer"

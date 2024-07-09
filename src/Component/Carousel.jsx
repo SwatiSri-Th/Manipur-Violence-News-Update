@@ -62,7 +62,8 @@
 // };
 
 // export default Carousel;
-
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import { Carousel } from "@mantine/carousel";
 
 const slides = [
@@ -73,8 +74,12 @@ const slides = [
 ];
 
 const CarouselElement = () => {
+  const autoplay = useRef(Autoplay({ delay: 2000 }));
   return (
     <Carousel
+      plugins={[autoplay.current]}
+      onMouseEnter={autoplay.current.stop}
+      onMouseLeave={autoplay.current.reset}
       slideSize="33.33333%"
       slideGap="md"
       loop

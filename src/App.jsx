@@ -51,12 +51,12 @@ export default function App() {
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
       setExpressData(res.data.indianExpress);
-      setYoutubeData(sortedData?.slice(0, 9));
-      setFilterYoutubeData(sortedData?.slice(0, 9));
+      setYoutubeData(sortedData?.slice(0, 6));
+      setFilterYoutubeData(sortedData?.slice(0, 6));
       setGoogleData(res.data.google?.slice(0, 6));
       setFilterGoogleData(res.data.google?.slice(0, 6));
-      setNdtv(res.data.ndtv?.slice(0, 9));
-      setFilterNdtvData(res.data.ndtv?.slice(0, 9));
+      setNdtv(res.data.ndtv?.slice(0, 6));
+      setFilterNdtvData(res.data.ndtv?.slice(0, 6));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));
       setFilterTofIndiaData(res.data.timesOfIndia?.slice(0, 6));
       setTwitter(res?.data?.twitter);
@@ -171,23 +171,23 @@ export default function App() {
   }, [search]);
 
   return (
-    <div className="flex w-screen">
+    <div className="flex">
       <Sidebar search={search} setSearch={setSearch} />
-      <div className=" w-full flex flex-col items-start justify-start">
+      <div className=" w-full flex flex-col items-start justify-start overflow-hidden">
         <Navbar
           search={search}
           setSearch={setSearch}
           setSearching={setSearching}
         />
-        <ScrollArea className="h-[calc(100vh)] w-full rounded-md  ">
+        <ScrollArea className="h-[calc(100vh)] w-full rounded-md ">
           <main className="w-full">
             <Carousel />
           </main>
-          <div className="mt-8">
+          <div className="mt-8 ">
             <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
               News From Youtube
             </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center justify-items-center  w-screen  sm:w-full justify-center  gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center sm:justify-items-center justify-items-start  w-screen  sm:w-full justify-center  gap-4">
               {!loading && (
                 <div className="col-span-3">
                   <OrbitProgress
@@ -316,6 +316,22 @@ export default function App() {
                   />
                 ))}
           </div> */}
+          <section className="w-full h-[700px] aspect-video object-cover bg-center bg-news flex  items-center ">
+            <div className="w-full h-full bg-black opacity-[0.7] flex items-center">
+              {
+                <div className="w-full pt-[30px] pb-[30px] flex flex-col items-center">
+                  <input
+                    type="text"
+                    className="w-[70%] h-[60px] border border-solid border-white text-[18px] indent-[20px] rounded-[10px] bg-transparent outline-none text-white "
+                    placeholder="Enter Your Email"
+                  />
+                  <button className="p-[15px 40px] text-[20px] mt-[35px] bg-purple-400 text-white border border-solid rounded-[15px] cursor-pointer transition-[.3s] ">
+                    Get to Know
+                  </button>
+                </div>
+              }
+            </div>
+          </section>
           <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
             News From Times Of India
           </h1>
@@ -357,7 +373,62 @@ export default function App() {
                   />
                 ))}
           </div>
-          <h1 className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8">
+          <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+            News From Google
+          </h1>
+          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
+            {!loading && (
+              <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center sm:justify-items-center justify-items-start  w-screen  sm:w-full justify-center  gap-4">
+                <OrbitProgress
+                  variant="disc"
+                  color="#32cd32"
+                  size="medium"
+                  text=""
+                  textColor=""
+                />
+              </div>
+            )}
+            {googleData?.map((data, index) => (
+              <Google
+                key={index}
+                title={data.title}
+                link={data.link}
+                source={data.source}
+                desc={data.desc}
+              />
+            ))}
+          </div>
+          <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+            News From Twitter
+          </h1>
+          {!loading && (
+            <div className="col-span-3">
+              <OrbitProgress
+                variant="disc"
+                color="#32cd32"
+                size="medium"
+                text=""
+                textColor=""
+              />
+            </div>
+          )}
+          <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">
+            {twitter?.map((data) => (
+              <Twitter
+                key={data._id}
+                text={data.text}
+                link={data.url}
+                author={data.user_name}
+                date={data.created_at}
+                type={data.type}
+                media={data.media}
+                district={data.district}
+                category={data.category}
+                // img={data.img}
+              />
+            ))}
+          </div>
+          <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
             News From Indian Express
           </h1>
           <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
@@ -400,61 +471,6 @@ export default function App() {
                   />
                 ))}
           </div>{" "}
-          <h1 className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8">
-            News From Google
-          </h1>
-          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
-            {!loading && (
-              <div className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8 ">
-                <OrbitProgress
-                  variant="disc"
-                  color="#32cd32"
-                  size="medium"
-                  text=""
-                  textColor=""
-                />
-              </div>
-            )}
-            {googleData?.map((data, index) => (
-              <Google
-                key={index}
-                title={data.title}
-                link={data.link}
-                source={data.source}
-                desc={data.desc}
-              />
-            ))}
-          </div>
-          <h1 className="text-3xl col-span-3 justify-self-start  font-extrabold ml-20 text-blue-900 text-left  mb-8">
-            News From Twitter
-          </h1>
-          {!loading && (
-            <div className="col-span-3">
-              <OrbitProgress
-                variant="disc"
-                color="#32cd32"
-                size="medium"
-                text=""
-                textColor=""
-              />
-            </div>
-          )}
-          <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">
-            {twitter?.map((data) => (
-              <Twitter
-                key={data._id}
-                text={data.text}
-                link={data.url}
-                author={data.user_name}
-                date={data.created_at}
-                type={data.type}
-                media={data.media}
-                district={data.district}
-                category={data.category}
-                // img={data.img}
-              />
-            ))}
-          </div>
           <Footer />
         </ScrollArea>
       </div>

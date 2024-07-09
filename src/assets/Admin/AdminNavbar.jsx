@@ -50,22 +50,22 @@ export default function AdminNavbar() {
     },
   ];
 
-  const DropdownLinks = [
-    {
-      id: 1,
-      name: "Trending Videos",
-    },
+  // const DropdownLinks = [
+  //   {
+  //     id: 1,
+  //     name: "Trending Videos",
+  //   },
 
-    {
-      id: 2,
-      name: "Latest News",
-    },
+  //   {
+  //     id: 2,
+  //     name: "Latest News",
+  //   },
 
-    {
-      id: 3,
-      name: "Top Rated",
-    },
-  ];
+  //   {
+  //     id: 3,
+  //     name: "Top Rated",
+  //   },
+  // ];
 
   return (
     <div className="shadow-md w-full bg-white dark:bg-indigo-900 dark:text-white duration-200 relative z-10">
@@ -78,9 +78,9 @@ export default function AdminNavbar() {
               href="#"
               className="font-bold font-serif text-2xl sm:text-2sm flex items-center"
             >
-              <div className=" w-[70px]">
+              <div className="pl-[10px] w-[70px]">
                 <img
-                  src="/images/logo.png"
+                  src="/images/mlogo.png"
                   alt="Logo"
                   className="w-[90px] aspect-square object-cover "
                 />
@@ -128,7 +128,7 @@ export default function AdminNavbar() {
           ))}
 
           {/* Dropdown and links */}
-          <li className="group relative cursor-pointer">
+          {/* <li className="group relative cursor-pointer">
             <a href="#" className="flex items-center gap-[2px] py-2">
               Trending
               <span>
@@ -150,7 +150,7 @@ export default function AdminNavbar() {
                 ))}
               </ul>
             </div>
-          </li>
+          </li> */}
 
           {/* District Dropdown */}
 
