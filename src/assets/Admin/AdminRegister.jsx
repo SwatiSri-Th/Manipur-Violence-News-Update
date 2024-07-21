@@ -16,6 +16,7 @@ const AdminRegister = () => {
     const id = toast.loading("Loading...");
     console.log(name);
     const res = await instance.post("/admin", { name, email, password, role });
+    console.log(res);
     if (res.status === 200) {
       toast.update(id, {
         render: "verified",

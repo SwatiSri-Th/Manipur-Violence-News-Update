@@ -20,8 +20,8 @@ const ModeratorList = () => {
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
       });
-      console.log(res.data);
-      setData(res.data);
+      console.log(res);
+      setData(res.data.data);
     } catch (error) {
       toast.error(error.response.data.message);
     }
