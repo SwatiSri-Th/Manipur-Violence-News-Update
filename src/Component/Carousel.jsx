@@ -80,18 +80,17 @@ const CarouselElement = () => {
       plugins={[autoplay.current]}
       onMouseEnter={autoplay.current.stop}
       onMouseLeave={autoplay.current.reset}
-      slideSize="33.33333%"
-      slideGap="md"
-      loop
-      dragFree
-      align="start"
-      slidesToScroll={1}
       withIndicators
+      height={300}
+      slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
+      slideGap={{ base: 0, sm: "md" }}
+      loop
+      align="start"
       // height={300}
     >
       {slides.map((slide) => (
         <Carousel.Slide>
-          <img height="400px" src={slide} />
+          <img src={slide} />
         </Carousel.Slide>
       ))}
     </Carousel>

@@ -35,17 +35,23 @@ export default function TimesOfIndia({
       )}
 
       {/* <img className="aspect-video w-full object-cover" src={image} alt="" /> */}
-      <div className="m-6">
+      <div className="m-6 dark:text-white">
         <div className="flex flex-col ">
           <h1 className="font-bold ">{title}</h1>
-          <div className="w-full flex justify-start text-slate-500 flex-col ">
+          <div className="w-full flex justify-start dark:text-white text-slate-500 flex-col ">
             <p>{date}</p>
           </div>
         </div>
-        <p className="text-black mt-5 text-left">{description}</p>
+        <p className="text-black mt-5 dark:text-white text-left">
+          {description}
+        </p>
 
-        <p className="text-black font-bold">{district ? district : ""}</p>
-        <p className="text-black font-bold">{category ? category : ""}</p>
+        <p className="text-black dark:text-white font-bold">
+          {district ? district : ""}
+        </p>
+        <p className="text-black dark:text-white font-bold">
+          {category ? category : ""}
+        </p>
       </div>
 
       <div className="w-[120px] flex  gap-2 sm:mt-[190px]">

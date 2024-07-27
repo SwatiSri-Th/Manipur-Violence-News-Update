@@ -2,26 +2,37 @@ import React, { useState, useEffect } from "react";
 import instance from "@/Api/api_instance";
 import Ndtv from "@/Component/Ndtv";
 import Sidebar from "@/Component/Sidebar";
+import { toast } from "react-toastify";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
 
 const NdtvPage = () => {
   const [ndtv, setNdtv] = useState([]);
+  const [limit, setLimit] = useState(6);
+  const [skip, setSkip] = useState(0);
 
   const fetchNdtv = async () => {
     try {
       const res = await instance({
-        url: "ndtv/data",
+        url: `ndtv/data?limit=${limit}&skip=${skip}`,
       });
       setNdtv(res.data.data);
+      if (skip === 0) {
+        setNdtv(sortedData);
+        // setFilterYoutubeData(sortedData);
+      } else {
+        setNdtv((prevItems) => [...prevItems, ...sortedData]);
+        // setFilterYoutubeData((prevItems) => [...prevItems, ...sortedData]);
+      }
     } catch (error) {
       console.error(error);
+      toast.error(error);
     }
   };
 
   useEffect(() => {
     fetchNdtv();
-  }, []);
+  }, [skip, limit]);
 
   return (
     <div className=" flex">
@@ -31,7 +42,7 @@ const NdtvPage = () => {
           <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
             NDTV
           </h1>
-          <div className="flex  flex-wrap place-self-center w-full justify-center  gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center justify-items-start  w-screen  sm:w-[97%] justify-center  gap-0">
             {ndtv?.map((data) => (
               <Ndtv
                 key={data._id}
@@ -46,6 +57,12 @@ const NdtvPage = () => {
               />
             ))}
           </div>
+          <button
+            className="px-4 py-2 w-fit self-center mt-12 bg-blue-300 "
+            onClick={() => setSkip(skip + limit)}
+          >
+            Read More
+          </button>
         </div>
         <Footer />
       </ScrollArea>

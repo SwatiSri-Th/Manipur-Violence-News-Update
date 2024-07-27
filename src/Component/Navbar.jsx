@@ -80,11 +80,11 @@ export default function Navbar({ setSearch, setSearching }) {
   // ];
 
   return (
-    <div className="shadow-md w-full bg-white dark:bg-indigo-900 dark:text-white duration-200 relative z-10">
+    <div className="shadow-md w-[100%] dark:bg-slate-800  bg-white dark:text-white duration-200 relative z-80">
       {/* Upper Navbar */}
-      <div className="bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+      <div className="bg-[#e8e5e8] dark:bg-slate-600 border shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
         {/* // "bg-primary/40 py-2" */}
-        <div className="container flex justify-between items-center ">
+        <div className=" flex justify-between items-center ">
           <div>
             <a
               href="#"
@@ -108,34 +108,25 @@ export default function Navbar({ setSearch, setSearching }) {
             </a>
           </div>
           {/* search bar */}
-          <div>
-            <div className="relative group hidden sm:block">
-              <input
-                type="text"
-                placeholder="search"
-                onChange={(e) => setSearching(e.target.value)}
-                className="w-[200px] sm:[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary"
-              />
-              <IoMdSearch className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3" />
-            </div>
+          <div className="relative group hidden sm:block">
+            <input
+              type="text"
+              placeholder="search"
+              onChange={(e) => setSearching(e.target.value)}
+              className="w-[200px] dark:text-black sm:[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary"
+            />
+            <IoMdSearch className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3" />
           </div>
+
           {/* order button */}
           {/* Darkmode Switch */}
           <div>
             <DarkMode />
           </div>
-          {/* <button
-            onClick={() => {
-              navigate("/admin");
-            }}
-            className="w-[60px] h-[25px] rounded-lg cursor-pointer text-sm hover:bg-blue-900 text-center bg-blue-600 text-wrap text-white"
-          >
-            Admin
-          </button> */}
         </div>
       </div>
       {/* Lower Navbar */}
-      <div className="flex justify-center">
+      <div className=" flex justify-center">
         <ul className="sm:flex hidden items-center gap-4">
           {Category.map((data) => (
             <li key={data.id}>
@@ -147,35 +138,7 @@ export default function Navbar({ setSearch, setSearching }) {
               </div>
             </li>
           ))}
-
-          {/* Dropdown and links */}
-          {/* <li className="group relative cursor-pointer">
-            <a href="#" className="flex items-center gap-[2px] py-2">
-              Trending
-              <span>
-                <MdArrowDropDown className="transition-all duration-200 group-hover:rotate-180" />
-              </span>
-            </a>
-
-            <div className="absolute z-[9999] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black">
-              <ul>
-                {DropdownLinks.map((data) => (
-                  <li key={data.id}>
-                    <a
-                      href={data.link}
-                      className="inline-block w-full rounded-md p-2 hover:bg-gray-300"
-                    >
-                      {data.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </li> */}
-
-          {/* District Dropdown */}
-
-          <li className="group flex items-center gap-4 relative text-black cursor-pointer">
+          <li className=" flex items-center gap-4 relative text-black cursor-pointer">
             <p>District</p>
             <Select
               className="w-36 placeholder:text-black"

@@ -19,7 +19,7 @@ export default function Ndtv({
   return (
     <a
       href={link}
-      className="w-[100%] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+      className="w-[100%] h-35 p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] dark:text-white"
     >
       {img == null ? (
         <img
@@ -36,14 +36,18 @@ export default function Ndtv({
 
       {/* <img className="aspect-video w-full object-cover" src={img} alt="" /> */}
       <h1 className="font-bold">{title}</h1>
-      <div className="w-full flex justify-start text-slate-500 flex-col ">
+      <div className="w-full flex dark:text-white justify-start text-slate-500 flex-col ">
         <p>{author}</p>
         <p>{date}</p>
 
-        <p className="text-black font-bold">{district ? district : ""}</p>
-        <p className="text-black font-bold">{category ? category : ""}</p>
+        <p className="text-black dark:text-white font-bold">
+          {district ? district : ""}
+        </p>
+        <p className="text-black dark:text-white font-bold">
+          {category ? category : ""}
+        </p>
       </div>
-      <p className="text-black mt-5 text-left">{description}</p>
+      <p className="text-black dark:text-white mt-5 text-left">{description}</p>
 
       <div className="w-[120px] flex justify-center gap-2">
         <WhatsappShareButton url={link}>

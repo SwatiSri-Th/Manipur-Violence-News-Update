@@ -10,14 +10,19 @@ import Navbar from "./Navbar";
 const TwitterPage = () => {
   const [image, setImage] = useState();
   const [twitter, setTwitter] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const [skip, setSkip] = useState(0);
   const [opened, { open, close }] = useDisclosure(false);
 
   const fetchTwitter = async () => {
     try {
       const res = await instance({
-        url: "twitter/search",
+        url: `twitter/search?limit=${limit}&skip=${skip}`,
       });
-      setTwitter(res.data.data);
+      if (skip == 0) setTwitter(res.data.data);
+      else {
+        setTwitter((prevItems) => [...prevItems, ...res.data.data]);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -25,7 +30,7 @@ const TwitterPage = () => {
 
   useEffect(() => {
     fetchTwitter();
-  }, []);
+  }, [skip, limit]);
 
   return (
     <div className=" flex">
@@ -60,6 +65,12 @@ const TwitterPage = () => {
               />
             ))}
           </div>
+          <button
+            className="px-4 py-2 w-fit self-center mt-12 bg-blue-300 "
+            onClick={() => setSkip(skip + limit)}
+          >
+            Read More
+          </button>
         </div>
         <Footer />
       </ScrollArea>

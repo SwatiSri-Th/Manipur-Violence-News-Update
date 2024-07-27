@@ -50,6 +50,7 @@ export default function App() {
       const sortedData = res?.data?.youtube?.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
+      console.log(res.data.google);
       setExpressData(res.data.indianExpress);
       setYoutubeData(sortedData?.slice(0, 6));
       setFilterYoutubeData(sortedData?.slice(0, 6));
@@ -171,23 +172,23 @@ export default function App() {
   }, [search]);
 
   return (
-    <div className="flex">
+    <div className="flex dark:bg-slate-600 dark:text-white">
       <Sidebar search={search} setSearch={setSearch} />
-      <div className=" w-full flex flex-col items-start justify-start overflow-hidden">
+      <div className="flex-1 w-[80%] flex flex-col items-start justify-start">
         <Navbar
           search={search}
           setSearch={setSearch}
           setSearching={setSearching}
         />
-        <ScrollArea className="h-[calc(100vh)] w-full rounded-md ">
-          <main className="w-full">
+        <ScrollArea className="h-[calc(100vh)] w-[100%] dark:bg-slate-800 rounded-md">
+          <main className="w-full dark:bg-slate-800">
             <Carousel />
           </main>
-          <div className="mt-8 ">
-            <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+          <div className="mt-8 dark:bg-slate-800 ">
+            <h1 className="text-3xl w-[50%] font-extrabold ml-4 dark:text-white  text-blue-900 text-left mt-8 mb-8">
               News From Youtube
             </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center sm:justify-items-center justify-items-start  w-screen  sm:w-full justify-center  gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 sm:grid-cols-2  justify-items-start  w-full dark:text-white sm:w-[97%] justify-center  gap-0">
               {!loading && (
                 <div className="col-span-3">
                   <OrbitProgress
@@ -235,7 +236,7 @@ export default function App() {
                     />
                   ))}
 
-              <h1 className="text-3xl col-span-1 sm:col-span-3 justify-self-start  font-extrabold ml-8 text-blue-900 text-left ">
+              <h1 className="text-3xl col-span-1 lg:col-span-3 md:col-span-2 sm:col-span-2 justify-self-start  font-extrabold ml-8 text-blue-900 text-left dark:text-white ">
                 News From NDTV
               </h1>
               {!loading && (
@@ -316,7 +317,7 @@ export default function App() {
                   />
                 ))}
           </div> */}
-          <section className="w-full h-[700px] aspect-video object-cover bg-center bg-news flex  items-center ">
+          <section className="w-full aspect-video object-cover bg-center bg-news flex  items-center ">
             <div className="w-full h-full bg-black opacity-[0.7] flex items-center">
               {
                 <div className="w-full pt-[30px] pb-[30px] flex flex-col items-center">
@@ -332,10 +333,10 @@ export default function App() {
               }
             </div>
           </section>
-          <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+          <h1 className="text-3xl w-1/2 font-extrabold ml-8 text-blue-900 dark:text-white text-left mt-8 mb-8">
             News From Times Of India
           </h1>
-          <div className="flex mt-8 mb-8 flex-wrap place-self-start w-screen justify-center sm:w-full  gap-5">
+          <div className="flex dark:text-white mt-8 mb-8 flex-wrap place-self-start w-full justify-center sm:w-full  gap-5">
             {!loading && (
               <div className="col-span-3">
                 <OrbitProgress
@@ -373,12 +374,12 @@ export default function App() {
                   />
                 ))}
           </div>
-          <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+          <h1 className="text-3xl w-1/2 dark:text-white font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
             News From Google
           </h1>
-          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
+          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-full sm:w-full justify-center gap-4">
             {!loading && (
-              <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center sm:justify-items-center justify-items-start  w-screen  sm:w-full justify-center  gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center sm:justify-items-center justify-items-start  w-full  sm:w-full justify-center  gap-4">
                 <OrbitProgress
                   variant="disc"
                   color="#32cd32"
@@ -398,7 +399,7 @@ export default function App() {
               />
             ))}
           </div>
-          <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+          <h1 className="text-3xl w-1/2 dark:text-white font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
             News From Twitter
           </h1>
           {!loading && (
@@ -428,10 +429,10 @@ export default function App() {
               />
             ))}
           </div>
-          <h1 className="text-3xl font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
+          <h1 className="text-3xl w-1/2 font-extrabold ml-8 text-blue-900 text-left mt-8 mb-8">
             News From Indian Express
           </h1>
-          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-screen sm:w-full justify-center gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 sm:grid-cols-2  justify-items-start  w-full dark:text-white sm:w-[97%] justify-center  gap-0">
             {!loading && (
               <div className="col-span-3">
                 <OrbitProgress

@@ -74,10 +74,10 @@ const router = createBrowserRouter(
   )
 );
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <MantineProvider>
-      <ToastContainer autoClose={1000} />
-      <RouterProvider router={router} />
-    </MantineProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <MantineProvider>
+    <ToastContainer autoClose={1000} />
+    <RouterProvider router={router} />
+  </MantineProvider>
+  // </React.StrictMode>
 );
