@@ -188,7 +188,7 @@ export default function App() {
             <h1 className="text-3xl w-[50%] font-extrabold ml-4 dark:text-white  text-blue-900 text-left mt-8 mb-8">
               News From Youtube
             </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 sm:grid-cols-2  justify-items-start  w-full dark:text-white sm:w-[97%] justify-center  gap-0">
+            <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 sm:grid-cols-2  justify-items-start  w-full dark:text-white sm:w-[100%] justify-center  gap-0">
               {!loading && (
                 <div className="col-span-3">
                   <OrbitProgress

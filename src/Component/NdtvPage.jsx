@@ -13,15 +13,18 @@ const NdtvPage = () => {
 
   const fetchNdtv = async () => {
     try {
+      console.log(limit);
+      console.log(skip);
       const res = await instance({
         url: `ndtv/data?limit=${limit}&skip=${skip}`,
       });
-      setNdtv(res.data.data);
+      // setNdtv(res.data.data);
       if (skip === 0) {
-        setNdtv(sortedData);
+        setNdtv(res.data.data);
         // setFilterYoutubeData(sortedData);
       } else {
-        setNdtv((prevItems) => [...prevItems, ...sortedData]);
+        setNdtv((prevItems) => [...prevItems, ...res.data.data]);
+        console.log(ndtv);
         // setFilterYoutubeData((prevItems) => [...prevItems, ...sortedData]);
       }
     } catch (error) {

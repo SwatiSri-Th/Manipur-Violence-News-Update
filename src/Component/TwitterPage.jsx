@@ -43,7 +43,7 @@ const TwitterPage = () => {
       </Modal>
       <ScrollArea className="h-[calc(100vh-2rem)] bg-slate-300 w-full rounded-md  ">
         <Navbar />
-        <div>
+        <div className="flex flex-col justify-center">
           <h1 className="text-3xl bg-slate-300 font-extrabold text-[#000] text-center mb-8 mt-8">
             Twitter
           </h1>
