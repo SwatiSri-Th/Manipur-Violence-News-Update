@@ -26,7 +26,7 @@ export default function Sidebar() {
       className={` flex gap-6 z-20  ${open ? "w-60" : "w-16"} duration-500 `}
     >
       <div
-        className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] min-h-screen ${
+        className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] dark:bg-slate-600 dark:text-white min-h-screen ${
           open ? "w-72" : "w-[68px]"
         } duration-500 text-black px-4`}
       >

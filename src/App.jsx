@@ -15,6 +15,7 @@ import Twitter from "./Component/Twitter";
 import Carousel from "./Component/Carousel";
 import { toast } from "react-toastify";
 import { useDebouncedValue } from "@mantine/hooks";
+import NewBox from "./Component/NewBox";
 
 // import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
@@ -318,6 +319,7 @@ export default function App() {
                 ))}
           </div> */}
           <section className="w-full aspect-video object-cover bg-center bg-news flex  items-center ">
+            <NewBox />
             <div className="w-full h-full bg-black opacity-[0.7] flex items-center">
               {
                 <div className="w-full pt-[30px] pb-[30px] flex flex-col items-center">
