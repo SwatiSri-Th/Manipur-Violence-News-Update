@@ -2,12 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import lightButton from "/images/light-mode-button.png";
 import darkButton from "/images/dark-mode-button.png";
-export default function DarkMode() {
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "dark" ? true : false;
-  });
-
+export default function DarkMode({ darkMode, setDarkMode }) {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");

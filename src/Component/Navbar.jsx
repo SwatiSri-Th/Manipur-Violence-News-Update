@@ -11,6 +11,11 @@ import instance from "@/Api/api_instance";
 // import { link } from "fs";
 export default function Navbar({ setSearch, setSearching }) {
   const [districts, setDistricts] = useState();
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "dark" ? true : false;
+  });
+
   const fetchDistrict = async () => {
     try {
       const res = await instance.get("/district");
@@ -91,19 +96,35 @@ export default function Navbar({ setSearch, setSearching }) {
               className="font-bold font-serif text-2xl sm:text-2sm flex items-center"
             >
               <div className=" pl-[10px] w-[70px]">
-                <img
-                  src="/images/mlogo.png"
-                  alt="Logo"
-                  className="w-[90px] aspect-square object-cover "
-                />
+                {darkMode ? (
+                  <img
+                    src="/images/darklogo.png"
+                    alt="Logo"
+                    className="w-[90px] aspect-square object-cover "
+                  />
+                ) : (
+                  <img
+                    src="/images/mlogo.png"
+                    alt="Logo"
+                    className="w-[90px] aspect-square object-cover "
+                  />
+                )}
               </div>
 
               <div className=" h-[60px] flex items-center">
-                <img
-                  src="/images/name.png"
-                  alt=""
-                  className="h-[130px] w-[250px]  aspect-video object-cover "
-                />
+                {darkMode ? (
+                  <img
+                    src="/images/night.png"
+                    alt=""
+                    className="h-[130px] w-[250px]  aspect-video object-cover "
+                  />
+                ) : (
+                  <img
+                    src="/images/name.png"
+                    alt=""
+                    className="h-[130px] w-[250px]  aspect-video object-cover "
+                  />
+                )}
               </div>
             </a>
           </div>
@@ -121,7 +142,7 @@ export default function Navbar({ setSearch, setSearching }) {
           {/* order button */}
           {/* Darkmode Switch */}
           <div>
-            <DarkMode />
+            <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
           </div>
         </div>
       </div>
