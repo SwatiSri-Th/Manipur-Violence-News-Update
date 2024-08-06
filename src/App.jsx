@@ -49,7 +49,7 @@ export default function App() {
     try {
       const res = await instance.get("/latest");
       const sortedData = res?.data?.youtube?.sort(
-        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
       );
       console.log(res.data.google);
       setExpressData(res.data.indianExpress);
@@ -72,13 +72,13 @@ export default function App() {
 
   const filterByCategory = (data, category) => {
     return data.filter(
-      (item) => item.category?.toLowerCase() === category?.toLowerCase()
+      (item) => item.category?.toLowerCase() === category?.toLowerCase(),
     );
   };
 
   const filterByTitle = (data, title) => {
     return data.filter((item) =>
-      item.title?.toLowerCase().includes(title?.toLowerCase())
+      item.title?.toLowerCase().includes(title?.toLowerCase()),
     );
   };
 
@@ -211,7 +211,7 @@ export default function App() {
                       file_id={data.file_id}
                       publishedAt={format(
                         new Date(data.publishedAt),
-                        "dd-MMMM-yyyy h:mm:a"
+                        "dd-MMMM-yyyy h:mm:a",
                       )}
                       link={data.video_link}
                       district={data.district}
@@ -228,7 +228,7 @@ export default function App() {
                       file_id={data.file_id}
                       publishedAt={format(
                         new Date(data.publishedAt),
-                        "dd-MMMM-yyyy h:mm:a"
+                        "dd-MMMM-yyyy h:mm:a",
                       )}
                       link={data.video_link}
                       district={data.district}
@@ -318,8 +318,8 @@ export default function App() {
                   />
                 ))}
           </div> */}
+          <NewBox />
           <section className="w-full aspect-video object-cover bg-center bg-news flex  items-center ">
-            <NewBox />
             <div className="w-full h-full bg-black opacity-[0.7] flex items-center">
               {
                 <div className="w-full pt-[30px] pb-[30px] flex flex-col items-center">

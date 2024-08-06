@@ -1,6 +1,7 @@
 import { Settings } from "lucide-react";
 import React from "react";
-import { Slider } from "react-slick";
+
+import Slider from "react-slick";
 
 const NewBoxData = [
   {
@@ -177,7 +178,7 @@ const NewBox = () => {
         <div>
           <Slider {...settings}>
             {NewBoxData.map((data) => (
-              <div></div>
+              <div>'hello'</div>
             ))}
           </Slider>
         </div>
