@@ -9,6 +9,7 @@ import Navbar from "./Navbar";
 import { useDebouncedValue } from "@mantine/hooks";
 
 import { toast } from "react-toastify";
+import NewBox from "./NewBox";
 
 const YoutubePage = () => {
   const [youtubeData, setYoutubeData] = useState([]);
@@ -74,14 +75,17 @@ const YoutubePage = () => {
   return (
     <div className=" flex dark:bg-slate-800">
       <Sidebar />
-      <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+      <ScrollArea className="h-[calc(100vh-2rem)] w-full pl-2 rounded-md  ">
         <Navbar
           search={search}
           setSearch={setSearch}
           setSearching={setSearching}
         />
         <div className="dark:text-white dark:bg-slate-800 flex flex-col ">
-          <h1 className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8">
+          <h1
+            data-aos="fade-up"
+            className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8"
+          >
             YouTube
           </h1>
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center justify-items-start  w-screen  sm:w-full justify-center  gap-0">
@@ -128,6 +132,7 @@ const YoutubePage = () => {
             Read More
           </button>
         </div>
+        <NewBox />
         <Footer />
       </ScrollArea>
     </div>

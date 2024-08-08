@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { ToastContainer } from "react-toastify";
@@ -31,7 +31,8 @@ import ModeratorList from "./assets/Admin/ModeratorList.jsx";
 import ExpressPage from "./Component/ExpressPage.jsx";
 import AdminExpressPage from "./assets/Admin/AdminExpressPage.jsx";
 // import AdminRegister from "./assets/Admin/AdminRegister.jsx";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
 import { MantineProvider } from "@mantine/core";

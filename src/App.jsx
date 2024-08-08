@@ -16,10 +16,20 @@ import Carousel from "./Component/Carousel";
 import { toast } from "react-toastify";
 import { useDebouncedValue } from "@mantine/hooks";
 import NewBox from "./Component/NewBox";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 // import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 export default function App() {
+  useEffect(() => {
+    Aos.init({
+      offset: 100,
+      duration: 800,
+      easing: "ease-in-shine",
+      delay: "100",
+    });
+    Aos.refresh();
+  }, []);
   const [search, setSearch] = useState("");
   const [searching, setSearching] = useState("");
   const [loading, setLoading] = useState(false);
@@ -186,7 +196,10 @@ export default function App() {
             <Carousel />
           </main>
           <div className="mt-8 dark:bg-slate-800 ">
-            <h1 className="text-3xl w-[50%] font-extrabold ml-4 dark:text-white  text-blue-900 text-left mt-8 mb-8">
+            <h1
+              data-aos="fade-up"
+              className="text-3xl w-[50%] font-extrabold ml-4 dark:text-white  text-blue-900 text-left mt-8 mb-8"
+            >
               News From Youtube
             </h1>
             <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 sm:grid-cols-2  justify-items-start  w-full dark:text-white sm:w-[100%] justify-center  gap-0">
@@ -317,11 +330,11 @@ export default function App() {
                     category={data.category}
                   />
                 ))}
-          </div> */}
-          <section className="w-full aspect-video object-cover bg-center bg-news flex  items-center ">
-            <div className="w-full h-full bg-black opacity-[0.7] flex items-center">
+                </div> */}
+          <section className="w-full aspect-video  object-cover bg-center  flex  items-center ">
+            <div className="w-full h-full bg-news bg-black  opacity-[0.8] flex items-center">
               <NewBox />
-              {
+              {/* {
                 <div className="w-full pt-[30px] pb-[30px] flex flex-col items-center">
                   <input
                     type="text"
@@ -332,7 +345,7 @@ export default function App() {
                     Get to Know
                   </button>
                 </div>
-              }
+              } */}
             </div>
           </section>
           <h1 className="text-3xl w-1/2 font-extrabold ml-8 text-blue-900 dark:text-white text-left mt-8 mb-8">
