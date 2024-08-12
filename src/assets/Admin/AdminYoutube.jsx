@@ -10,6 +10,8 @@ import {
   TelegramIcon,
 } from "react-share";
 
+import { format } from "date-fns";
+
 export default function AdminYoutube({
   video_id,
   title,
@@ -46,7 +48,7 @@ export default function AdminYoutube({
 
       <h1 className="font-bold">{title}</h1>
       <p>{channel}</p>
-      <p>{publishedAt}</p>
+      <p>{format(new Date(publishedAt), "dd-MMMM-yyyy h:mm:a")}</p>
       <p>{district ? district : ""}</p>
       <p>{category ? category : ""}</p>
       <div className="w-[100px] flex justify-around">

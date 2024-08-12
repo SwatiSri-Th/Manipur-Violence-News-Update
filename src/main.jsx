@@ -37,6 +37,7 @@ import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
 import { MantineProvider } from "@mantine/core";
 import AdminRegister from "./assets/Admin/AdminRegister.jsx";
+import District from "./Component/District.jsx";
 const login = window.localStorage.getItem("token");
 
 const router = createBrowserRouter(
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
       <Route index element={<App />} />
       <Route path="/youtube" element={<YoutubePage />} />
       <Route path="/youtube/:id" element={<YoutubeDisplay />} />
+      <Route path="/district/:id" element={<District />} />
       <Route path="/ndtv" element={<NdtvPage />} />
       <Route path="/tofIndia" element={<TimesOfIndiaPage />} />
       <Route path="/google" element={<GooglePage />} />

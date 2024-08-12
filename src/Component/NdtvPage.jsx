@@ -5,6 +5,7 @@ import Sidebar from "@/Component/Sidebar";
 import { toast } from "react-toastify";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 const NdtvPage = () => {
   const [ndtv, setNdtv] = useState([]);
@@ -41,11 +42,12 @@ const NdtvPage = () => {
     <div className=" flex">
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
+        <Navbar />
         <div>
           <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
             NDTV
           </h1>
-          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center justify-items-start  w-screen  sm:w-[97%] justify-center  gap-0">
+          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-start sm:justify-items-start justify-items-start  w-screen  sm:w-[97%] justify-center   gap-0">
             {ndtv?.map((data) => (
               <Ndtv
                 key={data._id}
@@ -60,12 +62,14 @@ const NdtvPage = () => {
               />
             ))}
           </div>
-          <button
-            className="px-4 py-2 w-fit self-center mt-12 bg-blue-300 "
-            onClick={() => setSkip(skip + limit)}
-          >
-            Read More
-          </button>
+          <div className="w-full flex items-center justify-center">
+            <button
+              className="px-4 py-2 w-fit    bg-blue-300 "
+              onClick={() => setSkip(skip + limit)}
+            >
+              Read More
+            </button>
+          </div>
         </div>
         <Footer />
       </ScrollArea>

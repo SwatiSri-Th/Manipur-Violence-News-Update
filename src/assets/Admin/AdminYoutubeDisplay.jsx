@@ -28,6 +28,7 @@ const AdminYoutubeDisplay = () => {
   const [district, setDistrict] = useState();
   const [categoryData, setCategoryData] = useState();
   const [districtData, setDistrictData] = useState();
+
   const { id } = useParams();
 
   const fetchDataById = async (id) => {
@@ -152,10 +153,19 @@ const AdminYoutubeDisplay = () => {
               onClick={() => navigate(`/youtube/${video_id}`)}
               className="w-[70%]  p-4 text-wrap  text-black  rounded-xl flex flex-col items-start justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 "
             >
-              <iframe
+              {/* <iframe
                 className="aspect-video w-full object-cover"
                 src={`https://drive.google.com/file/d/${displayData.file_id}/preview`}
                 allowFullScreen
+              ></iframe> */}
+              <iframe
+                className="aspect-video w-full object-cover"
+                src={displayData.embed}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
               ></iframe>
               <h1 className="font-bold">{displayData.title}</h1>
 

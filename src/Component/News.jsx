@@ -25,11 +25,11 @@ export default function News({
   return (
     <div
       onClick={() => navigate(`/youtube/${video_id}`)}
-      className="w-[80vw] sm:w-[100%] dark:text-white border shadow-[0_3px_10px_rgb(0,0,0,0.2)  lg:w-[100%]  p-4 sm:p-4 text-wrap text-black dark:bg-slate-800 dark:border-slate-800 rounded-xl flex flex-col items-start justify-between z-10 transition-opacity duration-300 hover:opacity-88"
+      className="w-[80vw] sm:w-[100%] h-full dark:text-white border   lg:w-[100%]  p-4 sm:p-4 text-wrap text-black dark:bg-slate-800 dark:border-slate-800 rounded-xl flex flex-col items-start justify-start z-10 transition-opacity duration-300 hover:opacity-88"
     >
       {embed ? (
         <iframe
-          className=" w-full object-cover"
+          className=" w-full "
           src={embed}
           title="YouTube video player"
           frameborder="0"

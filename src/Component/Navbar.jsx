@@ -16,6 +16,8 @@ export default function Navbar({ setSearch, setSearching }) {
     return savedTheme === "dark" ? true : false;
   });
 
+  const navigate = useNavigate();
+
   const fetchDistrict = async () => {
     try {
       const res = await instance.get("/district");
@@ -169,6 +171,9 @@ export default function Navbar({ setSearch, setSearching }) {
                 value: branch._id,
                 label: branch.name,
               }))}
+              onChange={(_value, option) =>
+                navigate(`/district/${option.label}`)
+              }
               defaultValue="React"
               clearable
               allowDeselect

@@ -41,11 +41,22 @@ const YoutubeDisplay = () => {
             onClick={() => navigate(`/youtube/${video_id}`)}
             className="w-[60vw] p-4 text-wrap text-black  rounded-xl flex flex-col items-start justify-between border shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 "
           >
-            <iframe
-              className="aspect-video w-full object-cover"
-              src={`https://drive.google.com/file/d/${displayData.file_id}/preview`}
-              allowFullScreen
-            ></iframe>
+            {displayData.embed ? (
+              <iframe
+                className="aspect-video w-full"
+                src={displayData.embed}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <iframe
+                className="aspect-video w-full object-cover"
+                src={`https://drive.google.com/file/d/${displayData.file_id}/preview`}
+              ></iframe>
+            )}
             <h1 className="font-bold">{displayData.title}</h1>
 
             <p>{displayData.channel}</p>
@@ -89,7 +100,7 @@ const YoutubeDisplay = () => {
               </TelegramShareButton>
             </div>
           </div>
-          <div className="w-[320px] h-[600px] p-4 rounded-lg overflow-y-scroll border shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
+          <div className="w-[350px] h-[600px] p-4 rounded-lg overflow-y-scroll border shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
             <p>{displayData.description}</p>
           </div>
         </div>

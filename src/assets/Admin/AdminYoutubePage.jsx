@@ -11,6 +11,9 @@ import { toast } from "react-toastify";
 const AdminYoutubePage = () => {
   const [youtubeData, setYoutubeData] = useState([]);
 
+  const [limit, setLimit] = useState(6);
+  const [skip, setSkip] = useState(10);
+
   const fetchNewData = async () => {
     try {
       const id = toast.loading("Please wait...");
@@ -23,10 +26,14 @@ const AdminYoutubePage = () => {
           autoClose: 3000,
         });
       }
-      const sortedData = response?.data?.data?.sort(
-        (a, b) => new Date(b?.publishedAt) - new Date(a?.publishedAt)
-      );
-      setYoutubeData((prev) => [...prev, sortedData]);
+      const sortedData = response?.data?.data
+        ?.map((item) => ({
+          ...item,
+          publishedAt: new Date(item?.publishedAt),
+        }))
+        .sort((a, b) => b.publishedAt - a.publishedAt);
+
+      setYoutubeData((prev) => [...prev, ...sortedData]);
     } catch (e) {
       console.log(e.message);
     }
@@ -35,12 +42,18 @@ const AdminYoutubePage = () => {
   const fetchYoutube = async () => {
     try {
       const res = await instance({
-        url: "/",
+        // url: "/",
+        url: `/?limit=${limit}&skip=${skip}`,
       });
-      const sortedData = res?.data?.data?.sort(
-        (a, b) => new Date(b?.publishedAt) - new Date(a?.publishedAt)
+      const sortedData = res.data.data.sort(
+        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
-      setYoutubeData(sortedData);
+      console.log(sortedData);
+      if (skip === 0) {
+        setYoutubeData(sortedData);
+      } else {
+        setYoutubeData((prevItems) => [...prevItems, ...sortedData]);
+      }
     } catch (error) {
       toast.error(error.message);
     }
@@ -48,7 +61,7 @@ const AdminYoutubePage = () => {
 
   useEffect(() => {
     fetchYoutube();
-  }, []);
+  }, [limit, skip]);
   return (
     <div className=" flex">
       <AdminSidebar />
@@ -68,20 +81,25 @@ const AdminYoutubePage = () => {
           <div className="flex  flex-wrap place-self-center w-full justify-center items-center  gap-4">
             {youtubeData?.map((data) => (
               <AdminYoutube
-                key={data._id}
-                video_id={data._id}
-                title={data.title}
-                channel={data.channelTitle}
-                file_id={data.file_id}
-                embed={data.embed}
-                publishedAt={format(
-                  new Date(data?.publishedAt),
-                  "dd-MMMM-yyyy h:mm:a"
-                )}
-                link={data.video_link}
+                key={data?._id}
+                video_id={data?._id}
+                title={data?.title}
+                channel={data?.channelTitle}
+                file_id={data?.file_id}
+                embed={data?.embed}
+                publishedAt={data?.publishedAt}
+                link={data?.video_link}
               />
             ))}
           </div>
+        </div>
+        <div className="flex items-center justify-center w-full">
+          <button
+            className="px-4 py-2 w-fil self-center mt-12 bg-blue-300 "
+            onClick={() => setSkip(skip + limit)}
+          >
+            Read More
+          </button>
         </div>
         <Footer />
       </ScrollArea>

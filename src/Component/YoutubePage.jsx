@@ -88,7 +88,7 @@ const YoutubePage = () => {
           >
             YouTube
           </h1>
-          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center justify-items-start  w-screen  sm:w-full justify-center  gap-0">
+          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center  justify-items-start  w-screen  sm:w-[94%] justify-center  gap-0">
             {filterYoutubeData.length > 0
               ? filterYoutubeData.map((data) => (
                   <News

@@ -2,6 +2,7 @@ import { Settings } from "lucide-react";
 import React, { useEffect } from "react";
 
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 
 const NewBoxData = [
   {
@@ -9,6 +10,7 @@ const NewBoxData = [
     name: "Bishnupur",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/f/f6/Bishnupur_in_Manipur_%28India%29.svg",
+    nav: "/district/Bishnupur",
   },
 
   {
@@ -16,6 +18,7 @@ const NewBoxData = [
     name: "Chandel",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/4/45/Chandel_in_Manipur_%28India%29.svg",
+    nav: "/district/Chandel",
   },
 
   {
@@ -23,6 +26,7 @@ const NewBoxData = [
     name: "Churachandpur",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxLPVboRexNBnpT6WjXitSRyJNgcPjWwKsZg&s",
+    nav: "/district/Churachandpur",
   },
 
   {
@@ -30,6 +34,7 @@ const NewBoxData = [
     name: "Imphal East",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Imphal_East_in_Manipur_%28India%29.svg/375px-Imphal_East_in_Manipur_%28India%29.svg.png",
+    nav: "/district/Imphal East",
   },
 
   {
@@ -37,6 +42,7 @@ const NewBoxData = [
     name: "Imphal West",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHYfhe7EkLitn4oWh_aJoofRYRZ33exOf82A&s",
+    nav: "/district/Imphal West",
   },
 
   {
@@ -44,6 +50,7 @@ const NewBoxData = [
     name: "Jiribam",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Jiribam_District_Map.png/375px-Jiribam_District_Map.png",
+    nav: "/district/Jiribam",
   },
 
   {
@@ -51,6 +58,7 @@ const NewBoxData = [
     name: "Kakching",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/d/db/Kakching_in_Manipur_%28India%29.svg",
+    nav: "/district/Kakching",
   },
 
   {
@@ -58,6 +66,7 @@ const NewBoxData = [
     name: "Kamjong",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Kamjong_in_Manipur_%28India%29.svg/375px-Kamjong_in_Manipur_%28India%29.svg.png",
+    nav: "/district/Kamjong",
   },
 
   {
@@ -65,6 +74,7 @@ const NewBoxData = [
     name: "Kangpokpi",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/c/c6/Kangpokpi_District.png",
+    nav: "/district/Kangpokpi",
   },
 
   {
@@ -72,6 +82,7 @@ const NewBoxData = [
     name: "Noney",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/9/94/Noney_in_Manipur_%28India%29.svg",
+    nav: "/district/Noney",
   },
 
   {
@@ -79,6 +90,7 @@ const NewBoxData = [
     name: "Pherzawl",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Pherzawl_District.png/250px-Pherzawl_District.png",
+    nav: "/district/Pherzawl",
   },
 
   {
@@ -86,6 +98,7 @@ const NewBoxData = [
     name: "Senapati",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD24TA-Z0dTCLYvWlo-1XronXJPuRb9X9Wng&s",
+    nav: "/district/Senapati",
   },
 
   {
@@ -93,6 +106,7 @@ const NewBoxData = [
     name: "Tamenglong",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLf8rHG3iORGCYr2_ohgAuiC6QiXzSH_VtoA&s",
+    nav: "/district/Tamenglong",
   },
 
   {
@@ -100,6 +114,7 @@ const NewBoxData = [
     name: "Tengnoupal",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/4/40/Tengnoupal_in_Manipur_%28India%29.svg",
+    nav: "/district/Tengnoupal",
   },
 
   {
@@ -107,6 +122,7 @@ const NewBoxData = [
     name: "Thoubal",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Thoubal_in_Manipur_%28India%29.svg/375px-Thoubal_in_Manipur_%28India%29.svg.png",
+    nav: "/district/Thoubal",
   },
 
   {
@@ -114,10 +130,13 @@ const NewBoxData = [
     name: "Ukhrul",
     text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. In, vitae",
     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Ukhrul_in_Manipur_%28India%29.svg/250px-Ukhrul_in_Manipur_%28India%29.svg.png",
+    nav: "/district/Ukhrul",
   },
 ];
 
 const NewBox = () => {
+  const navigate = useNavigate();
+
   var settings = {
     dots: true,
     arrows: false,
@@ -172,8 +191,12 @@ const NewBox = () => {
         {/* NewBox Cards */}
         <div>
           <Slider {...settings}>
-            {NewBoxData.map((data) => (
-              <div className="my-6 ">
+            {NewBoxData.map((data, index) => (
+              <div
+                className="my-6 "
+                key={index}
+                onClick={() => navigate(data.nav)}
+              >
                 <div
                   key={data.id}
                   className="flex flex-col gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl dark:bg-gray-800 bg-yellow-200/10 relative"
