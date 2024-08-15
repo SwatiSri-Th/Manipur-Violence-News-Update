@@ -132,7 +132,6 @@ const YoutubePage = () => {
             Read More
           </button>
         </div>
-        <NewBox />
         <Footer />
       </ScrollArea>
     </div>

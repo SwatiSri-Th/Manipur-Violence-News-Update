@@ -9,7 +9,7 @@ import {
 } from "react-share";
 const Express = ({ img, link, paragraph, time, title, district, category }) => {
   return (
-    <div className="w-[100%] h-max p-4 text-wrap text-black  rounded-xl flex flex-col items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+    <div className="w-[100%] h-max p-4 text-wrap text-black dark:text-white  rounded-xl flex flex-col items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
       {img == null ? (
         <img
           className="aspect-video w-full object-cover"
@@ -28,10 +28,14 @@ const Express = ({ img, link, paragraph, time, title, district, category }) => {
       <div className="w-full flex justify-start text-slate-500 flex-col ">
         <p>{time}</p>
 
-        <p className="text-black font-bold">{district ? district : ""}</p>
-        <p className="text-black font-bold">{category ? category : ""}</p>
+        <p className="text-black dark:text-white font-bold">
+          {district ? district : ""}
+        </p>
+        <p className="text-black dark:text-white font-bold">
+          {category ? category : ""}
+        </p>
       </div>
-      <p className="text-black mt-5 text-left">
+      <p className="text-black dark:text-white mt-5 text-left">
         {paragraph}...
         <a href={link} className="text-blue-600 hover:text-blue-300">
           Read more

@@ -64,6 +64,12 @@ export default function Navbar({ setSearch, setSearching }) {
       name: "Gun Fire",
       onClick: () => setSearch("gun firing"),
     },
+
+    // {
+    //   id: 6,
+    //   name: "Curfew",
+    //   onClick: () => setSearch("Curfew"),
+    // },
   ];
 
   // const DropdownLinks = [
@@ -136,7 +142,7 @@ export default function Navbar({ setSearch, setSearching }) {
               type="text"
               placeholder="search"
               onChange={(e) => setSearching(e.target.value)}
-              className="w-[200px] dark:text-black sm:[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary"
+              className="w-[200px] dark:text-black sm:[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-yellow-200"
             />
             <IoMdSearch className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3" />
           </div>
@@ -162,7 +168,7 @@ export default function Navbar({ setSearch, setSearching }) {
             </li>
           ))}
           <li className=" flex items-center gap-4 relative text-black cursor-pointer">
-            <p>District</p>
+            <p className="dark:text-white">District</p>
             <Select
               className="w-36 placeholder:text-black"
               variant="unstyled"

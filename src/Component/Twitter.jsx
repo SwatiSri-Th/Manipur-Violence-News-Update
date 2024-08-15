@@ -22,7 +22,7 @@ export default function Twitter({
     open();
   };
   return (
-    <div className="h-fit w-[50%] bg-white p-4 text-wrap  text-black  rounded-xl flex flex-col items-start gap-4 justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-70 ">
+    <div className="h-full w-[700px]  bg-white p-4 text-wrap  text-black  rounded-xl flex flex-col items-start gap-4 justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 transition-opacity duration-300 hover:opacity-70 ">
       <h1 className="font-bold  ">{author}</h1>
       <p className="">{text}</p>
       {type === "photo" ? (

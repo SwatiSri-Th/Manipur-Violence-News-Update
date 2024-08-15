@@ -70,10 +70,10 @@ export default function App() {
       setNdtv(res.data.ndtv?.slice(0, 6));
       setFilterNdtvData(res.data.ndtv?.slice(0, 6));
       setTofIndia(res.data.timesOfIndia?.slice(0, 6));
-      setFilterTofIndiaData(res.data.timesOfIndia?.slice(0, 6));
-      setTwitter(res?.data?.twitter);
-      setFilterTwitterData(res?.data?.twitter);
-      setFilterExpress(res.data?.indianExpress);
+      setFilterTofIndiaData(res.data.timesOfIndia?.slice(0, 4));
+      setTwitter(res?.data?.twitter?.slice(0, 4));
+      setFilterTwitterData(res?.data?.twitter?.slice(0, 6));
+      setFilterExpress(res.data?.indianExpress?.slice(0, 6));
       setLoading(true);
     } catch (error) {
       toast.error(error);
@@ -257,7 +257,7 @@ export default function App() {
                   News From NDTV
                 </h1>
               )}
-              {!loading && (
+              {/* {!loading && (
                 <div className="col-span-3">
                   <OrbitProgress
                     variant="disc"
@@ -267,7 +267,7 @@ export default function App() {
                     textColor=""
                   />
                 </div>
-              )}
+              )} */}
               {filterNdtvData.length > 0
                 ? filterNdtvData.map((data) => (
                     <Ndtv
@@ -335,10 +335,10 @@ export default function App() {
                   />
                 ))}
                 </div> */}
-          <section className="w-full aspect-video bg-news  object-cover bg-center  flex  items-center ">
-            <div className="w-full h-full  bg-black  opacity-[0.8] flex items-center">
-              <NewBox />
-              {/* {
+          <NewBox />
+          {/* <section className="w-full aspect-video bg-news  object-cover bg-center  flex  items-center ">
+            <div className="w-full h-full  bg-black  opacity-[0.8] flex items-center"> */}
+          {/* {
                 <div className="w-full pt-[30px] pb-[30px] flex flex-col items-center">
                   <input
                     type="text"
@@ -350,14 +350,14 @@ export default function App() {
                   </button>
                 </div>
               } */}
-            </div>
-          </section>
+          {/* </div>
+          </section> */}
           {tofIndia.length > 0 && (
             <h1 className="text-3xl w-1/2 font-extrabold ml-8 text-blue-900 dark:text-white text-left mt-8 mb-8">
               News From Times Of India
             </h1>
           )}
-          <div className="flex dark:text-white mt-8 mb-8 flex-wrap place-self-start w-full justify-center sm:w-full  gap-5">
+          <div className="flex dark:text-white mt-8 mb-8 flex-wrap place-self-start w-full lg:w-[95%] justify-center sm:w-full  gap-5">
             {!loading && (
               <div className="col-span-3">
                 <OrbitProgress
@@ -438,7 +438,7 @@ export default function App() {
               />
             </div>
           )}
-          <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">
+          <div className="flex flex-wrap  place-self-center h-full w-full gap-4 justify-center  ">
             {twitter?.map((data) => (
               <Twitter
                 key={data._id}
