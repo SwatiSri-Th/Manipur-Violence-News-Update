@@ -65,7 +65,11 @@ const District = () => {
           ndtv.length === 0 &&
           tofIndia.length === 0 &&
           googleData.length === 0 && (
-            <h1 className="text-red-500 text-center text-2xl font-bold  animate-pulse pb-10 mt-32">
+            <h1
+              className={`text-red-500 text-center text-2xl font-bold ${
+                loading ? "hidden" : "block"
+              } animate-pulse pb-10 mt-32`}
+            >
               Data not available
             </h1>
           )}
@@ -113,7 +117,7 @@ const District = () => {
                 News From NDTV
               </h1>
             )}
-            {loading && (
+            {/* {loading && (
               <div className="col-span-3">
                 <OrbitProgress
                   variant="disc"
@@ -123,7 +127,7 @@ const District = () => {
                   textColor=""
                 />
               </div>
-            )}
+            )} */}
             {ndtv.map((data) => (
               <Ndtv
                 key={data._id}
@@ -144,7 +148,7 @@ const District = () => {
                 </h1>
               )}
               <div className="flex dark:text-white mt-8 mb-8 flex-wrap place-self-center w-full justify-center  sm:w-full gap-5">
-                {loading && (
+                {/* {loading && (
                   <div className="col-span-3">
                     <OrbitProgress
                       variant="disc"
@@ -154,7 +158,7 @@ const District = () => {
                       textColor=""
                     />
                   </div>
-                )}
+                )} */}
                 {tofIndia.map((data) => (
                   <TimesOfIndia
                     key={data._id}
@@ -176,7 +180,7 @@ const District = () => {
             </h1>
           )}
           <div className="flex flex-wrap mt-8 mb-8 place-self-center w-full sm:w-full justify-center gap-4">
-            {loading && (
+            {/* {loading && (
               <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center sm:justify-items-center justify-items-start  w-full  sm:w-full justify-center  gap-4">
                 <OrbitProgress
                   variant="disc"
@@ -186,7 +190,7 @@ const District = () => {
                   textColor=""
                 />
               </div>
-            )}
+            )} */}
             {googleData?.map((data, index) => (
               <Google
                 key={index}
@@ -202,7 +206,7 @@ const District = () => {
               News From Twitter
             </h1>
           )}
-          {loading && (
+          {/* {loading && (
             <div className="col-span-3">
               <OrbitProgress
                 variant="disc"
@@ -212,7 +216,7 @@ const District = () => {
                 textColor=""
               />
             </div>
-          )}
+          )} */}
           <div className="flex flex-wrap  place-self-center w-full gap-4 justify-center  ">
             {twitter?.map((data) => (
               <Twitter
@@ -235,7 +239,7 @@ const District = () => {
             </h1>
           )}
           <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 sm:grid-cols-2  justify-items-start  w-full dark:text-white sm:w-[97%] justify-center  gap-0">
-            {loading && (
+            {/* {loading && (
               <div className="col-span-3">
                 <OrbitProgress
                   variant="disc"
@@ -245,7 +249,7 @@ const District = () => {
                   textColor=""
                 />
               </div>
-            )}
+            )} */}
             {expressData?.map((data, index) => (
               <Express
                 //mg, link, paragraph, time, title, district, category
