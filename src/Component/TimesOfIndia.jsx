@@ -19,7 +19,7 @@ export default function TimesOfIndia({
   return (
     <a
       href={link}
-      className="w-[80vw] sm:w-[90%] max-h-30 p-4 text-wrap text-black  rounded-xl flex flex-wrap sm:flex-nowrap flex-row items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all"
+      className="w-[80vw] sm:w-[90%] max-h-30 p-4 text-wrap text-black  rounded-xl flex flex-col flex-wrap lg:flex-nowrap sm:flex-wrap sm:flex-col lg:flex-row items-center justify-between shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all"
     >
       {image == null ? (
         <img

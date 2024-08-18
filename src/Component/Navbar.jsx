@@ -93,7 +93,7 @@ export default function Navbar({ setSearch, setSearching }) {
   // ];
 
   return (
-    <div className="shadow-md w-[100%] dark:bg-slate-800  bg-white dark:text-white duration-200 relative z-80">
+    <div className="shadow-md w-[100%] dark:bg-slate-800  bg-white dark:text-white duration-200 relative lg:block z-80">
       {/* Upper Navbar */}
       <div className="bg-[#e8e5e8] dark:bg-slate-600 border shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
         {/* // "bg-primary/40 py-2" */}

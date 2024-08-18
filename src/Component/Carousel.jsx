@@ -82,8 +82,9 @@ const CarouselElement = () => {
       onMouseLeave={autoplay.current.reset}
       withIndicators
       height={300}
+      // slideSize="100%" // Set this for full width on mobile
       slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
-      slideGap={{ base: 0, sm: "md" }}
+      slideGap={{ base: 0, sm: "md" }} // Adjust gap between slides
       loop
       align="start"
       // height={300}

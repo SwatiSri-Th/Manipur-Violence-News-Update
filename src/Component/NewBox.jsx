@@ -139,7 +139,7 @@ const NewBox = () => {
 
   var settings = {
     dots: true,
-    arrows: false,
+    arrows: true,
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
@@ -176,11 +176,63 @@ const NewBox = () => {
   };
 
   return (
-    <div className="py-10 mb-10 bg-[#fffff0] dark:bg-black">
-      <div className="container">
+    // <div className="py-10 mb-10 bg-[#fffff0] w-full dark:bg-black">
+    //   <div className="container mx-auto">
+    //     {/* header section */}
+    //     <div className="text-center mb-10 max-w-[600px] ">
+    //       <p className="text-sm text-purple-500"> Manipur Violance News</p>
+    //       <h1 className="text-3xl font-bold font-serif">HOT NEWS</h1>
+    //       <p className="text-xs text-gray-400">
+    //         This Hot News Displays the latest important news about Manipur
+    //         Violence.
+    //       </p>
+    //     </div>
+
+    //     {/* NewBox Cards */}
+    //     {/* <div className="w-full bg-black">lkjsdf</div> */}
+    //     <div className=" border border-black">
+    //       <Slider {...settings}>
+    //         {NewBoxData.map((data, index) => (
+    //           <div
+    //             className="my-6 "
+    //             key={index}
+    //             onClick={() => navigate(data.nav)}
+    //           >
+    //             <div
+    //               key={data.id}
+    //               className="flex flex-col gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl dark:bg-gray-800  bg-yellow-200/30  relative "
+    //             >
+    //               <div className="mb-4">
+    //                 <img
+    //                   src={data.img}
+    //                   alt=""
+    //                   className="rounded-full w-20 h-20 border border-yellow-800/30 dark:border border-white"
+    //                 />
+    //               </div>
+    //               <div className=" flex flex-col items-center gap-4">
+    //                 <div className="space-y-3">
+    //                   <p className="text-xs text-gray-500">{data.text}</p>
+    //                   <h1 className="text-xl font-bold text-black/80 dark:text-white">
+    //                     {data.name}
+    //                   </h1>
+    //                 </div>
+    //               </div>
+    //               <p className="text-black/20 text-9xl  dark:text-white/20 font-serif absolute top-0 right-0">
+    //                 *!
+    //               </p>
+    //             </div>
+    //           </div>
+    //         ))}
+    //       </Slider>
+    //     </div>
+    //   </div>
+    // </div>
+    //bg-[#fffff0]
+    <div className="py-10 mb-10 bg-[#fffff0] w-full dark:bg-black">
+      <div className="container xl:mx-auto xl:px-4">
         {/* header section */}
         <div className="text-center mb-10 max-w-[600px] mx-auto">
-          <p className="text-sm text-purple-500"> Manipur Violance News</p>
+          <p className="text-sm text-purple-500">Manipur Violence News</p>
           <h1 className="text-3xl font-bold font-serif">HOT NEWS</h1>
           <p className="text-xs text-gray-400">
             This Hot News Displays the latest important news about Manipur
@@ -189,17 +241,17 @@ const NewBox = () => {
         </div>
 
         {/* NewBox Cards */}
-        <div>
-          <Slider {...settings}>
+        <div className="w-full">
+          <Slider {...settings} className="w-full">
             {NewBoxData.map((data, index) => (
               <div
-                className="my-6 "
+                className="my-6"
                 key={index}
                 onClick={() => navigate(data.nav)}
               >
                 <div
                   key={data.id}
-                  className="flex flex-col gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl dark:bg-gray-800  bg-yellow-200/30  relative "
+                  className="flex flex-col gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl dark:bg-gray-800 bg-yellow-200/30 relative"
                 >
                   <div className="mb-4">
                     <img
@@ -208,7 +260,7 @@ const NewBox = () => {
                       className="rounded-full w-20 h-20 border border-yellow-800/30 dark:border border-white"
                     />
                   </div>
-                  <div className=" flex flex-col items-center gap-4">
+                  <div className="flex flex-col items-center gap-4">
                     <div className="space-y-3">
                       <p className="text-xs text-gray-500">{data.text}</p>
                       <h1 className="text-xl font-bold text-black/80 dark:text-white">
@@ -216,7 +268,7 @@ const NewBox = () => {
                       </h1>
                     </div>
                   </div>
-                  <p className="text-black/20 text-9xl  dark:text-white/20 font-serif absolute top-0 right-0">
+                  <p className="text-black/20 text-9xl dark:text-white/20 font-serif absolute top-0 right-0">
                     *!
                   </p>
                 </div>
@@ -226,6 +278,7 @@ const NewBox = () => {
         </div>
       </div>
     </div>
+    // );
   );
 };
 

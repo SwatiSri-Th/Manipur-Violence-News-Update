@@ -185,7 +185,7 @@ export default function App() {
   return (
     <div className="flex dark:bg-slate-600 dark:text-white">
       <Sidebar search={search} setSearch={setSearch} />
-      <div className="flex-1 w-[80%] flex flex-col items-start justify-start">
+      <div className="  w-full flex flex-col items-start justify-start">
         <Navbar
           search={search}
           setSearch={setSearch}
@@ -204,7 +204,7 @@ export default function App() {
                 News From Youtube
               </h1>
             )}
-            <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center  justify-items-start  w-screen  sm:w-[94%] justify-center  gap-0">
+            <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center  justify-items-start  w-screen  sm:w-[94%] lg:w-full justify-center  gap-0">
               {!loading && (
                 <div className="col-span-3">
                   <OrbitProgress
@@ -335,7 +335,7 @@ export default function App() {
                   />
                 ))}
                 </div> */}
-          <NewBox />
+          {/* <NewBox /> */}
           {/* <section className="w-full aspect-video bg-news  object-cover bg-center  flex  items-center ">
             <div className="w-full h-full  bg-black  opacity-[0.8] flex items-center"> */}
           {/* {
@@ -357,7 +357,7 @@ export default function App() {
               News From Times Of India
             </h1>
           )}
-          <div className="flex dark:text-white mt-8 mb-8 flex-wrap place-self-start w-full lg:w-[95%] justify-center sm:w-full  gap-5">
+          <div className="flex dark:text-white mt-8 mb-8 flex-wrap place-self-start w-full lg:w-[100%] justify-center sm:w-full  gap-5">
             {!loading && (
               <div className="col-span-3">
                 <OrbitProgress
@@ -400,7 +400,7 @@ export default function App() {
               News From Google
             </h1>
           )}
-          <div className="flex flex-wrap mt-8 mb-8 place-self-center w-full sm:w-full justify-center gap-4">
+          <div className="flex flex-wrap mt-8 mb-8  w-full sm:w-full justify-center gap-4">
             {!loading && (
               <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center sm:justify-items-center justify-items-start  w-full  sm:w-full justify-center  gap-4">
                 <OrbitProgress
