@@ -183,7 +183,7 @@ export default function App() {
   }, [search]);
 
   return (
-    <div className="flex dark:bg-slate-600 dark:text-white">
+    <div className="flex dark:bg-slate-600  dark:text-white">
       <Sidebar search={search} setSearch={setSearch} />
       <div className="  w-full flex flex-col items-start justify-start">
         <Navbar
@@ -191,7 +191,7 @@ export default function App() {
           setSearch={setSearch}
           setSearching={setSearching}
         />
-        <ScrollArea className="h-[calc(100vh)] w-[100%] dark:bg-slate-800 rounded-md">
+        <ScrollArea className="h-[calc(100vh-100px)] w-[100%] dark:bg-slate-800 rounded-md">
           <main className="w-full dark:bg-slate-800">
             <Carousel />
           </main>
@@ -498,7 +498,7 @@ export default function App() {
                     title={data.title}
                   />
                 ))}
-          </div>{" "}
+          </div>
           <Footer />
         </ScrollArea>
       </div>
