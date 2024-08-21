@@ -5,11 +5,23 @@ import { MdArrowDropDown } from "react-icons/md";
 import { Select } from "@mantine/core";
 import { useEffect, useState } from "react";
 import instance from "@/Api/api_instance";
+import { useDisclosure } from "@mantine/hooks";
+import { Burger } from "@mantine/core";
 
 // import { data } from "autoprefixer";
 // import { link } from "fs";
 // import { link } from "fs";
-export default function Navbar({ setSearch, setSearching }) {
+export default function Navbar({
+  setSearch,
+  setSearching,
+  open,
+  setOpen,
+  drawopen,
+  burgeropened,
+  toggle,
+}) {
+  // const [opened, { toggle }] = useDisclosure();
+
   const [districts, setDistricts] = useState();
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -92,15 +104,29 @@ export default function Navbar({ setSearch, setSearching }) {
   //   },
   // ];
 
+  const handleClick = () => {
+    toggle();
+    // setOpen(!open);
+    drawopen();
+  };
+
   return (
-    <div className="shadow-md w-[100%] dark:bg-slate-800  bg-white dark:text-white duration-200 relative lg:block z-80">
+    <div className="shadow-md w-[100%] dark:bg-slate-800  bg-white dark:text-white duration-200 relative lg:block  lg:w-full ">
       {/* Upper Navbar */}
       <div className="bg-[#e8e5e8] dark:bg-slate-600 border shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
         {/* // "bg-primary/40 py-2" */}
         <div className=" flex justify-between items-center ">
+          <div className="block sm:hidden">
+            <Burger
+              opened={burgeropened}
+              onClick={handleClick}
+              // onClick={setOpen(!open)}
+              aria-label="Toggle navigation"
+            />
+          </div>
           <div>
             <a
-              href="#"
+              href="/"
               className="font-bold font-serif text-2xl sm:text-2sm flex items-center"
             >
               <div className=" pl-[10px] w-[70px]">

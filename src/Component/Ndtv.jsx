@@ -19,7 +19,7 @@ export default function Ndtv({
   return (
     <a
       href={link}
-      className="w-[80vw] sm:w-[100%] h-full dark:text-white border   lg:w-[100%]  p-4 sm:p-4 text-wrap text-black dark:bg-slate-800 dark:border-slate-800 rounded-xl flex flex-col items-start justify-start z-10 transition-opacity duration-300 hover:opacity-88"
+      className="w-screen sm:w-[100%] h-full dark:text-white border   lg:w-[100%]  p-4 sm:p-4 text-wrap text-black dark:bg-slate-800 dark:border-slate-800 rounded-xl flex flex-col items-start justify-start z-10 transition-opacity duration-300 hover:opacity-88"
     >
       {img == null ? (
         <img

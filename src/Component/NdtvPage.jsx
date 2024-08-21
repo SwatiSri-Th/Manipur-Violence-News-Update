@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import { useDisclosure } from "@mantine/hooks";
+import { Drawer } from "@mantine/core";
+import MobileNavbar from "./MobileNavbar";
 
 const NdtvPage = () => {
   const [ndtv, setNdtv] = useState([]);
@@ -37,12 +40,26 @@ const NdtvPage = () => {
   useEffect(() => {
     fetchNdtv();
   }, [skip, limit]);
+  const [opened, { open: drawopen, close: drawclose }] = useDisclosure(false);
+  const [burgeropened, { toggle }] = useDisclosure();
+  const handleClose = () => {
+    drawclose();
+    toggle();
+  };
 
   return (
     <div className=" flex">
+      <Drawer opened={opened} onClose={handleClose} title="Pages">
+        {/* Drawer content */}
+        <MobileNavbar />
+      </Drawer>
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
-        <Navbar />
+        <Navbar
+          drawopen={drawopen}
+          burgeropened={burgeropened}
+          toggle={toggle}
+        />
         <div>
           <h1 className="text-3xl font-extrabold text-[#792d2d] text-center mb-8 mt-8">
             NDTV

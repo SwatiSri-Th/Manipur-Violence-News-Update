@@ -9,7 +9,7 @@ import { FaGoogle } from "react-icons/fa6";
 import { RiTwitterXFill } from "react-icons/ri";
 import { ImNewspaper } from "react-icons/im";
 
-export default function Sidebar() {
+export default function Sidebar({ open, setOpen, drawOpen }) {
   const menus = [
     { name: "Home", link: "/", icon: IoMdHome },
     { name: "YouTube", link: "/youtube", icon: IoLogoYoutube },
@@ -20,17 +20,17 @@ export default function Sidebar() {
     { name: "Express", link: "/express", icon: ImNewspaper, margin: true },
   ];
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   return (
     <section
-      className={` flex gap-6 z-20  ${
+      className={`  gap-6   ${
         open ? "w-60" : "w-16"
-      } sm:block hidden duration-500 `}
+      } sm:flex hidden duration-500 `}
     >
       <div
         className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] dark:bg-slate-600 dark:text-white min-h-screen ${
           open ? "w-72" : "w-[68px]"
-        } duration-500 text-black px-4`}
+        } z-80 duration-500 text-black px-4`}
       >
         <div className="py-3 flex justify-end">
           <HiMenuAlt3
@@ -39,7 +39,7 @@ export default function Sidebar() {
             onClick={() => setOpen(!open)}
           />
         </div>
-        <div className="mt-4 flex flex-col gap-4 relative">
+        <div className="mt-4 flex flex-col gap-4 ">
           {menus?.map((menu, i) => (
             <NavLink
               to={menu?.link}
@@ -58,7 +58,7 @@ export default function Sidebar() {
                 style={{ transitionDelay: `${i + 2}00 ms` }}
                 className={`whitespace-pre duration-500 ${
                   !open && "opacity-0 translate-x-28 overflow-hidden"
-                }`}
+                }  `}
               >
                 {menu?.name}
               </h2>

@@ -5,6 +5,9 @@ import Sidebar from "@/Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import { useDisclosure } from "@mantine/hooks";
+import MobileNavbar from "./MobileNavbar";
+import { Drawer } from "@mantine/core";
 
 const GooglePage = () => {
   const [googleData, setGoogleData] = useState([]);
@@ -24,11 +27,25 @@ const GooglePage = () => {
     fetchGoogle();
   }, []);
 
+  const [opened, { open: drawopen, close: drawclose }] = useDisclosure(false);
+  const [burgeropened, { toggle }] = useDisclosure();
+  const handleClose = () => {
+    drawclose();
+    toggle();
+  };
   return (
     <div className=" flex">
+      <Drawer opened={opened} onClose={handleClose} title="Pages">
+        {/* Drawer content */}
+        <MobileNavbar />
+      </Drawer>
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full rounded-md  ">
-        <Navbar />
+        <Navbar
+          drawopen={drawopen}
+          burgeropened={burgeropened}
+          toggle={toggle}
+        />
         <div>
           <h1 className="text-3xl font-extrabold text-[hsl(220,90%,67%)] text-center mt-8 mb-8">
             Google

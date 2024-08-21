@@ -5,8 +5,9 @@ import Sidebar from "@/Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal } from "@mantine/core";
+import { Drawer, Modal } from "@mantine/core";
 import Navbar from "./Navbar";
+import MobileNavbar from "./MobileNavbar";
 const TwitterPage = () => {
   const [image, setImage] = useState();
   const [twitter, setTwitter] = useState([]);
@@ -31,7 +32,13 @@ const TwitterPage = () => {
   useEffect(() => {
     fetchTwitter();
   }, [skip, limit]);
-
+  const [navbaropened, { open: drawopen, close: drawclose }] =
+    useDisclosure(false);
+  const [burgeropened, { toggle }] = useDisclosure();
+  const handleClose = () => {
+    drawclose();
+    toggle();
+  };
   return (
     <div className=" flex">
       <Sidebar />
@@ -41,8 +48,16 @@ const TwitterPage = () => {
           src={`https://drive.google.com/thumbnail?id=${image}&sz=w1000-h1000`}
         />
       </Modal>
+      <Drawer opened={navbaropened} onClose={handleClose} title="Pages">
+        {/* Drawer content */}
+        <MobileNavbar />
+      </Drawer>
       <ScrollArea className="h-[calc(100vh-2rem)] bg-slate-300 w-full rounded-md  ">
-        <Navbar />
+        <Navbar
+          drawopen={drawopen}
+          burgeropened={burgeropened}
+          toggle={toggle}
+        />
         <div className="flex flex-col justify-center">
           <h1 className="text-3xl bg-slate-300 font-extrabold text-[#000] text-center mb-8 mt-8">
             Twitter

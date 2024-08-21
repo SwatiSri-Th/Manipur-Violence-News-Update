@@ -87,6 +87,7 @@ const CarouselElement = () => {
       slideGap={{ base: 0, sm: "md" }} // Adjust gap between slides
       loop
       align="start"
+
       // height={300}
     >
       {slides.map((slide) => (

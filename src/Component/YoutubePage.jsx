@@ -6,10 +6,12 @@ import Sidebar from "@/Component/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import { useDebouncedValue } from "@mantine/hooks";
+import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
 
 import { toast } from "react-toastify";
 import NewBox from "./NewBox";
+import { Drawer } from "@mantine/core";
+import MobileNavbar from "./MobileNavbar";
 
 const YoutubePage = () => {
   const [youtubeData, setYoutubeData] = useState([]);
@@ -72,14 +74,29 @@ const YoutubePage = () => {
   useEffect(() => {
     fetchYoutube();
   }, [limit, skip]);
+  const [opened, { open: drawopen, close: drawclose }] = useDisclosure(false);
+  const [burgeropened, { toggle }] = useDisclosure();
+  const handleClose = () => {
+    drawclose();
+    toggle();
+  };
   return (
     <div className=" flex dark:bg-slate-800">
+      <Drawer opened={opened} onClose={handleClose} title="Pages">
+        {/* Drawer content */}
+        <MobileNavbar />
+      </Drawer>
       <Sidebar />
       <ScrollArea className="h-[calc(100vh-2rem)] w-full pl-2 rounded-md  ">
         <Navbar
+          drawopen={drawopen}
           search={search}
           setSearch={setSearch}
           setSearching={setSearching}
+          // open={open}
+          // setOpen={setOpen}
+          burgeropened={burgeropened}
+          toggle={toggle}
         />
         <div className="dark:text-white dark:bg-slate-800 flex flex-col ">
           <h1

@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="w-full   bg-black font-segoe mt-5">
-      <div className="w-full pt-[0px] pb-[0px] pr-0 pl-0 mt-[30px] flex gap-x-[4%]">
+    <footer className="w-full  bg-black font-segoe mt-5">
+      <div className="w-full pt-[0px] pb-[8px] pr-0 pl-0 mt-[30px] flex gap-x-[4%] flex-wrap">
         <div className="w-[22%] pt-5 pb-5 pr-[50px] pl-[50px] flex flex-col gap-y-[10px] text-white">
           <h3 className="underline">QUICK LINKS </h3>
 
