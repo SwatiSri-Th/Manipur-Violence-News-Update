@@ -204,7 +204,7 @@ export default function App() {
           open={open}
           setOpen={setOpen}
         />
-        <div className=" flex-grow flex flex-col items-start justify-start overflow-x-hidden">
+        <div className=" flex-grow flex flex-col items-start justify-start  overflow-x-hidden">
           <Navbar
             drawopen={drawopen}
             search={search}
@@ -215,8 +215,8 @@ export default function App() {
             burgeropened={burgeropened}
             toggle={toggle}
           />
-          <ScrollArea className="h-screen sm:h-[calc(100vh-100px)] w-screen sm:w-[100%] lg:w-full dark:bg-slate-800 rounded-md">
-            <main className="sm:w-[100%]  w-screen  dark:bg-slate-800">
+          <ScrollArea className="h-screen sm:h-[calc(100vh-100px)] w-screen sm:w-[100%] lg:w-[100%]   dark:bg-slate-800 rounded-md">
+            <main className="sm:w-[100%] lg:w-[95%] z-10  w-screen  dark:bg-slate-800 ">
               <Carousel />
             </main>
             <div className="mt-8 dark:bg-slate-800  ">
@@ -228,7 +228,7 @@ export default function App() {
                   News From Youtube
                 </h1>
               )}
-              <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center  justify-items-center w-screen   sm:w-[94%] lg:w-[97%]  justify-center  gap-0">
+              <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center  justify-items-center w-screen   sm:w-[94%] lg:w-[95%]  justify-center  gap-0">
                 {!loading && (
                   <div className="col-span-3">
                     <OrbitProgress
@@ -380,7 +380,7 @@ export default function App() {
                 News From Google
               </h1>
             )}
-            <div className="flex flex-wrap mt-8 mb-8  w-screen sm:w-full justify-center gap-4">
+            <div className="flex flex-wrap mt-8 mb-8  w-screen sm:w-full lg:w-[95%] justify-center gap-4">
               {!loading && (
                 <div className="grid grid-cols-1 lg:grid-cols-3  sm:items-center sm:justify-items-center justify-items-start  w-full  sm:w-full justify-center  gap-4">
                   <OrbitProgress
@@ -428,7 +428,7 @@ export default function App() {
                 News From Indian Express
               </h1>
             )}
-            <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 sm:grid-cols-2  justify-items-start  w-screen dark:text-white sm:w-[97%] justify-center  gap-0">
+            <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 sm:grid-cols-2  justify-items-start  w-screen dark:text-white sm:w-[97%] lg:w-[95%] justify-center  gap-0">
               {filterExpress.length > 0
                 ? filterExpress.map((data) => (
                     <Express

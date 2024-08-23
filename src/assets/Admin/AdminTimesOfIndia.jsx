@@ -89,7 +89,7 @@ export default function AdminTimesOfIndia({
 
           <button
             className=" flex justify-center p-1 rounded-lg hover:shadow-[0_3px_10px_rgb(0,0,0,1)] cursor-pointer border border-solid-[6px]  transition-[3s] hover:bg-transparent hover:text-black bg-black text-wrap text-white"
-            onClick={deleteHandler}
+            onClick={() => deleteHandler(id)}
           >
             <MdDelete size={18} />
           </button>

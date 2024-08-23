@@ -46,8 +46,8 @@ const AdminTwitterPage = () => {
   };
 
   const fetchNewData = async () => {
+    const id = toast.loading("Please wait...");
     try {
-      const id = toast.loading("Please wait...");
       const response = await instance.get("/twitter");
       console.log(response.data);
       if (response.data.length === 0) {
@@ -70,6 +70,12 @@ const AdminTwitterPage = () => {
       setTwitterData(response.data);
     } catch (e) {
       console.log(e.message);
+      toast.update(id, {
+        render: "Failed to fetch data",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
   };
 

@@ -48,7 +48,7 @@ const AdminTimesOfIndiaPage = () => {
       const id = toast.loading("Please wait...");
       const response = await instance.get("/time");
       console.log(response.data);
-      if (response.data.data.length === 0) {
+      if (response.data.length === 0) {
         toast.update(id, {
           render: "No new data available",
           type: "success",
@@ -65,7 +65,7 @@ const AdminTimesOfIndiaPage = () => {
           autoClose: 3000,
         });
       }
-      setTofIndia(response.data.data);
+      setTofIndia(response.data);
     } catch (e) {
       console.log(e.message);
     }
@@ -73,10 +73,10 @@ const AdminTimesOfIndiaPage = () => {
 
   const deleteHandler = async (id) => {
     try {
-      const res = await instance.delete(`/timeOfIndia/delete/${id}`);
+      const res = await instance.delete(`/times/delete/${id}`);
+      setTofIndia((prev) => prev.filter((item) => item._id !== id));
       if (res.status === 200) {
         toast.success("deleted");
-        setTofIndia((prev) => prev.filter((item) => item._id !== id));
       }
     } catch (error) {
       toast.error(error.message);

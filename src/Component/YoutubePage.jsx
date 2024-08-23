@@ -98,14 +98,14 @@ const YoutubePage = () => {
           burgeropened={burgeropened}
           toggle={toggle}
         />
-        <div className="dark:text-white dark:bg-slate-800 flex flex-col ">
+        <div className="dark:text-white dark:bg-slate-800 flex flex-col justify-center items-center">
           <h1
             data-aos="fade-up"
             className="text-3xl font-extrabold text-red-600 text-center mb-8 mt-8"
           >
             YouTube
           </h1>
-          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center  justify-items-start  w-screen  sm:w-[94%] justify-center  gap-0">
+          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2  sm:items-center sm:justify-items-center lg:justify-items-center justify-items-start  w-screen  sm:w-[94%] justify-center  gap-0">
             {filterYoutubeData.length > 0
               ? filterYoutubeData.map((data) => (
                   <News
