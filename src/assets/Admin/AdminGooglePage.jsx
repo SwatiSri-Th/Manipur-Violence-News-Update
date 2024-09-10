@@ -62,7 +62,7 @@ const AdminGooglePage = () => {
           autoClose: 3000,
         });
       }
-      setNdtv(response.data.data);
+      googleData(response.data.data);
     } catch (e) {
       console.log(e.message);
     }

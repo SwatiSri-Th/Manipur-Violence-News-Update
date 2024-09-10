@@ -15,9 +15,20 @@ const AdminYoutubePage = () => {
   const [skip, setSkip] = useState(10);
 
   const fetchNewData = async () => {
+    const id = toast.loading("Please wait...");
     try {
-      const id = toast.loading("Please wait...");
       const response = await instance.get("/youtube");
+      console.log(response);
+      console.log("success");
+      if (response.status === 404) {
+        toast.update(id, {
+          render: "No new data available",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+        return;
+      }
       if (response.status === 201) {
         toast.update(id, {
           render: "Data is fetch",
@@ -35,7 +46,22 @@ const AdminYoutubePage = () => {
 
       setYoutubeData((prev) => [...prev, ...sortedData]);
     } catch (e) {
-      console.log(e.message);
+      console.log(e.request.status);
+      if (e.request.status === 404) {
+        toast.update(id, {
+          render: "No New Data",
+          type: "warning",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      } else {
+        toast.update(id, {
+          render: "Failed to fetch data",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      }
     }
   };
 

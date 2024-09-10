@@ -25,12 +25,12 @@ export default function Sidebar({ open, setOpen, drawOpen }) {
     <section
       className={`  gap-6   ${
         open ? "w-60" : "w-16"
-      } sm:flex hidden duration-500 `}
+      } sm:flex hidden duration-500 z-90 `}
     >
       <div
         className={`bg-[#e8e5e8] border shadow-[0_3px_10px_rgb(0,0,0,0.2)] dark:bg-slate-600 dark:text-white min-h-screen ${
           open ? "w-72" : "w-[68px]"
-        } z-80 duration-500 text-black px-4`}
+        }  duration-500 text-black px-4 `}
       >
         <div className="py-3 flex justify-end">
           <HiMenuAlt3
@@ -66,7 +66,7 @@ export default function Sidebar({ open, setOpen, drawOpen }) {
               <h2
                 className={` ${
                   open && "hidden"
-                } absolute left-48 bg-black text-white text-sm font-normal whitespace-pre marker:rounded-lg  py-0 w-0 overflow-hidden group-hover:py-1 group-hover:px-4 group-hover:rounded-lg group-hover:left-14 group-hover:duration-300 group-hover:w-fit group-hover:text-sm`}
+                } absolute left-48 bg-black text-white text-sm font-normal whitespace-pre marker:rounded-lg  py-0 w-0 overflow-hidden group-hover:py-1 group-hover:px-4 group-hover:rounded-lg group-hover:left-14 group-hover:duration-300 group-hover:w-fit group-hover:text-sm z-50`}
               >
                 {menu?.name}
               </h2>
